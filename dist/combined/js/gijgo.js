@@ -3458,7 +3458,8 @@ gj.grid.config = {
          */
         notFoundText: undefined,
 		
-		deleteConfirmationText:'Are you sure you want to delete?',
+        deleteConfirmationText:'Are you sure you want to delete?',
+        allowDelete:true,
 
         /** Width of the grid.
          * @type number
@@ -6752,8 +6753,12 @@ gj.grid.plugins.inlineEditing.private = {
             if (column.role === 'managementColumn') {
                 $cell.find('[role="update"]').hide();
                 $cell.find('[role="cancel"]').hide();
+                if($grid.data().allowDelete)
+                { 
+                    $cell.find('[role="delete"]').show(); 
+                }
                 $cell.find('[role="edit"]').show();
-                $cell.find('[role="delete"]').show();
+        
             }
         }
     },

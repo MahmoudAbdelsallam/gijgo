@@ -528,8 +528,12 @@ gj.grid.plugins.inlineEditing.private = {
             if (column.role === 'managementColumn') {
                 $cell.find('[role="update"]').hide();
                 $cell.find('[role="cancel"]').hide();
+                if($grid.data().allowDelete)
+                { 
+                    $cell.find('[role="delete"]').show(); 
+                }
                 $cell.find('[role="edit"]').show();
-                $cell.find('[role="delete"]').show();
+        
             }
         }
     },

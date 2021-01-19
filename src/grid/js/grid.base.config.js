@@ -944,7 +944,8 @@ gj.grid.config = {
          */
         notFoundText: undefined,
 		
-		deleteConfirmationText:'Are you sure you want to delete?',
+        deleteConfirmationText:'Are you sure you want to delete?',
+        allowDelete:true,
 
         /** Width of the grid.
          * @type number
