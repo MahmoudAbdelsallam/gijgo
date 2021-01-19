@@ -18,10 +18,10 @@ gj.datetimepicker.config = {
          * @additionalinfo All configuration options that exists on the datetimepicker level are going to override the options at datepicker level.
          * @type object
          * @default undefined
-         * @example Sample <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="312" />
+         * @example Sample <!-- datetimepicker -->
+         * <input id="datetimepicker" width="312" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), {
+         *    $('#datetimepicker').datetimepicker({
          *        datepicker: { showOtherMonths: true, calendarWeeks: true }
          *    });
          * </script>
@@ -34,25 +34,25 @@ gj.datetimepicker.config = {
          * @additionalinfo The css file for bootstrap should be manually included if you use bootstrap.
          * @type (materialdesign|bootstrap|bootstrap4)
          * @default materialdesign
-         * @example MaterialDesign <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="312" />
+         * @example MaterialDesign <!-- datetimepicker -->
+         * <input id="datetimepicker" width="312" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), { uiLibrary: 'materialdesign' });
+         *    $('#datetimepicker').datetimepicker({ uiLibrary: 'materialdesign' });
          * </script>
-         * @example MaterialDesign.Modal <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="312" />
+         * @example MaterialDesign.Modal <!-- datetimepicker -->
+         * <input id="datetimepicker" width="312" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), { uiLibrary: 'materialdesign', modal: true, footer: true });
+         *    $('#datetimepicker').datetimepicker({ uiLibrary: 'materialdesign', modal: true, footer: true });
          * </script>
-         * @example Bootstrap.3 <!-- nojquery, bootstrap, datetimepicker -->
-         * <input id="picker" width="220" />
+         * @example Bootstrap.3 <!-- bootstrap, datetimepicker -->
+         * <input id="datetimepicker" width="220" />
          * <script>
-         *     new GijgoDateTimePicker(document.getElementById('picker'), { uiLibrary: 'bootstrap' });
+         *     $('#datetimepicker').datetimepicker({ uiLibrary: 'bootstrap' });
          * </script>
-         * @example Bootstrap.4 <!-- nojquery, bootstrap4, datetimepicker -->
-         * <input id="picker" width="234" />
+         * @example Bootstrap.4 <!-- bootstrap4, datetimepicker -->
+         * <input id="datetimepicker" width="234" />
          * <script>
-         *     new GijgoDateTimePicker(document.getElementById('picker'), { uiLibrary: 'bootstrap4', modal: true, footer: true });
+         *     $('#datetimepicker').datetimepicker({ uiLibrary: 'bootstrap4', modal: true, footer: true });
          * </script>
          */
         uiLibrary: 'materialdesign',
@@ -60,15 +60,15 @@ gj.datetimepicker.config = {
         /** The initial datetimepicker value.
          * @type number
          * @default undefined
-         * @example Javascript <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="300" />
+         * @example Javascript <!-- datetimepicker -->
+         * <input id="datetimepicker" width="300" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), { value: '22:10 03/27/2020' });
+         *    $('#datetimepicker').datetimepicker({ value: '22:10 03/27/2018' });
          * </script>
-         * @example HTML <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="300" value="22:10 03/27/2020" />
+         * @example HTML <!-- datetimepicker -->
+         * <input id="datetimepicker" width="300" value="22:10 03/27/2018" />
          * <script>
-         *     new GijgoDateTimePicker(document.getElementById('picker'));
+         *     $('#datetimepicker').datetimepicker();
          * </script>
          */
         value: undefined,
@@ -94,15 +94,15 @@ gj.datetimepicker.config = {
          * <b>yyyy</b> - Year represented by four digits.<br/>
          * @type String
          * @default 'HH:MM mm/dd/yyyy'
-         * @example Sample <!-- nojquery, datetimepicker -->
+         * @example Sample <!-- datetimepicker -->
          * <input id="input" value="05:50 2018-27-03" width="312" />
          * <script>
-         *     new GijgoDateTimePicker(document.getElementById('picker'), { format: 'HH:MM yyyy-dd-mm' });
+         *     $('#input').datetimepicker({ format: 'HH:MM yyyy-dd-mm' });
          * </script>
-         * @example Long.Month.Format <!-- nojquery, datetimepicker -->
+         * @example Long.Month.Format <!-- datetimepicker -->
          * <input id="input" value="10 October 2017 05:50" width="312" />
          * <script>
-         *     new GijgoDateTimePicker(document.getElementById('picker'), { format: 'dd mmmm yyyy HH:MM' });
+         *     $('#input').datetimepicker({ format: 'dd mmmm yyyy HH:MM' });
          * </script>
          */
         format: 'HH:MM mm/dd/yyyy',
@@ -110,15 +110,15 @@ gj.datetimepicker.config = {
         /** The width of the datetimepicker.
          * @type number
          * @default undefined
-         * @example JS.Config <!-- nojquery, datetimepicker -->
+         * @example JS.Config <!-- datetimepicker -->
          * <input id="input" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), { width: 312 });
+         *    $('#input').datetimepicker({ width: 312 });
          * </script>
-         * @example HTML.Config <!-- nojquery, datetimepicker -->
+         * @example HTML.Config <!-- datetimepicker -->
          * <input id="input" width="312" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'));
+         *    $('#input').datetimepicker();
          * </script>
          */
         width: undefined,
@@ -126,20 +126,20 @@ gj.datetimepicker.config = {
         /** If set to true, the datetimepicker will have modal behavior.
          * @type Boolean
          * @default false
-         * @example Material.Design <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="312" />
+         * @example Material.Design <!-- datetimepicker -->
+         * <input id="input" width="312" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), { modal: true });
+         *    $('#input').datetimepicker({ modal: true });
          * </script>
-         * @example Bootstrap <!-- nojquery, bootstrap, datetimepicker -->
-         * <input id="picker" width="220" />
+         * @example Bootstrap <!-- bootstrap, datetimepicker -->
+         * <input id="input" width="220" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), { uiLibrary: 'bootstrap', modal: true, footer: true });
+         *    $('#input').datetimepicker({ uiLibrary: 'bootstrap', modal: true, footer: true });
          * </script>
-         * @example Bootstrap.4 <!-- nojquery, bootstrap4, datetimepicker -->
-         * <input id="picker" width="234" />
+         * @example Bootstrap.4 <!-- bootstrap4, datetimepicker -->
+         * <input id="input" width="234" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), { uiLibrary: 'bootstrap4', modal: true, footer: true });
+         *    $('#input').datetimepicker({ uiLibrary: 'bootstrap4', modal: true, footer: true });
          * </script>
          */
         modal: false,
@@ -147,15 +147,15 @@ gj.datetimepicker.config = {
         /** If set to true, add footer with ok and cancel buttons to the datetimepicker.
          * @type Boolean
          * @default false
-         * @example True <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="312" />
+         * @example True <!-- datetimepicker -->
+         * <input id="input" width="312" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), { footer: true, modal: true, header: true });
+         *    $('#input').datetimepicker({ footer: true, modal: true, header: true });
          * </script>
-         * @example False <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="312" />
+         * @example False <!-- datetimepicker -->
+         * <input id="input" width="312" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), { footer: false });
+         *    $('#input').datetimepicker({ footer: false });
          * </script>
          */
         footer: false,
@@ -163,41 +163,41 @@ gj.datetimepicker.config = {
         /** The size of the datetimepicker input.
          * @type 'small'|'default'|'large'
          * @default 'default'
-         * @example Bootstrap.4 <!-- nojquery, bootstrap4, datetimepicker -->
+         * @example Bootstrap.4 <!-- bootstrap4, datetimepicker -->
          * <p><label for="small">Small Size:</label> <input id="small" width="234" value="10:20 03/20/2018" /></p>
          * <p><label for="default">Default Size:</label> <input id="default" width="234" value="10:20 03/20/2018" /></p>
          * <p><label for="large">Large Size:</label> <input id="large" width="234" value="10:20 03/20/2018" /></p>
          * <script>
-         *     new GijgoDateTimePicker(document.getElementById('small'), { uiLibrary: 'bootstrap4', size: 'small' });
-         *     new GijgoDateTimePicker(document.getElementById('default'), { uiLibrary: 'bootstrap4', size: 'default' });
-         *     new GijgoDateTimePicker(document.getElementById('large'), { uiLibrary: 'bootstrap4', size: 'large' });
+         *     $('#small').datetimepicker({ uiLibrary: 'bootstrap4', size: 'small' });
+         *     $('#default').datetimepicker({ uiLibrary: 'bootstrap4', size: 'default' });
+         *     $('#large').datetimepicker({ uiLibrary: 'bootstrap4', size: 'large' });
          * </script>
-         * @example Bootstrap.4.Font.Awesome <!-- nojquery, bootstrap4, fontawesome, datetimepicker -->
+         * @example Bootstrap.4.Font.Awesome <!-- bootstrap4, fontawesome, datetimepicker -->
          * <p><label for="small">Small Size:</label> <input id="small" width="234" value="10:20 03/20/2018" /></p>
          * <p><label for="default">Default Size:</label> <input id="default" width="234" value="10:20 03/20/2018" /></p>
          * <p><label for="large">Large Size:</label> <input id="large" width="234" value="10:20 03/20/2018" /></p>
          * <script>
-         *     new GijgoDateTimePicker(document.getElementById('small'), { uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'small' });
-         *     new GijgoDateTimePicker(document.getElementById('default'), { uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'default' });
-         *     new GijgoDateTimePicker(document.getElementById('large'), { uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'large' });
+         *     $('#small').datetimepicker({ uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'small' });
+         *     $('#default').datetimepicker({ uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'default' });
+         *     $('#large').datetimepicker({ uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'large' });
          * </script>
-         * @example Bootstrap.3 <!-- nojquery, bootstrap, datetimepicker -->
+         * @example Bootstrap.3 <!-- bootstrap, datetimepicker -->
          * <p><label for="small">Small Size:</label> <input id="small" width="220" value="10:20 03/20/2018" /></p>
          * <p><label for="default">Default Size:</label> <input id="default" width="220" value="10:20 03/20/2018" /></p>
          * <p><label for="large">Large Size:</label> <input id="large" width="220" value="10:20 03/20/2018" /></p>
          * <script>
-         *     new GijgoDateTimePicker(document.getElementById('small'), { uiLibrary: 'bootstrap', size: 'small' });
-         *     new GijgoDateTimePicker(document.getElementById('default'), { uiLibrary: 'bootstrap', size: 'default' });
-         *     new GijgoDateTimePicker(document.getElementById('large'), { uiLibrary: 'bootstrap', size: 'large' });
+         *     $('#small').datetimepicker({ uiLibrary: 'bootstrap', size: 'small' });
+         *     $('#default').datetimepicker({ uiLibrary: 'bootstrap', size: 'default' });
+         *     $('#large').datetimepicker({ uiLibrary: 'bootstrap', size: 'large' });
          * </script>
-         * @example Material.Design <!-- nojquery, datetimepicker -->
+         * @example Material.Design <!-- datetimepicker -->
          * <p><label for="small">Small Size:</label> <input id="small" width="276" value="10:20 03/20/2018" /></p>
          * <p><label for="default">Default Size:</label> <input id="default" width="276" value="10:20 03/20/2018" /></p>
          * <p><label for="large">Large Size:</label> <input id="large" width="276" value="10:20 03/20/2018" /></p>
          * <script>
-         *     new GijgoDateTimePicker(document.getElementById('small'), { size: 'small' });
-         *     new GijgoDateTimePicker(document.getElementById('default'), { size: 'default' });
-         *     new GijgoDateTimePicker(document.getElementById('large'), { size: 'large' });
+         *     $('#small').datetimepicker({ size: 'small' });
+         *     $('#default').datetimepicker({ size: 'default' });
+         *     $('#large').datetimepicker({ size: 'large' });
          * </script>
          */
         size: 'default',
@@ -205,28 +205,19 @@ gj.datetimepicker.config = {
         /** The language that needs to be in use.
          * @type string
          * @default 'en-us'
-         * @example German <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="276" />
+         * @example German <!-- datetimepicker -->
+         * <input id="input" width="276" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), {
+         *    $('#input').datetimepicker({
          *        locale: 'de-de',
          *        format: 'HH:MM dd mmm yyyy'
          *    });
          * </script>
-         * @example Bulgarian <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="276" />
+         * @example Bulgarian <!-- datetimepicker -->
+         * <input id="input" width="276" />
          * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), {
+         *    $('#input').datetimepicker({
          *        locale: 'bg-bg',
-         *        format: 'HH:MM dd mmm yyyy',
-         *        datepicker: { weekStartDay: 1 }
-         *    });
-         * </script>
-         * @example Chinise_Simplified <!-- nojquery, datetimepicker -->
-         * <input id="picker" width="276" />
-         * <script>
-         *    new GijgoDateTimePicker(document.getElementById('picker'), {
-         *        locale: 'zh-cn',
          *        format: 'HH:MM dd mmm yyyy',
          *        datepicker: { weekStartDay: 1 }
          *    });
@@ -257,36 +248,38 @@ gj.datetimepicker.config = {
 
 gj.datetimepicker.methods = {
     init: function (jsConfig) {
-        gj.widget.prototype.initJS.call(this, jsConfig, 'datetimepicker');
-        this.element.setAttribute('data-datetimepicker', 'true');
-        gj.datetimepicker.methods.initialize(this, gijgoStorage.get(this.element, 'gijgo'));
+        gj.widget.prototype.init.call(this, jsConfig, 'datetimepicker');
+        this.attr('data-datetimepicker', 'true');
+        gj.datetimepicker.methods.initialize(this);
         return this;
     },
 
     getConfig: function (clientConfig, type) {
-        var config = gj.widget.prototype.getConfigJS.call(this, clientConfig, type);
+        var config = gj.widget.prototype.getConfig.call(this, clientConfig, type);
 
         uiLibrary = clientConfig.hasOwnProperty('uiLibrary') ? clientConfig.uiLibrary : config.uiLibrary;
         if (gj.datepicker.config[uiLibrary]) {
-            this.extend(config.datepicker, gj.datepicker.config[uiLibrary]);
+            $.extend(true, config.datepicker, gj.datepicker.config[uiLibrary]);
         }
         if (gj.timepicker.config[uiLibrary]) {
-            this.extend(config.timepicker, gj.timepicker.config[uiLibrary]);
+            $.extend(true, config.timepicker, gj.timepicker.config[uiLibrary]);
         }
 
         iconsLibrary = clientConfig.hasOwnProperty('iconsLibrary') ? clientConfig.iconsLibrary : config.iconsLibrary;
         if (gj.datepicker.config[iconsLibrary]) {
-            this.extend(config.datepicker, gj.datepicker.config[iconsLibrary]);
+            $.extend(true, config.datepicker, gj.datepicker.config[iconsLibrary]);
         }
         if (gj.timepicker.config[iconsLibrary]) {
-            this.extend(config.timepicker, gj.timepicker.config[iconsLibrary]);
+            $.extend(true, config.timepicker, gj.timepicker.config[iconsLibrary]);
         }
 
         return config;
     },
 
-    initialize: function (picker, data) {
-        var date, headerEl, dateEl, switchEl, timeEl, hourEl, separatorEl, minuteEl, calendarMode, clockMode, popup;
+    initialize: function ($datetimepicker) {
+        var $picker, $header, $date, $time, date,
+            $switch, $calendarMode, $clockMode,
+            data = $datetimepicker.data();
 
         // Init datepicker
         data.datepicker.uiLibrary = data.uiLibrary;
@@ -300,34 +293,32 @@ gj.datetimepicker.methods = {
         data.datepicker.value = data.value;
         data.datepicker.size = data.size;
         data.datepicker.autoClose = false;
-        gj.datepicker.methods.initialize(picker, data.datepicker);
-
-        popup = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');
-
-        picker.element.addEventListener('select', function (e) {
-            var selectedDay, date, value;
-            if (e.detail.type === 'day') {
-                gj.datetimepicker.methods.createShowHourHandler(picker, popup, data)();
-            } else if (e.detail.type === 'minute') {
-                if (popup.getAttribute('selectedDay') && data.footer !== true) {
-                    selectedDay = popup.getAttribute('selectedDay').split('-');
-                    date = new Date(selectedDay[0], selectedDay[1], selectedDay[2], popup.getAttribute('hour') || 0, popup.getAttribute('minute') || 0);
+        gj.datepicker.methods.initialize($datetimepicker, data.datepicker);
+        $datetimepicker.on('select', function (e, type) {
+            var date, value;
+            if (type === 'day') {
+                gj.datetimepicker.methods.createShowHourHandler($datetimepicker, $picker, data)();
+            } else if (type === 'minute') {
+                if ($picker.attr('selectedDay') && data.footer !== true) {
+                    selectedDay = $picker.attr('selectedDay').split('-');
+                    date = new Date(selectedDay[0], selectedDay[1], selectedDay[2], $picker.attr('hour') || 0, $picker.attr('minute') || 0);
                     value = gj.core.formatDate(date, data.format, data.locale);
-                    picker.element.value = value;
-                    gj.datetimepicker.events.change(picker.element);
-                    gj.datetimepicker.methods.close(picker);
+                    $datetimepicker.val(value);
+                    gj.datetimepicker.events.change($datetimepicker);
+                    gj.datetimepicker.methods.close($datetimepicker);
                 }
             }
         });
-        picker.element.addEventListener('open', function () {
-            var headerEl = popup.querySelector('[role="header"]');
-            headerEl.querySelector('[role="calendarMode"]').classList.add('selected');
-            headerEl.querySelector('[role="clockMode"]').classList.remove('selected');
+        $datetimepicker.on('open', function () {
+            var $header = $picker.children('[role="header"]');
+            $header.find('[role="calendarMode"]').addClass("selected");
+            $header.find('[role="clockMode"]').removeClass("selected");
         });
-        
+
+        $picker = $('body').find('[role="calendar"][guid="' + $datetimepicker.attr('data-guid') + '"]');
         date = data.value ? gj.core.parseDate(data.value, data.format, data.locale) : new Date();
-        popup.setAttribute('hour', date.getHours());
-        popup.setAttribute('minute', date.getMinutes());
+        $picker.attr('hour', date.getHours());
+        $picker.attr('minute', date.getMinutes());
 
         // Init timepicker
         data.timepicker.uiLibrary = data.uiLibrary;
@@ -339,122 +330,121 @@ gj.datetimepicker.methods = {
         data.timepicker.size = data.size;
         data.timepicker.mode = '24hr';
         data.timepicker.autoClose = false;
-        gj.timepicker.methods.initMouse(picker, popup, data.timepicker);
 
-        // Init header
-        headerEl = document.createElement('div');
-        headerEl.setAttribute('role', 'header');
+        // Init header        
+        $header = $('<div role="header" />');
+        $date = $('<div role="date" class="selected" />');
+        $date.on('click', gj.datetimepicker.methods.createShowDateHandler($datetimepicker, $picker, data));
+        $date.html(gj.core.formatDate(new Date(), 'ddd, mmm dd', data.locale));
+        $header.append($date);
 
-        dateEl = document.createElement('div');
-        dateEl.setAttribute('role', 'date');
-        dateEl.classList.add('selected');
-        dateEl.addEventListener('click', gj.datetimepicker.methods.createShowDateHandler(picker, popup, data));
-        dateEl.innerHTML = gj.core.formatDate(new Date(), 'ddd, mmm dd', data.locale);
-        headerEl.appendChild(dateEl);
+        $switch = $('<div role="switch"></div>');
 
-        switchEl = document.createElement('div');
-        switchEl.setAttribute('role', 'switch');
+        $calendarMode = $('<i class="gj-icon selected" role="calendarMode">event</i>');
+        $calendarMode.on('click', gj.datetimepicker.methods.createShowDateHandler($datetimepicker, $picker, data));
+        $switch.append($calendarMode);
 
-        calendarMode = document.createElement('i');
-        calendarMode.classList.add('gj-icon');
-        calendarMode.classList.add('selected');
-        calendarMode.setAttribute('role', 'calendarMode');
-        calendarMode.innerHTML = 'event';
-        calendarMode.addEventListener('click', gj.datetimepicker.methods.createShowDateHandler(picker, popup, data));
-        switchEl.appendChild(calendarMode);
+        $time = $('<div role="time" />');
+        $time.append($('<div role="hour" />').on('click', gj.datetimepicker.methods.createShowHourHandler($datetimepicker, $picker, data)).html(gj.core.formatDate(new Date(), 'HH', data.locale)));
+        $time.append(':');
+        $time.append($('<div role="minute" />').on('click', gj.datetimepicker.methods.createShowMinuteHandler($datetimepicker, $picker, data)).html(gj.core.formatDate(new Date(), 'MM', data.locale)));
+        $switch.append($time);
 
-        timeEl = document.createElement('div');
-        timeEl.setAttribute('role', 'time');
-        hourEl = document.createElement('div');
-        hourEl.setAttribute('role', 'hour');
-        hourEl.addEventListener('click', gj.datetimepicker.methods.createShowHourHandler(picker, popup, data));
-        hourEl.innerHTML = gj.core.formatDate(new Date(), 'HH', data.locale);
-        separatorEl = document.createElement('div');
-        separatorEl.innerText = ':';
-        minuteEl = document.createElement('div');
-        minuteEl.setAttribute('role', 'minute');
-        minuteEl.addEventListener('click', gj.datetimepicker.methods.createShowMinuteHandler(picker, popup, data));
-        minuteEl.innerHTML = gj.core.formatDate(new Date(), 'MM', data.locale);
-        timeEl.appendChild(hourEl);
-        timeEl.appendChild(separatorEl);
-        timeEl.appendChild(minuteEl);
-        switchEl.appendChild(timeEl);
-        
-        clockMode = document.createElement('i');
-        clockMode.classList.add('gj-icon');
-        clockMode.setAttribute('role', 'clockMode');
-        clockMode.innerHTML = 'clock';
-        clockMode.addEventListener('click', gj.datetimepicker.methods.createShowHourHandler(picker, popup, data));
-        switchEl.appendChild(clockMode);
+        $clockMode = $('<i class="gj-icon" role="clockMode">clock</i>');
+        $clockMode.on('click', gj.datetimepicker.methods.createShowHourHandler($datetimepicker, $picker, data));
+        $switch.append($clockMode);
+        $header.append($switch);
 
-        headerEl.appendChild(switchEl);
-
-        popup.prepend(headerEl);
+        $picker.prepend($header);
     },
 
-    createShowDateHandler: function (picker, clock, data) {
-        return function () {
-            var header = clock.querySelector('[role="header"]');
-            header.querySelector('[role="date"]').classList.add('selected');
-            header.querySelector('[role="calendarMode"]').classList.add('selected');
-            header.querySelector('[role="clockMode"]').classList.remove('selected');
-            header.querySelector('[role="hour"]').classList.remove('selected');
-            header.querySelector('[role="minute"]').classList.remove('selected');
-            gj.datepicker.methods.renderMonth(picker, clock, data.datepicker);
+    createShowDateHandler: function ($datetimepicker, $picker, data) {
+        return function (e) {
+            var $header = $picker.children('[role="header"]');
+            $header.find('[role="calendarMode"]').addClass("selected");
+            $header.find('[role="date"]').addClass("selected");
+            $header.find('[role="clockMode"]').removeClass("selected");
+            $header.find('[role="hour"]').removeClass("selected");
+            $header.find('[role="minute"]').removeClass("selected");
+            gj.datepicker.methods.renderMonth($datetimepicker, $picker, data.datepicker);
         };
     },
 
-    createShowHourHandler: function (picker, popup, data) {
+    createShowHourHandler: function ($datetimepicker, $picker, data) {
         return function () {
-            var header = popup.querySelector('[role="header"]');
-            header.querySelector('[role="calendarMode"]').classList.remove('selected');
-            header.querySelector('[role="date"]').classList.remove('selected');
-            header.querySelector('[role="clockMode"]').classList.add('selected');
-            header.querySelector('[role="hour"]').classList.add('selected');
-            header.querySelector('[role="minute"]').classList.remove('selected');
+            var $header = $picker.children('[role="header"]');
+            $header.find('[role="calendarMode"]').removeClass("selected");
+            $header.find('[role="date"]').removeClass("selected");
+            $header.find('[role="clockMode"]').addClass("selected");
+            $header.find('[role="hour"]').addClass("selected");
+            $header.find('[role="minute"]').removeClass("selected");
 
-            gj.timepicker.methods.renderHours(picker, popup, data.timepicker);
+            gj.timepicker.methods.initMouse($picker.children('[role="body"]'), $datetimepicker, $picker, data.timepicker);
+            gj.timepicker.methods.renderHours($datetimepicker, $picker, data.timepicker);
         };
     },
 
-    createShowMinuteHandler: function (picker, clock, data) {
+    createShowMinuteHandler: function ($datetimepicker, $picker, data) {
         return function () {
-            var header = clock.querySelector('[role="header"]');
-            header.querySelector('[role="calendarMode"]').classList.remove('selected');
-            header.querySelector('[role="date"]').classList.remove('selected');
-            header.querySelector('[role="clockMode"]').classList.add('selected');
-            header.querySelector('[role="hour"]').classList.remove('selected');
-            header.querySelector('[role="minute"]').classList.add('selected');
-
-            gj.timepicker.methods.renderMinutes(picker, clock, data.timepicker);
+            var $header = $picker.children('[role="header"]');
+            $header.find('[role="calendarMode"]').removeClass("selected");
+            $header.find('[role="date"]').removeClass("selected");
+            $header.find('[role="clockMode"]').addClass("selected");
+            $header.find('[role="hour"]').removeClass("selected");
+            $header.find('[role="minute"]').addClass("selected");
+            gj.timepicker.methods.initMouse($picker.children('[role="body"]'), $datetimepicker, $picker, data.timepicker);
+            gj.timepicker.methods.renderMinutes($datetimepicker, $picker, data.timepicker);
         };
     },
 
-    close: function (picker) {
-        gj.datepicker.methods.close(picker);
+    close: function ($datetimepicker) {
+        var $calendar = $('body').find('[role="calendar"][guid="' + $datetimepicker.attr('data-guid') + '"]');
+        $calendar.hide();
+        $calendar.closest('div[role="modal"]').hide();
+        //gj.datepicker.events.close($datepicker);
     },
 
-    value: function (picker, value) {
-        var clock, date, hour,
-            data = gijgoStorage.get(picker.element, 'gijgo');
-        if (typeof value === "undefined") {
-            return picker.element.value;
+    value: function ($datetimepicker, value) {
+        var $calendar, date, hour, data = $datetimepicker.data();
+        if (typeof (value) === "undefined") {
+            return $datetimepicker.val();
         } else {
             date = gj.core.parseDate(value, data.format, data.locale);
             if (date) {
-                clock = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');                
-                gj.datepicker.methods.selectDay(picker, clock, data.datepicker, date);
-                gj.timepicker.methods.setAttributes(clock, data.timepicker, date);
-                picker.element.value = value;
+                $calendar = $('body').find('[role="calendar"][guid="' + $datetimepicker.attr('data-guid') + '"]');
+                gj.datepicker.methods.dayClickHandler($datetimepicker, $calendar, data, date)();
+                // Set Time
+                hour = date.getHours();
+                if (data.mode === 'ampm') {
+                    $calendar.attr('mode', hour > 12 ? 'pm' : 'am');
+                }
+                $calendar.attr('hour', hour);
+                $calendar.attr('minute', date.getMinutes());
+                $datetimepicker.val(value);
             } else {
-                picker.element.value = '';
+                $datetimepicker.val('');
             }
-            return picker;
+            return $datetimepicker;
         }
     },
 
-    destroy: function (picker) {
-        gj.datepicker.methods.destroy(picker);
+    destroy: function ($datetimepicker) {
+        var data = $datetimepicker.data(),
+            $parent = $datetimepicker.parent(),
+            $picker = $('body').find('[role="calendar"][guid="' + $datetimepicker.attr('data-guid') + '"]');
+        if (data) {
+            $datetimepicker.off();
+            if ($picker.parent('[role="modal"]').length > 0) {
+                $picker.unwrap();
+            }
+            $picker.remove();
+            $datetimepicker.removeData();
+            $datetimepicker.removeAttr('data-type').removeAttr('data-guid').removeAttr('data-datetimepicker');
+            $datetimepicker.removeClass();
+            $parent.children('[role="right-icon"]').remove();
+            $datetimepicker.unwrap();
+        }
+        return $datetimepicker;
     }
 };
 
@@ -464,11 +454,10 @@ gj.datetimepicker.events = {
      *
      * @event change
      * @param {object} e - event data
-     * @return Boolean
-     * @example sample <!--nojquery, datetimepicker -->
+     * @example sample <!-- datetimepicker -->
      * <input id="input" width="312" />
      * <script>
-     *     new GijgoDateTimePicker(document.getElementById('picker'), {
+     *     $('#input').datetimepicker({
      *         footer: true,
      *         modal: true,
      *         change: function (e) {
@@ -477,35 +466,34 @@ gj.datetimepicker.events = {
      *     });
      * </script>
      */
-    change: function (el) {
-        return el.dispatchEvent(new Event('change'));
+    change: function ($datetimepicker) {
+        return $datetimepicker.triggerHandler('change');
     }
 };
 
-GijgoDateTimePicker = function (element, jsConfig) {
+gj.datetimepicker.widget = function ($element, jsConfig) {
     var self = this,
         methods = gj.datetimepicker.methods;
 
-    self.element = element;
     self.mouseMove = false;
 
     /** Gets or sets the value of the datetimepicker.
      * @method
      * @param {string} value - The value that needs to be selected.
      * @return string
-     * @example Get <!-- nojquery, datetimepicker -->
-     * <button class="gj-button-md" onclick="alert(datetimepicker.value())">Get Value</button>
+     * @example Get <!-- datetimepicker -->
+     * <button class="gj-button-md" onclick="alert($datetimepicker.value())">Get Value</button>
      * <hr/>
-     * <input id="picker" width="312" value="17:50 03/27/2020" />
+     * <input id="datetimepicker" width="312" value="17:50 03/27/2018" />
      * <script>
-     *     var datetimepicker = new GijgoDateTimePicker(document.getElementById('picker'));
+     *     var $datetimepicker = $('#datetimepicker').datetimepicker();
      * </script>
-     * @example Set <!-- nojquery, datetimepicker -->
-     * <button class="gj-button-md" onclick="datetimepicker.value('13:40 08/01/2020')">Set Value</button>
+     * @example Set <!-- datetimepicker -->
+     * <button class="gj-button-md" onclick="$datetimepicker.value('13:40 08/01/2017')">Set Value</button>
      * <hr/>
-     * <input id="picker" width="312" />
+     * <input id="datetimepicker" width="312" />
      * <script>
-     *     var datetimepicker = new GijgoDateTimePicker(document.getElementById('picker'));
+     *     var $datetimepicker = $('#datetimepicker').datetimepicker();
      * </script>
      */
     self.value = function (value) {
@@ -515,13 +503,13 @@ GijgoDateTimePicker = function (element, jsConfig) {
     /** Open the calendar.
      * @method
      * @return datetimepicker
-     * @example Open.Close <!-- nojquery, datetimepicker -->
-     * <button class="gj-button-md" onclick="picker.open()">Open</button>
-     * <button class="gj-button-md" onclick="picker.close()">Close</button>
+     * @example Open.Close <!-- datetimepicker -->
+     * <button class="gj-button-md" onclick="$picker.open()">Open</button>
+     * <button class="gj-button-md" onclick="$picker.close()">Close</button>
      * <hr/>
-     * <input id="picker" width="312" />
+     * <input id="input" width="312" />
      * <script>
-     *     var picker = new GijgoDateTimePicker(document.getElementById('picker'));
+     *     var $picker = $('#input').datetimepicker();
      * </script>
      */
     self.open = function () {
@@ -531,13 +519,13 @@ GijgoDateTimePicker = function (element, jsConfig) {
     /** Close the calendar.
      * @method
      * @return datetimepicker
-     * @example Open.Close <!-- nojquery, datetimepicker -->
-     * <button class="gj-button-md" onclick="picker.open()">Open</button>
-     * <button class="gj-button-md" onclick="picker.close()">Close</button>
+     * @example Open.Close <!-- datetimepicker -->
+     * <button class="gj-button-md" onclick="$picker.open()">Open</button>
+     * <button class="gj-button-md" onclick="$picker.close()">Close</button>
      * <hr/>
-     * <input id="picker" width="312" />
+     * <input id="input" width="312" />
      * <script>
-     *     var picker = new GijgoDateTimePicker(document.getElementById('picker'));
+     *     var $picker = $('#input').datetimepicker();
      * </script>
      */
     self.close = function () {
@@ -546,46 +534,45 @@ GijgoDateTimePicker = function (element, jsConfig) {
 
     /** Remove datetimepicker functionality from the element.
      * @method
-     * @return datetimepicker
-     * @example sample <!-- nojquery, datetimepicker -->
-     * <button class="gj-button-md" onclick="picker.destroy()">Destroy</button>
-     * <input id="picker" width="312" />
+     * @return jquery element
+     * @example sample <!-- datetimepicker -->
+     * <button class="gj-button-md" onclick="datetimepicker.destroy()">Destroy</button>
+     * <input id="datetimepicker" width="312" />
      * <script>
-     *     var picker = new GijgoDateTimePicker(document.getElementById('picker'));
+     *     var datetimepicker = $('#datetimepicker').datetimepicker();
      * </script>
      */
     self.destroy = function () {
         return methods.destroy(this);
     };
 
-    //$.extend($element, self);
-    if ('true' !== element.getAttribute('data-datetimepicker')) {
-        methods.init.call(self, jsConfig);
+    $.extend($element, self);
+    if ('true' !== $element.attr('data-datetimepicker')) {
+        methods.init.call($element, jsConfig);
     }
 
-    return self;
+    return $element;
 };
 
-GijgoDateTimePicker.prototype = new gj.widget();
-GijgoDateTimePicker.constructor = GijgoDatePicker;
-GijgoDateTimePicker.prototype.getConfigJS = gj.datetimepicker.methods.getConfig;
+gj.datetimepicker.widget.prototype = new gj.widget();
+gj.datetimepicker.widget.constructor = gj.datetimepicker.widget;
 
-if (typeof jQuery !== "undefined") {
-    (function ($) {
-        $.fn.datetimepicker = function (method) {
-            var $widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoDateTimePicker(this[0], method);
+gj.datetimepicker.widget.prototype.getConfig = gj.datetimepicker.methods.getConfig;
+
+(function ($) {
+    $.fn.datetimepicker = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.datetimepicker.widget(this, method);
+            } else {
+                $widget = new gj.datetimepicker.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    $widget = new GijgoDateTimePicker(this[0], null);
-                    if ($widget[method]) {
-                        return $widget[method].apply(this[0], Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
+        }
+    };
+})(jQuery);

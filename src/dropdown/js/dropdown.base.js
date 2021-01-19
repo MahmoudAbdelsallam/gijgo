@@ -75,6 +75,7 @@ gj.dropdown.config = {
          * </script>
          */
         selectedField: 'selected',
+		emptyField:undefined,
 
         /** The width of the dropdown.
          * @type number
@@ -459,8 +460,16 @@ gj.dropdown.methods = {
         $dropdown.data('records', response);
         $dropdown.empty();
         $list.empty();
-
-        if (response && response.length) {
+if	(response){
+	if($dropdown.data().emptyField)
+	{
+		var emptyField={};
+		emptyField[data.textField]=$dropdown.data().emptyField;
+		emptyField[data.valueField]=null;
+		response.unshift(emptyField);
+	}
+	
+        if (   response.length) {
             $.each(response, function () {
                 var value = this[data.valueField],
                     text = this[data.textField],
@@ -492,6 +501,7 @@ gj.dropdown.methods = {
                 }
             }
         }
+	}
 
         if (data.width) {
             $parent.css('width', data.width);
@@ -542,6 +552,7 @@ gj.dropdown.methods = {
             gj.dropdown.methods.addParentsScrollListener(scrollParentEl, handler);
         }
     },
+
     removeParentsScrollListener: function (el, handler) {
         var scrollParentEl = gj.core.getScrollParent(el.parentNode);
         el.removeEventListener('scroll', handler);
@@ -663,11 +674,9 @@ gj.dropdown.events = {
     }
 };
 
-GijgoDropDown = function (element, jsConfig) {
+gj.dropdown.widget = function ($element, jsConfig) {
     var self = this,
-        methods = gj.datepicker.methods;
-
-    self.element = element;
+        methods = gj.dropdown.methods;
 
     /** Gets or sets the value of the DropDown.
      * @method
@@ -726,35 +735,33 @@ GijgoDropDown = function (element, jsConfig) {
         return methods.destroy(this);
     };
 
-    if ('true' !== element.attr('data-dropdown')) {
-        methods.init.call(self, jsConfig);
+    $.extend($element, self);
+    if ('true' !== $element.attr('data-dropdown')) {
+        methods.init.call($element, jsConfig);
     }
 
-    return self;
+    return $element;
 };
 
-GijgoDropDown.prototype = new gj.widget();
-GijgoDropDown.constructor = gj.dropdown.widget;
+gj.dropdown.widget.prototype = new gj.widget();
+gj.dropdown.widget.constructor = gj.dropdown.widget;
 
-GijgoDropDown.prototype.getHTMLConfig = gj.dropdown.methods.getHTMLConfig;
+gj.dropdown.widget.prototype.getHTMLConfig = gj.dropdown.methods.getHTMLConfig;
 
-
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.dropdown = function (method) {
-            var widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoDropDown(this, method);
+(function ($) {
+    $.fn.dropdown = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.dropdown.widget(this, method);
+            } else {
+                $widget = new gj.dropdown.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    widget = new GijgoDropDown(this, null);
-                    if (widget[method]) {
-                        return widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
+        }
+    };
+})(jQuery);

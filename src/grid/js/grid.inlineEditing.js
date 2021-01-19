@@ -14,13 +14,15 @@ gj.grid.plugins.inlineEditing = {
                 $grid.edit($(this).attr('key'));
             });
             $delete.on('click', function (e) {
-                $grid.removeRow($(this).attr('key'));
+					//$grid.removeRow($(this).attr('key'));
+					gj.grid.events.rowRemoving($grid, $cell, id, $grid.getById(id));
             });
             $update.on('click', function (e) {
                 $grid.update($(this).attr('key'));
             });
             $cancel.on('click', function (e) {
                 $grid.cancel($(this).attr('key'));
+				gj.grid.plugins.inlineEditing.events.rowDataCancelled($grid,$(this).attr('key'));
             });
             $displayEl.empty().append($edit).append($delete).append($update).append($cancel);
         }
@@ -442,6 +444,7 @@ gj.grid.plugins.inlineEditing.private = {
                                     $dropdown.value(record[column.field]);
                                 }
                             };
+							config.emptyField=column.editor.emptyField;
                             $editorField = $editorField.dropdown(config);
                         } else {
                             $editorField = $('<input type="text" value="' + value + '" class="gj-width-full"/>');
@@ -460,11 +463,14 @@ gj.grid.plugins.inlineEditing.private = {
                         });
                     }
                 }
-                if ($editorField.prop('tagName').toUpperCase() === "INPUT" && $editorField.prop('type').toUpperCase() === 'TEXT') {
-                    gj.core.setCaretAtEnd($editorField[0]);
-                } else {
-                    $editorField.focus();
-                }
+				if($editorField!="")
+				{
+					if ($editorField.prop('tagName').toUpperCase() === "INPUT" && $editorField.prop('type').toUpperCase() === 'TEXT') {
+						gj.core.setCaretAtEnd($editorField[0]);
+					} else {
+						$editorField.focus();
+					}
+				}
                 $cell.attr('data-mode', 'edit');
             } else if (column.role === 'managementColumn') {
                 $cell.find('[role="edit"]').hide();
@@ -741,7 +747,7 @@ gj.grid.plugins.inlineEditing.public = {
         for (i = 0; i < $cells.length; i++) {
             gj.grid.plugins.inlineEditing.private.displayMode(this, $($cells[i]), columns[i], true);
         }
-
+	 
         return this;
     }
 };
@@ -795,7 +801,13 @@ gj.grid.plugins.inlineEditing.events = {
      */
     rowDataChanged: function ($grid, id, record) {
         $grid.triggerHandler('rowDataChanged', [id, record]);
+    },
+	
+	rowDataCancelled: function ($grid,id) {
+        $grid.triggerHandler('rowDataCancelled', [id]);
     }
+	
+
 };
 
 gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientConfig) {

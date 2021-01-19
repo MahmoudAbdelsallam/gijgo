@@ -1,8 +1,8 @@
 /*
- * Gijgo JavaScript Library v2.0.0-alpha-1
+ * Gijgo JavaScript Library v1.9.13
  * http://gijgo.com/
  *
- * Copyright 2014, 2018 gijgo.com
+ * Copyright 2014, 2019 gijgo.com
  * Released under the MIT license
  */
 var gj = {};
@@ -56,31 +56,16 @@ gj.widget = function () {
         }
         return null;
     };
-
-    self.extend = function () {
-        for (var i = 1; i < arguments.length; i++) {
-            for (var key in arguments[i]) {
-                if (arguments[i].hasOwnProperty(key)) {
-                    if (typeof arguments[0][key] === 'object') {
-                        arguments[0][key] = this.extend(arguments[0][key], arguments[i][key]);
-                    } else {
-                        arguments[0][key] = arguments[i][key];
-                    }
-                }
-            }
-        }
-        return arguments[0];
-    };
 };
 
 gj.widget.prototype.init = function (jsConfig, type) {
     var option, clientConfig, fullConfig;
 
-    this.element.setAttribute('data-type', type);
+    this.attr('data-type', type);
     clientConfig = $.extend(true, {}, this.getHTMLConfig() || {});
     $.extend(true, clientConfig, jsConfig || {});
     fullConfig = this.getConfig(clientConfig, type);
-    this.element.setAttribute('data-guid', fullConfig.guid);
+    this.attr('data-guid', fullConfig.guid);
     this.data(fullConfig);
 
     // Initialize events configured as options
@@ -135,120 +120,11 @@ gj.widget.prototype.getConfig = function (clientConfig, type) {
     }
 
     return config;
-};
+}
 
 gj.widget.prototype.getHTMLConfig = function () {
     var result = this.data(),
         attrs = this[0].attributes;
-    if (attrs['width']) {
-        result.width = attrs['width'].value;
-    }
-    if (attrs['height']) {
-        result.height = attrs['height'].value;
-    }
-    if (attrs['value']) {
-        result.value = attrs['value'].value;
-    }
-    if (attrs['align']) {
-        result.align = attrs['align'].value;
-    }
-    if (result && result.source) {
-        result.dataSource = result.source;
-        delete result.source;
-    }
-    return result;
-};
-
-window.gijgoStorage = {
-    _storage: new WeakMap(),
-    put: function (el, key, obj) {
-        if (!this._storage.has(key)) {
-            this._storage.set(el, new Map());
-        }
-        this._storage.get(el).set(key, obj);
-    },
-    get: function (el, key) {
-        return this._storage.get(el).get(key);
-    },
-    has: function (el, key) {
-        return this._storage.get(el).has(key);
-    },
-    remove: function (el, key) {
-        var ret = this._storage.get(el).delete(key);
-        if (this._storage.get(key) && !this._storage.get(key).size === 0) {
-            this._storage.delete(el);
-        }
-        return ret;
-    }
-};
-
-gj.widget.prototype.initJS = function (jsConfig, type) {
-    var option, clientConfig, fullConfig;
-
-    this.element.setAttribute('data-type', type);
-    clientConfig = this.extend({}, this.getHTMLConfigJS() || {});
-    this.extend(clientConfig, jsConfig || {});
-    fullConfig = this.getConfigJS(clientConfig, type);
-    this.element.setAttribute('data-guid', fullConfig.guid);
-    gijgoStorage.put(this.element, 'gijgo', fullConfig);
-
-    // Initialize events configured as options
-    for (option in fullConfig) {
-        if (gj[type].events.hasOwnProperty(option)) {
-            this.element.addEventListener(option, fullConfig[option]);
-            delete fullConfig[option];
-        }
-    }
-
-    // Initialize all plugins
-    for (plugin in gj[type].plugins) {
-        if (gj[type].plugins.hasOwnProperty(plugin)) {
-            gj[type].plugins[plugin].configure(this, fullConfig, clientConfig);
-        }
-    }
-
-    return this;
-};
-
-gj.widget.prototype.getConfigJS = function (clientConfig, type) {
-    var config, uiLibrary, iconsLibrary, plugin;
-
-    config = this.extend({}, gj[type].config.base);
-
-    uiLibrary = clientConfig.hasOwnProperty('uiLibrary') ? clientConfig.uiLibrary : config.uiLibrary;
-    if (gj[type].config[uiLibrary]) {
-        this.extend(config, gj[type].config[uiLibrary]);
-    }
-
-    iconsLibrary = clientConfig.hasOwnProperty('iconsLibrary') ? clientConfig.iconsLibrary : config.iconsLibrary;
-    if (gj[type].config[iconsLibrary]) {
-        this.extend(config, gj[type].config[iconsLibrary]);
-    }
-
-    for (plugin in gj[type].plugins) {
-        if (gj[type].plugins.hasOwnProperty(plugin)) {
-            this.extend(config, gj[type].plugins[plugin].config.base);
-            if (gj[type].plugins[plugin].config[uiLibrary]) {
-                this.extend(config, gj[type].plugins[plugin].config[uiLibrary]);
-            }
-            if (gj[type].plugins[plugin].config[iconsLibrary]) {
-                this.extend(config, gj[type].plugins[plugin].config[iconsLibrary]);
-            }
-        }
-    }
-
-    this.extend(config, clientConfig);
-
-    if (!config.guid) {
-        config.guid = this.generateGUID();
-    }
-
-    return config;
-}
-
-gj.widget.prototype.getHTMLConfigJS = function () {
-    var result = {},
-        attrs = this.element.attributes;
     if (attrs['width']) {
         result.width = attrs['width'].value;
     }
@@ -279,6 +155,7 @@ gj.widget.prototype.createDoneHandler = function () {
 };
 
 gj.widget.prototype.createErrorHandler = function () {
+    var $widget = this;
     return function (response) {
         if (response && response.statusText && response.statusText !== 'abort') {
             alert(response.statusText);
@@ -330,7 +207,7 @@ gj.documentManager = {
     subscribeForEvent: function (eventName, widgetId, callback) {
         if (!gj.documentManager.events[eventName] || gj.documentManager.events[eventName].length === 0) {
             gj.documentManager.events[eventName] = [{ widgetId: widgetId, callback: callback }];
-            document.addEventListener(eventName, gj.documentManager.executeCallbacks);
+            $(document).on(eventName, gj.documentManager.executeCallbacks);
         } else if (!gj.documentManager.events[eventName][widgetId]) {
             gj.documentManager.events[eventName].push({ widgetId: widgetId, callback: callback });
         } else {
@@ -356,7 +233,7 @@ gj.documentManager = {
                     events.splice(i, 1);
                     success = true;
                     if (events.length === 0) {
-                        document.removeEventListener(eventName, gj.documentManager.executeCallbacks);
+                        $(document).off(eventName);
                         delete gj.documentManager.events[eventName];
                     }
                 }
@@ -368,7 +245,7 @@ gj.documentManager = {
     }
 };
 
-/**  */gj.core = {
+/**  */gj.core = {
     messages: {
         'en-us': {
             monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -384,7 +261,7 @@ gj.documentManager = {
         }
     },
 
-    /**      */    parseDate: function (value, format, locale) {
+    /**      */    parseDate: function (value, format, locale) {
         var i, year = 0, month = 0, date = 1, hour = 0, minute = 0, dateParts, formatParts, result;
 
         if (value && typeof value === 'string') {
@@ -431,7 +308,7 @@ gj.documentManager = {
         return result;
     },
 
-    /**      */    formatDate: function (date, format, locale) {
+    /**      */    formatDate: function (date, format, locale) {
         var result = '', separator, tmp,
             formatParts = format.split(/[\s,-\.//\:]+/),
             separators = format.split(/s+|M+|H+|h+|t+|T+|d+|m+|y+/);
@@ -518,12 +395,12 @@ gj.documentManager = {
         return val;
     },
 
-    center: function (element) {
-        var left = (window.innerWidth / 2) - (gj.core.width(element, true) / 2),
-            top = (window.innerHeight / 2) - (gj.core.height(element, true) / 2);
-        element.style.position = 'absolute';
-        element.style.left = (left > 0 ? left : 0) + 'px';
-        element.style.top = (top > 0 ? top : 0) + 'px';
+    center: function ($dialog) {
+        var left = ($(window).width() / 2) - ($dialog.width() / 2),
+            top = ($(window).height() / 2) - ($dialog.height() / 2);
+        $dialog.css('position', 'absolute');
+        $dialog.css('left', left > 0 ? left : 0);
+        $dialog.css('top', top > 0 ? top : 0);
     },
 
     isIE: function () {
@@ -602,12 +479,6 @@ gj.documentManager = {
         }
     },
 
-    createElement: function (htmlString) {
-        var div = document.createElement('div');
-        div.innerHTML = htmlString.trim();
-        return div.firstChild;
-    },
-
     position: function (el) {
         var xScroll, yScroll, left = 0, top = 0,
             height = gj.core.height(el),
@@ -644,7 +515,7 @@ gj.documentManager = {
             } else if (elem.selectionStart || elem.selectionStart == '0') { // Firefox/Chrome                
                 elem.selectionStart = elemLen;
                 elem.selectionEnd = elemLen;
-                elem.focus();
+                //elem.focus();
             }
         }
     },
@@ -667,99 +538,80 @@ gj.picker = {
 
 gj.picker.methods = {
 
-    initialize: function (picker, data, methods) {
-        var rightIcon, wrapper, input = picker.element,
-            popup = methods.createPopup(picker, data);
+    initialize: function ($input, data, methods) {
+        var $calendar, $rightIcon,
+            $picker = methods.createPicker($input, data),
+            $wrapper = $input.parent('div[role="wrapper"]');
 
-        if (input.parentElement.attributes.role !== 'wrapper') {
-            wrapper = document.createElement('div');
-            wrapper.setAttribute('role', 'wrapper');
-            input.parentNode.insertBefore(wrapper, input);
-            wrapper.appendChild(input);
+        if (data.uiLibrary === 'bootstrap') {
+            $rightIcon = $('<span class="input-group-addon">' + data.icons.rightIcon + '</span>');
+        } else if (data.uiLibrary === 'bootstrap4') {
+            $rightIcon = $('<span class="input-group-append"><button class="btn btn-outline-secondary border-left-0" type="button">' + data.icons.rightIcon + '</button></span>');
         } else {
-            wrapper = input.parentElement;
+            $rightIcon = $(data.icons.rightIcon);
         }
+        $rightIcon.attr('role', 'right-icon');
 
-        gj.core.addClasses(wrapper, data.style.wrapper);
-
-        if (data.width) {
-            wrapper.style.width = data.width + 'px';
+        if ($wrapper.length === 0) {
+            $wrapper = $('<div role="wrapper" />').addClass(data.style.wrapper); // The css class needs to be added before the wrapping, otherwise doesn't work.
+            $input.wrap($wrapper);
+        } else {
+            $wrapper.addClass(data.style.wrapper);
         }
+        $wrapper = $input.parent('div[role="wrapper"]');
 
-        input.value = data.value || '';
-        gj.core.addClasses(input, data.style.input);
-        input.setAttribute('role', 'input');
+        data.width && $wrapper.css('width', data.width);
 
-        if (data.fontSize) {
-            input.style.fontSize = data.fontSize;
-        }
+        $input.val(data.value).addClass(data.style.input).attr('role', 'input');
+
+        data.fontSize && $input.css('font-size', data.fontSize);
 
         if (data.uiLibrary === 'bootstrap' || data.uiLibrary === 'bootstrap4') {
             if (data.size === 'small') {
-                wrapper.classList.add('input-group-sm');
-                input.classList.add('form-control-sm');
+                $wrapper.addClass('input-group-sm');
+                $input.addClass('form-control-sm');
             } else if (data.size === 'large') {
-                wrapper.classList.add('input-group-lg');
-                input.classList.add('form-control-lg');
+                $wrapper.addClass('input-group-lg');
+                $input.addClass('form-control-lg');
             }
         } else {
             if (data.size === 'small') {
-                wrapper.classList.add('small');
+                $wrapper.addClass('small');
             } else if (data.size === 'large') {
-                wrapper.classList.add('large');
+                $wrapper.addClass('large');
             }
         }
 
-        if (data.showRightIcon) {
-            if (data.uiLibrary === 'bootstrap') {
-                rightIcon = document.createElement('span');
-                rightIcon.classList.add('input-group-addon');
-                rightIcon.innerHTML = data.icons.rightIcon;
-            } else if (data.uiLibrary === 'bootstrap4') {
-                rightIcon = document.createElement('span');
-                rightIcon.classList.add('input-group-append');
-                rightIcon.innerHTML = '<button class="btn btn-outline-secondary border-left-0" type="button">' + data.icons.rightIcon + '</button>';
+        $rightIcon.on('click', function (e) {
+            if ($picker.is(':visible')) {
+                $input.close();
             } else {
-                rightIcon = gj.core.createElement(data.icons.rightIcon);
+                $input.open();
             }
-            rightIcon.setAttribute('role', 'right-icon');
-            rightIcon.addEventListener('click', function (e) {
-                if (window.getComputedStyle(popup).display === 'none') {
-                    picker.open();
-                } else {
-                    picker.close();
-                }
-            });
-            wrapper.appendChild(rightIcon);
-        }
-
-        if (data.showOnFocus) {
-            input.addEventListener('focus', function () {
-                methods.open(picker, data);
-            });
-        }
+        });
+        $wrapper.append($rightIcon);
 
         if (data.footer !== true) {
-            input.addEventListener('blur', function () {
-                picker.timeout = setTimeout(function () {
-                    picker.close();
+            $input.on('blur', function () {
+                $input.timeout = setTimeout(function () {
+                    $input.close();
                 }, 500);
             });
-            popup.addEventListener('mousedown', function () {
-                clearTimeout(picker.timeout);
-                document.activeElement !== input && input.focus();
+            $picker.mousedown(function () {
+                clearTimeout($input.timeout);
+                $input.focus();
                 return false;
             });
-            popup.addEventListener('click', function () {
-                clearTimeout(picker.timeout);
-                document.activeElement !== input && input.focus();
+            $picker.on('click', function () {
+                clearTimeout($input.timeout);
+                $input.focus();
             });
         }
     }
 };
 
 
-gj.picker.widget = function (element, jsConfig) {
+gj.picker.widget = function ($element, jsConfig) {
     var self = this,
         methods = gj.picker.methods;
 
@@ -767,70 +619,61 @@ gj.picker.widget = function (element, jsConfig) {
         return methods.destroy(this);
     };
 
-    return element;
+    return $element;
 };
 
 gj.picker.widget.prototype = new gj.widget();
 gj.picker.widget.constructor = gj.picker.widget;
 
 gj.picker.widget.prototype.init = function (jsConfig, type, methods) {
-    gj.widget.prototype.initJS.call(this, jsConfig, type);
-    this.element.setAttribute('data-' + type, 'true');
-    gj.picker.methods.initialize(this, gijgoStorage.get(this.element, 'gijgo'), gj[type].methods);
+    gj.widget.prototype.init.call(this, jsConfig, type);
+    this.attr('data-' + type, 'true');
+    gj.picker.methods.initialize(this, this.data(), gj[type].methods);
     return this;
 };
 
 gj.picker.widget.prototype.open = function (type) {
-    var data = gijgoStorage.get(this.element, 'gijgo'),
-        picker = document.body.querySelector('[role="picker"][guid="' + this.element.getAttribute('data-guid') + '"]');
+    var data = this.data(),
+        $picker = $('body').find('[role="picker"][guid="' + this.attr('data-guid') + '"]');
 
-    picker.style.display = 'block';
+    $picker.show();
+    $picker.closest('div[role="modal"]').show();
     if (data.modal) {
-        picker.parentElement.style.display = 'block';
-        gj.core.center(picker);
+        gj.core.center($picker);
     } else {
-        gj.core.setChildPosition(this.element, picker);
-        document.activeElement !== this.element && this.element.focus();
+        gj.core.setChildPosition(this[0], $picker[0]);
+        this.focus();
     }
     clearTimeout(this.timeout);
 
-    gj[type].events.open(this.element);
+    gj[type].events.open(this);
 
     return this;
 };
 
 gj.picker.widget.prototype.close = function (type) {
-    var data = gijgoStorage.get(this.element, 'gijgo'),
-        picker = document.body.querySelector('[role="picker"][guid="' + this.element.getAttribute('data-guid') + '"]');
-    picker.style.display = 'none';
-    if (data.modal) {
-        picker.parentElement.style.display = 'none';
-    }
-    gj[type].events.close(this.element);
+    var $picker = $('body').find('[role="picker"][guid="' + this.attr('data-guid') + '"]');
+    $picker.hide();
+    $picker.closest('div[role="modal"]').hide();
+    gj[type].events.close(this);
     return this;
 };
 
 gj.picker.widget.prototype.destroy = function (type) {
-    var data = gijgoStorage.get(this.element, 'gijgo'),
-        parent = this.element.parentElement,
-        picker = document.body.querySelector('[role="picker"][guid="' + this.element.getAttribute('data-guid') + '"]'),
-        rightIcon = this.element.parentElement.querySelector('[role="right-icon"]');
+    var data = this.data(),
+        $parent = this.parent(),
+        $picker = $('body').find('[role="picker"][guid="' + this.attr('data-guid') + '"]');
     if (data) {
-        //this.off();
-        if (parent.getAttribute('role') === 'modal') {
-            this.element.outerHTML = this.element.innerHTML;
+        this.off();
+        if ($picker.parent('[role="modal"]').length > 0) {
+            $picker.unwrap();
         }
-        gijgoStorage.remove(this.element, 'gijgo');
-        this.element.removeAttribute('data-type');
-        this.element.removeAttribute('data-guid');
-        this.element.removeAttribute('data-datepicker');
-        this.element.removeAttribute('class');
-        if (rightIcon) {
-            this.element.parentElement.removeChild(rightIcon);
-        }
-        this.element.removeEventListener('focus');
-        this.element.removeEventListener('blur');
-        picker.parentNode.removeChild(picker);
+        $picker.remove();
+        this.removeData();
+        this.removeAttr('data-type').removeAttr('data-guid').removeAttr('data-' + type);
+        this.removeClass();
+        $parent.children('[role="right-icon"]').remove();
+        this.unwrap();
     }
     return this;
 };
@@ -936,7 +779,7 @@ gj.core.messages['ja-jp'] = {
     monthShortNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
     weekDaysMin: ['日', '月', '火', '水', '木', '金', '土'],
     weekDaysShort: ['日', '月', '火', '水', '木', '金', '土'],
-    weekDays: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
+    weekDays: ['日曜', '月曜', '火曜', '水曜', '木曜', '金曜', '土曜'],
     am: '午前',
     pm: '午後',
     ok: 'OK',
@@ -961,7 +804,7 @@ gj.core.messages['zh-tw'] = {
     monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
     monthShortNames: ['01.', '02.', '03.', '04.', '05.', '06.', '07.', '08.', '09.', '10.', '11.', '12.'],
     weekDaysMin: ['日', '一', '二', '三', '四', '五', '六'],
-    weekDaysShort: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
+    weekDaysShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
     weekDays: ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
     am: '上午',
     pm: '下午',

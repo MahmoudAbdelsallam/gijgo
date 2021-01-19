@@ -13,15 +13,15 @@ gj.timepicker.config = {
         /** The width of the timepicker.
          * @type number
          * @default undefined
-         * @example JS.Config <!-- nojquery, timepicker -->
+         * @example JS.Config <!-- timepicker -->
          * <input id="timepicker" width="312" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), { width: 280 });
+         *    $('#timepicker').timepicker({ width: 280 });
          * </script>
-         * @example HTML.Config <!-- nojquery, timepicker -->
+         * @example HTML.Config <!-- timepicker -->
          * <input id="timepicker" width="312" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'));
+         *    $('#timepicker').timepicker();
          * </script>
          */
         width: undefined,
@@ -29,15 +29,15 @@ gj.timepicker.config = {
         /** If set to true, the timepicker will have modal behavior.
          * @type Boolean
          * @default true
-         * @example True <!-- nojquery, timepicker -->
+         * @example True <!-- timepicker -->
          * <input id="timepicker" width="280" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), { modal: true });
+         *    $('#timepicker').timepicker({ modal: true });
          * </script>
-         * @example False <!-- nojquery, timepicker -->
+         * @example False <!-- timepicker -->
          * <input id="timepicker" width="280" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), { modal: false, header: false, footer: false });
+         *    $('#timepicker').timepicker({ modal: false, header: false, footer: false });
          * </script>
          */
         modal: true,
@@ -45,15 +45,15 @@ gj.timepicker.config = {
         /** If set to true, add header to the timepicker.
          * @type Boolean
          * @default true
-         * @example True <!-- nojquery, timepicker -->
+         * @example True <!-- timepicker -->
          * <input id="timepicker" width="280" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), { header: true });
+         *    $('#timepicker').timepicker({ header: true });
          * </script>
-         * @example False <!-- nojquery, timepicker -->
+         * @example False <!-- timepicker -->
          * <input id="timepicker" width="280" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), { header: false, mode: '24hr' });
+         *    $('#timepicker').timepicker({ header: false, mode: '24hr' });
          * </script>
          */
         header: true,
@@ -61,15 +61,15 @@ gj.timepicker.config = {
         /** If set to true, add footer with ok and cancel buttons to the timepicker.
          * @type Boolean
          * @default true
-         * @example True <!-- nojquery, timepicker -->
+         * @example True <!-- timepicker -->
          * <input id="timepicker" width="280" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), { footer: true });
+         *    $('#timepicker').timepicker({ footer: true });
          * </script>
-         * @example False <!-- nojquery, timepicker -->
+         * @example False <!-- timepicker -->
          * <input id="timepicker" width="280" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), { footer: false });
+         *    $('#timepicker').timepicker({ footer: false });
          * </script>
          */
         footer: true,
@@ -85,10 +85,10 @@ gj.timepicker.config = {
          * <b>TT</b> - The AM/PM designator; upercase.<br/>
          * @type String
          * @default 'MM:HH'
-         * @example Sample <!-- nojquery, timepicker -->
+         * @example Sample <!-- timepicker -->
          * <input id="timepicker" width="312" value="13.42" />
          * <script>
-         *     var timepicker = new GijgoTimePicker(document.getElementById('timepicker'), {
+         *     var timepicker = $('#timepicker').timepicker({
          *         format: 'HH.MM'
          *     });
          * </script>
@@ -99,20 +99,20 @@ gj.timepicker.config = {
          * @additionalinfo The css file for bootstrap should be manually included if you use bootstrap.
          * @type (materialdesign|bootstrap|bootstrap4)
          * @default materialdesign
-         * @example MaterialDesign <!-- nojquery, timepicker -->
+         * @example MaterialDesign <!-- timepicker -->
          * <input id="timepicker" width="312" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), { uiLibrary: 'materialdesign' });
+         *    $('#timepicker').timepicker({ uiLibrary: 'materialdesign' });
          * </script>
          * @example Bootstrap.3 <!-- bootstrap, timepicker -->
          * <input id="timepicker" width="270" />
          * <script>
-         *     new GijgoTimePicker(document.getElementById('timepicker'), { uiLibrary: 'bootstrap', modal: false, footer: false });
+         *     $('#timepicker').timepicker({ uiLibrary: 'bootstrap', modal: false, footer: false });
          * </script>
          * @example Bootstrap.4 <!-- bootstrap4, timepicker -->
          * <input id="timepicker" width="276" />
          * <script>
-         *     new GijgoTimePicker(document.getElementById('timepicker'), { uiLibrary: 'bootstrap4' });
+         *     $('#timepicker').timepicker({ uiLibrary: 'bootstrap4' });
          * </script>
          */
         uiLibrary: 'materialdesign',
@@ -120,17 +120,17 @@ gj.timepicker.config = {
         /** The initial timepicker value.
          * @type String
          * @default undefined
-         * @example Javascript <!-- nojquery, timepicker -->
+         * @example Javascript <!-- timepicker -->
          * <input id="timepicker" width="312" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), {
+         *    $('#timepicker').timepicker({
          *        value: '13:42'
          *    });
          * </script>
-         * @example HTML <!-- nojquery, timepicker -->
+         * @example HTML <!-- timepicker -->
          * <input id="timepicker" width="312" value="13:42" />
          * <script>
-         *     new GijgoTimePicker(document.getElementById('timepicker'));
+         *     $('#timepicker').timepicker();
          * </script>
          */
         value: undefined,
@@ -138,54 +138,54 @@ gj.timepicker.config = {
         /** The timepicker mode. Tells the component to display the picker in ampm (12hr) format or 24hr format.
          * @type ampm|24hr
          * @default 'ampm'
-         * @example ampm <!-- nojquery, timepicker -->
+         * @example ampm <!-- timepicker -->
          * <input id="timepicker" width="312" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), { mode: 'ampm' });
+         *    $('#timepicker').timepicker({ mode: 'ampm' });
          * </script>
-         * @example 24hr <!-- nojquery, timepicker -->
+         * @example 24hr <!-- timepicker -->
          * <input id="timepicker" width="312" />
          * <script>
-         *     new GijgoTimePicker(document.getElementById('timepicker'), { mode: '24hr' });
+         *     $('#timepicker').timepicker({ mode: '24hr' });
          * </script>
          */
-        mode: '24hr',
+        mode: 'ampm',
 
         /** The language that needs to be in use.
          * @type string
          * @default 'en-us'
-         * @example German <!-- nojquery, timepicker -->
+         * @example German <!-- timepicker -->
          * <input id="timepicker" width="276" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), {
+         *    $('#timepicker').timepicker({
          *        locale: 'de-de'
          *    });
          * </script>
-         * @example Bulgarian <!-- nojquery, timepicker -->
+         * @example Bulgarian <!-- timepicker -->
          * <input id="timepicker" width="276" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), {
+         *    $('#timepicker').timepicker({
          *        locale: 'bg-bg'
          *    });
          * </script>
-         * @example French <!-- nojquery, timepicker -->
+         * @example French <!-- timepicker -->
          * <input id="timepicker" width="276" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), {
+         *    $('#timepicker').timepicker({
          *        locale: 'fr-fr'
          *    });
          * </script>
-         * @example Brazil <!-- nojquery, timepicker -->
+         * @example Brazil <!-- timepicker -->
          * <input id="timepicker" width="276" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), {
+         *    $('#timepicker').timepicker({
          *        locale: 'pt-br'
          *    });
          * </script>
-         * @example Russian <!-- nojquery, timepicker -->
+         * @example Russian <!-- timepicker -->
          * <input id="timepicker" width="276" />
          * <script>
-         *    new GijgoTimePicker(document.getElementById('timepicker'), {
+         *    $('#timepicker').timepicker({
          *        locale: 'ru-ru'
          *    });
          * </script>
@@ -195,67 +195,35 @@ gj.timepicker.config = {
         /** The size of the timepicker input.
          * @type 'small'|'default'|'large'
          * @default 'default'
-         * @example Bootstrap.4 <!-- nojquery, bootstrap4, timepicker -->
+         * @example Bootstrap.4 <!-- bootstrap4, timepicker -->
          * <p><label for="timepicker-small">Small Size:</label> <input id="timepicker-small" width="220" value="15:20" /></p>
          * <p><label for="timepicker-default">Default Size:</label> <input id="timepicker-default" width="220" value="15:20" /></p>
          * <p><label for="timepicker-large">Large Size:</label> <input id="timepicker-large" width="220" value="15:20" /></p>
          * <script>
-         *     new GijgoTimePicker(document.getElementById('timepicker-small'), { uiLibrary: 'bootstrap4', size: 'small' });
-         *     new GijgoTimePicker(document.getElementById('timepicker-default'), { uiLibrary: 'bootstrap4', size: 'default' });
-         *     new GijgoTimePicker(document.getElementById('timepicker-large'), { uiLibrary: 'bootstrap4', size: 'large' });
+         *     $('#timepicker-small').timepicker({ uiLibrary: 'bootstrap4', size: 'small' });
+         *     $('#timepicker-default').timepicker({ uiLibrary: 'bootstrap4', size: 'default' });
+         *     $('#timepicker-large').timepicker({ uiLibrary: 'bootstrap4', size: 'large' });
          * </script>
-         * @example Bootstrap.3 <!-- nojquery, bootstrap, timepicker -->
+         * @example Bootstrap.3 <!-- bootstrap, timepicker -->
          * <p><label for="timepicker-small">Small Size:</label> <input id="timepicker-small" width="220" value="15:20" /></p>
          * <p><label for="timepicker-default">Default Size:</label> <input id="timepicker-default" width="220" value="15:20" /></p>
          * <p><label for="timepicker-large">Large Size:</label> <input id="timepicker-large" width="220" value="15:20" /></p>
          * <script>
-         *     new GijgoTimePicker(document.getElementById('timepicker-small'), { uiLibrary: 'bootstrap', size: 'small' });
-         *     new GijgoTimePicker(document.getElementById('timepicker-default'), { uiLibrary: 'bootstrap', size: 'default' });
-         *     new GijgoTimePicker(document.getElementById('timepicker-large'), { uiLibrary: 'bootstrap', size: 'large' });
+         *     $('#timepicker-small').timepicker({ uiLibrary: 'bootstrap', size: 'small' });
+         *     $('#timepicker-default').timepicker({ uiLibrary: 'bootstrap', size: 'default' });
+         *     $('#timepicker-large').timepicker({ uiLibrary: 'bootstrap', size: 'large' });
          * </script>
-         * @example Material.Design <!-- nojquery, timepicker -->
+         * @example Material.Design <!-- timepicker -->
          * <p><label for="timepicker-small">Small Size:</label> <input id="timepicker-small" width="220" value="15:20" /></p>
          * <p><label for="timepicker-default">Default Size:</label> <input id="timepicker-default" width="220" value="15:20" /></p>
          * <p><label for="timepicker-large">Large Size:</label> <input id="timepicker-large" width="220" value="15:20" /></p>
          * <script>
-         *     new GijgoTimePicker(document.getElementById('timepicker-small'), { size: 'small' });
-         *     new GijgoTimePicker(document.getElementById('timepicker-default'), { size: 'default' });
-         *     new GijgoTimePicker(document.getElementById('timepicker-large'), { size: 'large' });
+         *     $('#timepicker-small').timepicker({ size: 'small' });
+         *     $('#timepicker-default').timepicker({ size: 'default' });
+         *     $('#timepicker-large').timepicker({ size: 'large' });
          * </script>
          */
         size: 'default',
-
-        /** If set to true, show timepicker on input focus.
-         * @type Boolean
-         * @default true
-         * @example True <!-- nojquery, timepicker -->
-         * <input id="picker" width="312" />
-         * <script>
-         *    new GijgoTimePicker(document.getElementById('picker'), { showOnFocus: true, showRightIcon: false });
-         * </script>
-         * @example False <!-- nojquery, timepicker -->
-         * <input id="picker" width="312" />
-         * <script>
-         *    new GijgoTimePicker(document.getElementById('picker'), { showOnFocus: false });
-         * </script>
-         */
-        showOnFocus: true,
-
-        /** If set to true, show timepicker icon on the right side of the input.
-         * @type Boolean
-         * @default true
-         * @example False <!-- nojquery, timepicker -->
-         * <input id="picker" width="312" />
-         * <script>
-         *    new GijgoTimePicker(document.getElementById('picker'), { showOnFocus: true, showRightIcon: false });
-         * </script>
-         * @example True <!-- nojquery, timepicker -->
-         * <input id="picker" width="312" />
-         * <script>
-         *    new GijgoTimePicker(document.getElementById('picker'), { showRightIcon: true });
-         * </script>
-         */
-        showRightIcon: true,
 
         icons: {
             rightIcon: '<i class="gj-icon clock" />'
@@ -303,154 +271,115 @@ gj.timepicker.methods = {
 
     },
 
-    initMouse: function (input, popup, data) {
-        var body = popup.querySelector('[role="body"]');
-        body.addEventListener('mousedown', gj.timepicker.methods.mouseDownHandler(popup));
-        body.addEventListener('mousemove', gj.timepicker.methods.mouseMoveHandler(input, popup, data));
-        body.addEventListener('mouseup', gj.timepicker.methods.mouseUpHandler(input, popup, data));
+    initMouse: function ($body, $input, $picker, data) {
+        $body.off();
+        $body.on('mousedown', gj.timepicker.methods.mouseDownHandler($input, $picker));
+        $body.on('mousemove', gj.timepicker.methods.mouseMoveHandler($input, $picker, data));
+        $body.on('mouseup', gj.timepicker.methods.mouseUpHandler($input, $picker, data));
     },
 
-    createPopup: function (picker) {
-        var date, amEl, pmEl, wrapper,
-            data = gijgoStorage.get(picker.element, 'gijgo'),
-            clock = document.createElement('div'),
-            hour = document.createElement('div'),
-            separator = document.createElement('span'),
-            minute = document.createElement('div'),
-            header = document.createElement('div'),
-            mode = document.createElement('div'),
-            body = document.createElement('div'),
-            btnOk = document.createElement('button'),
-            btnCancel = document.createElement('button'),
-            footer = document.createElement('div');
-
-        gj.core.addClasses(clock, data.style.clock);
-        clock.setAttribute('role', 'picker');
-        clock.setAttribute('guid', picker.element.getAttribute('data-guid'));
-
-        hour.setAttribute('role', 'hour');
-        minute.setAttribute('role', 'minute');
-        header.setAttribute('role', 'header');
-        mode.setAttribute('role', 'mode');
-        body.setAttribute('role', 'body');
-
-        gj.core.addClasses(btnOk, data.style.button);
-        btnOk.innerText = gj.core.messages[data.locale].ok;
-
-        gj.core.addClasses(btnCancel, data.style.button);
-        btnCancel.innerText = gj.core.messages[data.locale].cancel;
-
-        footer.setAttribute('role', 'footer');
-        gj.core.addClasses(footer, data.style.footer);
+    createPicker: function ($timepicker) {
+        var date, data = $timepicker.data(),
+            $clock = $('<div role="picker" />').addClass(data.style.clock).attr('guid', $timepicker.attr('data-guid')),
+            $hour = $('<div role="hour" />'),
+            $minute = $('<div role="minute" />'),
+            $header = $('<div role="header" />'),
+            $mode = $('<div role="mode" />'),
+            $body = $('<div role="body" />'),
+            $btnOk = $('<button class="' + data.style.button + '">' + gj.core.messages[data.locale].ok + '</button>'),
+            $btnCancel = $('<button class="' + data.style.button + '">' + gj.core.messages[data.locale].cancel + '</button>'),
+            $footer = $('<div role="footer" class="' + data.style.footer + '" />');
 
         date = gj.core.parseDate(data.value, data.format, data.locale);
         if (!date || isNaN(date.getTime())) {
             date = new Date();
         } else {
-            picker.element.setAttribute('hours', date.getHours());
+            $timepicker.attr('hours', date.getHours());
         }
+
+        gj.timepicker.methods.initMouse($body, $timepicker, $clock, data);
 
         if (data.header) {
-            hour.addEventListener('click', function () {
-                gj.timepicker.methods.renderHours(picker.element, clock, data);
+            $hour.on('click', function () {
+                gj.timepicker.methods.renderHours($timepicker, $clock, data);
             });
-            minute.addEventListener('click', function () {
-                gj.timepicker.methods.renderMinutes(picker.element, clock, data);
+            $minute.on('click', function () {
+                gj.timepicker.methods.renderMinutes($timepicker, $clock, data);
             });
-            header.appendChild(hour);
-            separator.innerText = ':';
-            header.appendChild(separator);
-            header.appendChild(minute);
-
+            $header.append($hour).append(':').append($minute);
             if (data.mode === 'ampm') {
-                amEl = document.createElement('span');
-                amEl.setAttribute('role', 'am');
-                amEl.innerText = gj.core.messages[data.locale].am;
-                mode.appendChild(amEl);
-                amEl.addEventListener('click', function () {
-                    var hour = gj.timepicker.methods.getHour(clock);
-                    clock.setAttribute('mode', 'am');
-                    this.classList.add('selected');
-                    this.parentElement.querySelector('[role="pm"]').classList.remove('selected');
+                $mode.append($('<span role="am">' + gj.core.messages[data.locale].am + '</span>').on('click', function () {
+                    var hour = gj.timepicker.methods.getHour($clock);
+                    $clock.attr('mode', 'am');
+                    $(this).addClass('selected');
+                    $(this).parent().children('[role="pm"]').removeClass('selected');
                     if (hour >= 12) {
-                        clock.setAttribute('hour', hour - 12);
+                        $clock.attr('hour', hour - 12);
                     }
                     if (!data.modal) {
-                        clearTimeout(picker.timeout);
-                        picker.element.focus();
+                        clearTimeout($timepicker.timeout);
+                        $timepicker.focus();
                     }
-                });
-                mode.appendChild(document.createElement('br'));
-
-                pmEl = document.createElement('span');
-                pmEl.setAttribute('role', 'pm');
-                pmEl.innerText = gj.core.messages[data.locale].pm;
-                mode.appendChild(pmEl);
-                pmEl.addEventListener('click', function () {
-                    var hour = gj.timepicker.methods.getHour(clock);
-                    clock.setAttribute('mode', 'pm');
-                    this.classList.add('selected');
-                    this.parentElement.querySelector('[role="am"]').classList.remove('selected');
+                }));
+                $mode.append('<br />');
+                $mode.append($('<span role="pm">' + gj.core.messages[data.locale].pm + '</span>').on('click', function () {
+                    var hour = gj.timepicker.methods.getHour($clock);
+                    $clock.attr('mode', 'pm');
+                    $(this).addClass('selected');
+                    $(this).parent().children('[role="am"]').removeClass('selected');
                     if (hour < 12) {
-                        clock.setAttribute('hour', hour + 12);
+                        $clock.attr('hour', hour + 12);
                     }
                     if (!data.modal) {
-                        clearTimeout(picker.timeout);
-                        picker.element.focus();
+                        clearTimeout($timepicker.timeout);
+                        $timepicker.focus();
                     }
-                });
-                header.appendChild(mode);
+                }));
+                $header.append($mode);
             }
-            clock.appendChild(header);
+            $clock.append($header);
         }
         
-        clock.appendChild(body);
+        $clock.append($body);
 
         if (data.footer) {
-            btnCancel.addEventListener('click', function () { picker.close(); });
-            footer.appendChild(btnCancel);
-            btnOk.addEventListener('click', gj.timepicker.methods.setTime(picker, clock));
-            footer.appendChild(btnOk);
-            clock.appendChild(footer);
+            $btnCancel.on('click', function () { $timepicker.close(); });
+            $footer.append($btnCancel);
+            $btnOk.on('click', gj.timepicker.methods.setTime($timepicker, $clock));
+            $footer.append($btnOk);
+            $clock.append($footer);
         }
 
-        clock.style.display = 'none';
+        $clock.hide();
 
-        document.body.appendChild(clock);
+        $('body').append($clock);
 
         if (data.modal) {
-            wrapper = document.createElement('div');
-            wrapper.setAttribute('role', 'modal');
-            gj.core.addClasses(wrapper, data.style.modal);
-            clock.parentNode.insertBefore(wrapper, clock);
-            wrapper.appendChild(clock);
-            gj.core.center(clock);
+            $clock.wrapAll('<div role="modal" class="' + data.style.modal + '"/>');
+            gj.core.center($clock);
         }
-
-        gj.timepicker.methods.initMouse(picker, clock, data);
-
-        return clock;
+        return $clock;
     },
 
-    getHour: function (clock) {
-        return parseInt(clock.getAttribute('hour'), 10) || 0;
+    getHour: function ($clock) {
+        return parseInt($clock.attr('hour'), 10) || 0;
     },
 
-    getMinute: function (clock) {
-        return parseInt(clock.getAttribute('minute'), 10) || 0;
+    getMinute: function ($clock) {
+        return parseInt($clock.attr('minute'), 10) || 0;
     },
 
-    setTime: function (picker, clock) {
+    setTime: function ($timepicker, $clock) {
         return function () {
-            var hour = gj.timepicker.methods.getHour(clock),
-                minute = gj.timepicker.methods.getMinute(clock),
-                mode = clock.getAttribute('mode'),
+            var hour = gj.timepicker.methods.getHour($clock),
+                minute = gj.timepicker.methods.getMinute($clock),
+                mode = $clock.attr('mode'),
                 date = new Date(0, 0, 0, (hour === 12 && mode === 'am' ? 0 : hour), minute),
-                data = gijgoStorage.get(picker.element, 'gijgo'),
+                data = $timepicker.data(),
                 value = gj.core.formatDate(date, data.format, data.locale);
-            picker.value(value);
-            picker.close();
-        };
+            $timepicker.value(value);
+            $timepicker.close();
+        }
     },
 
     getPointerValue: function (x, y, mode) {
@@ -481,248 +410,219 @@ gj.timepicker.methods = {
                 value = Math.round(60 - 60 * angle / 360);
                 return value === 60 ? 0 : value;
             }
-            default:
-                throw 'missing timepicker mode.';
         }
     },
 
-    updateArrow: function(e, picker, clock, data) {
-        var rect, type, value,
-            mouseX = picker.mouseX(e),
-            mouseY = picker.mouseY(e),
+    updateArrow: function(e, $timepicker, $clock, data) {
+        var rect, value,
+            mouseX = $timepicker.mouseX(e),
+            mouseY = $timepicker.mouseY(e),
             scrollY = window.scrollY || window.pageYOffset || 0,
             scrollX = window.scrollX || window.pageXOffset || 0;
 
         rect = e.target.getBoundingClientRect();
-        type = clock.getAttribute('type');
-        if (type === 'hours') {
+        if (data.dialMode == 'hours') {
             value = gj.timepicker.methods.getPointerValue(mouseX - scrollX - rect.left, mouseY - scrollY - rect.top, data.mode);
-            clock.setAttribute('hour', data.mode === 'ampm' && clock.getAttribute('mode') === 'pm' && value < 12 ? value + 12 : value);
-        } else if (type === 'minutes') {
+            $clock.attr('hour', data.mode === 'ampm' && $clock.attr('mode') === 'pm' && value < 12 ? value + 12 : value);
+        } else if (data.dialMode == 'minutes') {
             value = gj.timepicker.methods.getPointerValue(mouseX - scrollX - rect.left, mouseY - scrollY - rect.top, 'minutes');
-            clock.setAttribute('minute', value);
+            $clock.attr('minute', value);
         }
 
-        gj.timepicker.methods.update(picker, clock, data);
+        gj.timepicker.methods.update($timepicker, $clock, data);
     },
 
-    update: function (picker, clock, data) {
-        var hour, minute, arrow, type, visualHour, header, numbers, i, number;
+    update: function ($timepicker, $clock, data) {
+        var hour, minute, $arrow, visualHour, $header, $numbers;
 
         // update the arrow
-        hour = gj.timepicker.methods.getHour(clock);
-        minute = gj.timepicker.methods.getMinute(clock);
-        arrow = clock.querySelector('[role="arrow"]');
-        type = clock.getAttribute('type');
-        if (type === 'hours' && (hour == 0 || hour > 12) && data.mode === '24hr') {
-            arrow.style.width = 'calc(50% - 52px)';
+        hour = gj.timepicker.methods.getHour($clock);
+        minute = gj.timepicker.methods.getMinute($clock);
+        $arrow = $clock.find('[role="arrow"]');
+        if (data.dialMode == 'hours' && (hour == 0 || hour > 12) && data.mode === '24hr') {
+            $arrow.css('width', 'calc(50% - 52px)');
         } else {
-            arrow.style.width = 'calc(50% - 20px)';
+            $arrow.css('width', 'calc(50% - 20px)');
         }
 
-        if (type === 'hours') {
-            arrow.style.transform = 'rotate(' + ((hour * 30) - 90).toString() + 'deg)';
+        if (data.dialMode == 'hours') {
+            $arrow.css('transform', 'rotate(' + ((hour * 30) - 90).toString() + 'deg)');
         } else {
-            arrow.style.transform = 'rotate(' + ((minute * 6) - 90).toString() + 'deg)';
+            $arrow.css('transform', 'rotate(' + ((minute * 6) - 90).toString() + 'deg)');
         }
-        arrow.style.display = 'block';
+        $arrow.show();
 
         // update the numbers
         visualHour = (data.mode === 'ampm' && hour > 12 ? hour - 12 : (hour == 0 ? 12 : hour));
-        numbers = clock.querySelectorAll('[role="body"] span');
-        for (i = 0; i < numbers.length; i++) {
-            number = parseInt(numbers[i].innerText, 10);
-            if (type === 'hours' && number === visualHour) {
-                numbers[i].classList.add('selected');
-            } else if (type === 'minutes' && number === minute) {
-                numbers[i].classList.add('selected');
+        $numbers = $clock.find('[role="body"] span');
+        $numbers.removeClass('selected');
+        $numbers.filter(function (e) {
+            if (data.dialMode == 'hours') {
+                return parseInt($(this).text(), 10) == visualHour;
             } else {
-                numbers[i].classList.remove('selected');
+                return parseInt($(this).text(), 10) == minute;
             }
-        }
+        }).addClass('selected');
 
         // update the header
         if (data.header) {
-            header = clock.querySelector('[role="header"]');
-            header.querySelector('[role="hour"]').innerText = visualHour;
-            header.querySelector('[role="minute"]').innerText = gj.core.pad(minute);
+            $header = $clock.find('[role="header"]');
+            $header.find('[role="hour"]').text(visualHour);
+            $header.find('[role="minute"]').text(gj.core.pad(minute));
             if (data.mode === 'ampm') {
                 if (hour >= 12) {
-                    header.querySelector('[role="pm"]').classList.add('selected');
-                    header.querySelector('[role="am"]').classList.remove('selected');
+                    $header.find('[role="pm"]').addClass('selected');
+                    $header.find('[role="am"]').removeClass('selected');
                 } else {
-                    header.querySelector('[role="am"]').classList.add('selected');
-                    header.querySelector('[role="pm"]').classList.remove('selected');
+                    $header.find('[role="am"]').addClass('selected');
+                    $header.find('[role="pm"]').removeClass('selected');
                 }
             }
         }
     },
 
-    mouseDownHandler: function (picker) {
+    mouseDownHandler: function ($timepicker, $clock) {
         return function (e) {
-            picker.mouseMove = true;
-        };
+            $timepicker.mouseMove = true;
+        }
     },
 
-    mouseMoveHandler: function (picker, clock, data) {
+    mouseMoveHandler: function ($timepicker, $clock, data) {
         return function (e) {
-            if (picker.mouseMove) {
-                gj.timepicker.methods.updateArrow(e, picker, clock, data);
+            if ($timepicker.mouseMove) {
+                gj.timepicker.methods.updateArrow(e, $timepicker, $clock, data);
             }
-        };
+        }
     },
 
-    mouseUpHandler: function (picker, clock, data) {
+    mouseUpHandler: function ($timepicker, $clock, data) {
         return function (e) {
-            var type = clock.getAttribute('type');
-            if (type === 'hours' || type === 'minutes') {
-                gj.timepicker.methods.updateArrow(e, picker, clock, data);
-                picker.mouseMove = false;
-                if (!data.modal) {
-                    clearTimeout(picker.timeout);
-                    picker.element.focus();
-                }
-                if (type === 'hours') {
-                    setTimeout(function () {
-                        gj.timepicker.events.select(picker.element, 'hour');
-                        gj.timepicker.methods.renderMinutes(picker, clock, data);
-                    }, 1000);
-                } else if (type === 'minutes') {
-                    if (data.footer !== true && data.autoClose !== false) {
-                        gj.timepicker.methods.setTime(picker, clock)();
-                    }
-                    gj.timepicker.events.select(picker.element, 'minute');
-                }
+            gj.timepicker.methods.updateArrow(e, $timepicker, $clock, data);
+            $timepicker.mouseMove = false;
+            if (!data.modal) {
+                clearTimeout($timepicker.timeout);
+                $timepicker.focus();
             }
-        };
+            if (data.dialMode == 'hours') {
+                setTimeout(function () {
+                    gj.timepicker.events.select($timepicker, 'hour');
+                    gj.timepicker.methods.renderMinutes($timepicker, $clock, data);
+                }, 1000);
+            } else if (data.dialMode == 'minutes') {
+                if (data.footer !== true && data.autoClose !== false) {
+                    gj.timepicker.methods.setTime($timepicker, $clock)();
+                }
+                gj.timepicker.events.select($timepicker, 'minute');
+            }
+        }
     },
 
-    renderHours: function (picker, clock, data) {
-        var dial, arrow, body = clock.querySelector('[role="body"]');
+    renderHours: function ($timepicker, $clock, data) {
+        var $dial, $body = $clock.find('[role="body"]');
 
-        clearTimeout(picker.timeout);
-        body.innerHTML = '';
-        dial = document.createElement('div');
-        dial.setAttribute('role', 'dial');
+        clearTimeout($timepicker.timeout);
+        $body.empty();
+        $dial = $('<div role="dial"></div>');
 
-        arrow = gj.core.createElement('<div role="arrow" style="display: none; transform: rotate(-90deg);" />');
-        arrow.appendChild(gj.core.createElement('<div class="arrow-begin"></div>'));
-        arrow.appendChild(gj.core.createElement('<div class="arrow-end"></div>'));
-        dial.appendChild(arrow);
+        $dial.append('<div role="arrow" style="transform: rotate(-90deg); display: none;"><div class="arrow-begin"></div><div class="arrow-end"></div></div>');
 
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(54px, -93.5307px)">1</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(93.5307px, -54px)">2</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(108px, 0px)">3</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(93.5307px, 54px)">4</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(54px, 93.5307px)">5</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(6.61309e-15px, 108px)">6</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-54px, 93.5307px)">7</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-93.5307px, 54px)">8</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-108px, 1.32262e-14px)">9</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-93.5307px, -54px)">10</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-54px, -93.5307px)">11</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-1.98393e-14px, -108px)">12</span>'));
+        $dial.append('<span role="hour" style="transform: translate(54px, -93.5307px);">1</span>');
+        $dial.append('<span role="hour" style="transform: translate(93.5307px, -54px);">2</span>');
+        $dial.append('<span role="hour" style="transform: translate(108px, 0px);">3</span>');
+        $dial.append('<span role="hour" style="transform: translate(93.5307px, 54px);">4</span>');
+        $dial.append('<span role="hour" style="transform: translate(54px, 93.5307px);">5</span>');
+        $dial.append('<span role="hour" style="transform: translate(6.61309e-15px, 108px);">6</span>');
+        $dial.append('<span role="hour" style="transform: translate(-54px, 93.5307px);">7</span>');
+        $dial.append('<span role="hour" style="transform: translate(-93.5307px, 54px);">8</span>');
+        $dial.append('<span role="hour" style="transform: translate(-108px, 1.32262e-14px);">9</span>');
+        $dial.append('<span role="hour" style="transform: translate(-93.5307px, -54px);">10</span>');
+        $dial.append('<span role="hour" style="transform: translate(-54px, -93.5307px);">11</span>');
+        $dial.append('<span role="hour" style="transform: translate(-1.98393e-14px, -108px);">12</span>');
         if (data.mode === '24hr') {
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(38px, -65.8179px)">13</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(65.8179px, -38px)">14</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(76px, 0px)">15</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(65.8179px, 38px)">16</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(38px, 65.8179px)">17</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(4.65366e-15px, 76px)">18</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-38px, 65.8179px)">19</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-65.8179px, 38px)">20</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-76px, 9.30732e-15px)">21</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-65.8179px, -38px)">22</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-38px, -65.8179px)">23</span>'));
-            dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-1.3961e-14px, -76px)">00</span>'));
+            $dial.append('<span role="hour" style="transform: translate(38px, -65.8179px);">13</span>');
+            $dial.append('<span role="hour" style="transform: translate(65.8179px, -38px);">14</span>');
+            $dial.append('<span role="hour" style="transform: translate(76px, 0px);">15</span>');
+            $dial.append('<span role="hour" style="transform: translate(65.8179px, 38px);">16</span>');
+            $dial.append('<span role="hour" style="transform: translate(38px, 65.8179px);">17</span>');
+            $dial.append('<span role="hour" style="transform: translate(4.65366e-15px, 76px);">18</span>');
+            $dial.append('<span role="hour" style="transform: translate(-38px, 65.8179px);">19</span>');
+            $dial.append('<span role="hour" style="transform: translate(-65.8179px, 38px);">20</span>');
+            $dial.append('<span role="hour" style="transform: translate(-76px, 9.30732e-15px);">21</span>');
+            $dial.append('<span role="hour" style="transform: translate(-65.8179px, -38px);">22</span>');
+            $dial.append('<span role="hour" style="transform: translate(-38px, -65.8179px);">23</span>');
+            $dial.append('<span role="hour" style="transform: translate(-1.3961e-14px, -76px);">00</span>');
         }
-        body.appendChild(dial);
+        $body.append($dial);
 
-        if (data.header) {
-            clock.querySelector('[role="header"] [role="hour"]').classList.add('selected');
-            clock.querySelector('[role="header"] [role="minute"]').classList.remove('selected');
-        }
+        $clock.find('[role="header"] [role="hour"]').addClass('selected');
+        $clock.find('[role="header"] [role="minute"]').removeClass('selected');
 
-        clock.setAttribute('type', 'hours');
+        data.dialMode = 'hours';
 
-        gj.timepicker.methods.update(picker, clock, data);
+        gj.timepicker.methods.update($timepicker, $clock, data);
     },
 
-    renderMinutes: function (picker, clock, data) {
-        var arrow, body = clock.querySelector('[role="body"]');
+    renderMinutes: function ($timepicker, $clock, data) {
+        var $body = $clock.find('[role="body"]');
 
-        clearTimeout(picker.timeout);
-        body.innerHTML = '';
-        dial = document.createElement('div');
-        dial.setAttribute('role', 'dial');
+        clearTimeout($timepicker.timeout);
+        $body.empty();
+        $dial = $('<div role="dial"></div>');
 
-        arrow = document.createElement('div');
-        arrow.setAttribute('role', 'arrow');
-        arrow.style.display = 'none';
-        arrow.style.transform = 'rotate(-90deg)';
-        arrow.appendChild(gj.core.createElement('<div class="arrow-begin"></div>'));
-        arrow.appendChild(gj.core.createElement('<div class="arrow-end"></div>'));
-        dial.appendChild(arrow);
+        $dial.append('<div role="arrow" style="transform: rotate(-90deg); display: none;"><div class="arrow-begin"></div><div class="arrow-end"></div></div>');
 
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(54px, -93.5307px)">5</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(93.5307px, -54px)">10</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(108px, 0px)">15</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(93.5307px, 54px)">20</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(54px, 93.5307px)">25</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(6.61309e-15px, 108px)">30</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-54px, 93.5307px)">35</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-93.5307px, 54px)">40</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-108px, 1.32262e-14px)">45</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-93.5307px, -54px)">50</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-54px, -93.5307px)">55</span>'));
-        dial.appendChild(gj.core.createElement('<span role="hour" style="transform: translate(-1.98393e-14px, -108px)">00</span>'));
-        body.appendChild(dial);
+        $dial.append('<span role="hour" style="transform: translate(54px, -93.5307px);">5</span>');
+        $dial.append('<span role="hour" style="transform: translate(93.5307px, -54px);">10</span>');
+        $dial.append('<span role="hour" style="transform: translate(108px, 0px);">15</span>');
+        $dial.append('<span role="hour" style="transform: translate(93.5307px, 54px);">20</span>');
+        $dial.append('<span role="hour" style="transform: translate(54px, 93.5307px);">25</span>');
+        $dial.append('<span role="hour" style="transform: translate(6.61309e-15px, 108px);">30</span>');
+        $dial.append('<span role="hour" style="transform: translate(-54px, 93.5307px);">35</span>');
+        $dial.append('<span role="hour" style="transform: translate(-93.5307px, 54px);">40</span>');
+        $dial.append('<span role="hour" style="transform: translate(-108px, 1.32262e-14px);">45</span>');
+        $dial.append('<span role="hour" style="transform: translate(-93.5307px, -54px);">50</span>');
+        $dial.append('<span role="hour" style="transform: translate(-54px, -93.5307px);">55</span>');
+        $dial.append('<span role="hour" style="transform: translate(-1.98393e-14px, -108px);">00</span>');
+        $body.append($dial);
 
-        if (data.header) {
-            clock.querySelector('[role="header"] [role="hour"]').classList.remove('selected');
-            clock.querySelector('[role="header"] [role="minute"]').classList.add('selected');
-        }
+        $clock.find('[role="header"] [role="hour"]').removeClass('selected');
+        $clock.find('[role="header"] [role="minute"]').addClass('selected');
         
-        clock.setAttribute('type', 'minutes');
+        data.dialMode = 'minutes';
 
-        gj.timepicker.methods.update(picker, clock, data);
+        gj.timepicker.methods.update($timepicker, $clock, data);
     },
 
-    setAttributes: function (popup, data, date) {
-        var hour = date.getHours();
-        if (data.mode === 'ampm') {
-            popup.setAttribute('mode', hour > 12 ? 'pm' : 'am');
-        }
-        popup.setAttribute('hour', hour);
-        popup.setAttribute('minute', date.getMinutes());
+    open: function ($timepicker) {
+        var time, hour, data = $timepicker.data(),
+            $clock = $('body').find('[role="picker"][guid="' + $timepicker.attr('data-guid') + '"]');
 
-    },
-
-    open: function (picker) {
-        var time, data = gijgoStorage.get(picker.element, 'gijgo'),
-            clock = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');
-
-        if (picker.value()) {
-            time = gj.core.parseDate(picker.value(), data.format, data.locale);
+        if ($timepicker.value()) {
+            time = gj.core.parseDate($timepicker.value(), data.format, data.locale);
         } else {
             time = new Date();
         }
+        hour = time.getHours();
+        if (data.mode === 'ampm') {
+            $clock.attr('mode', hour > 12 ? 'pm' : 'am');
+        }
+        $clock.attr('hour', hour);
+        $clock.attr('minute', time.getMinutes());
 
-        gj.timepicker.methods.setAttributes(clock, data, time);
+        gj.timepicker.methods.renderHours($timepicker, $clock, data);
 
-        gj.timepicker.methods.renderHours(picker, clock, data);
-
-        gj.picker.widget.prototype.open.call(picker, 'timepicker');
-        return picker;
+        gj.picker.widget.prototype.open.call($timepicker, 'timepicker');
+        return $timepicker;
     },
 
-    value: function (picker, value) {
+    value: function ($timepicker, value) {
+        var $clock, time, data = $timepicker.data();
         if (typeof (value) === "undefined") {
-            return picker.element.value;
+            return $timepicker.val();
         } else {
-            picker.element.value = value;
-            gj.timepicker.events.change(picker.element);
-            return picker;
+            $timepicker.val(value);
+            gj.timepicker.events.change($timepicker);
+            return $timepicker;
         }
     }
 };
@@ -733,18 +633,18 @@ gj.timepicker.events = {
      *
      * @event change
      * @param {object} e - event data
-     * @example sample <!-- nojquery, timepicker -->
-     * <input id="picker" width="312" />
+     * @example sample <!-- timepicker -->
+     * <input id="timepicker" width="312" />
      * <script>
-     *     new GijgoTimePicker(document.getElementById('picker'), {
+     *     $('#timepicker').timepicker({
      *         change: function (e) {
      *             alert('Change is fired');
      *         }
      *     });
      * </script>
      */
-    change: function (el) {
-        return el.dispatchEvent(new Event('change'));
+    change: function ($timepicker) {
+        return $timepicker.triggerHandler('change');
     },
 
     /**
@@ -753,68 +653,66 @@ gj.timepicker.events = {
      * @event select
      * @param {object} e - event data
      * @param {string} type - The type of the selection. The options are hour and minute.
-     * @example sample <!-- nojquery, timepicker -->
-     * <input id="picker" width="312" />
+     * @example sample <!-- datepicker -->
+     * <input id="timepicker" width="312" />
      * <script>
-     *     new GijgoTimePicker(document.getElementById('picker'), {
+     *     $('#timepicker').timepicker({
      *         modal: true,
      *         header: true,
      *         footer: true,
      *         change: function (e) {
      *             alert('Change is fired');
      *         },
-     *         select: function (e) {
-     *             alert('Select from type of "' + e.detail.type + '" is fired');
+     *         select: function (e, type) {
+     *             alert('Select from type of "' + type + '" is fired');
      *         }
      *     });
      * </script>
      */
-    select: function (el, type) {
-        return el.dispatchEvent(new CustomEvent('select', { detail: { 'type': type } }));
+    select: function ($timepicker, type) {
+        return $timepicker.triggerHandler('select', [type]);
     },
 
     /**
      * Event fires when the timepicker is opened.
      * @event open
      * @param {object} e - event data
-     * @example sample <!-- nojquery, timepicker -->
-     * <input id="picker" width="312" />
+     * @example sample <!-- timepicker -->
+     * <input id="timepicker" width="312" />
      * <script>
-     *     new GijgoTimePicker(document.getElementById('picker'), {
+     *     $('#timepicker').timepicker({
      *         open: function (e) {
      *             alert('open is fired.');
      *         }
      *     });
      * </script>
      */
-    open: function (el) {
-        return el.dispatchEvent(new Event('open'));
+    open: function ($timepicker) {
+        return $timepicker.triggerHandler('open');
     },
 
     /**
      * Event fires when the timepicker is closed.
      * @event close
      * @param {object} e - event data
-     * @example sample <!-- nojquery, timepicker -->
-     * <input id="picker" width="312" />
+     * @example sample <!-- timepicker -->
+     * <input id="timepicker" width="312" />
      * <script>
-     *     new GijgoTimePicker(document.getElementById('picker'), {
+     *     $('#timepicker').timepicker({
      *         close: function (e) {
      *             alert('close is fired.');
      *         }
      *     });
      * </script>
      */
-    close: function (el) {
-        return el.dispatchEvent(new Event('close'));
+    close: function ($timepicker) {
+        return $timepicker.triggerHandler('close');
     }
 };
 
-GijgoTimePicker = function (element, jsConfig) {
+gj.timepicker.widget = function ($element, jsConfig) {
     var self = this,
         methods = gj.timepicker.methods;
-
-    self.element = element;
 
     self.mouseMove = false;
 
@@ -822,19 +720,19 @@ GijgoTimePicker = function (element, jsConfig) {
      * @method
      * @param {string} value - The value that needs to be selected.
      * @return string
-     * @example Get <!-- nojquery, timepicker -->
-     * <button class="gj-button-md" onclick="alert(picker.value())">Get Value</button>
+     * @example Get <!-- timepicker -->
+     * <button class="gj-button-md" onclick="alert($timepicker.value())">Get Value</button>
      * <hr/>
-     * <input id="picker" width="312" />
+     * <input id="timepicker" width="312" />
      * <script>
-     *     var picker = new GijgoTimePicker(document.getElementById('picker'), );
+     *     var $timepicker = $('#timepicker').timepicker();
      * </script>
-     * @example Set <!-- nojquery, timepicker -->
-     * <button class="gj-button-md" onclick="picker.value('11:00')">Set Value</button>
+     * @example Set <!-- timepicker -->
+     * <button class="gj-button-md" onclick="$timepicker.value('11:00')">Set Value</button>
      * <hr/>
-     * <input id="picker" width="312" />
+     * <input id="timepicker" width="312" />
      * <script>
-     *     var picker = new GijgoTimePicker(document.getElementById('picker'), );
+     *     var $timepicker = $('#timepicker').timepicker();
      * </script>
      */
     self.value = function (value) {
@@ -844,11 +742,11 @@ GijgoTimePicker = function (element, jsConfig) {
     /** Remove timepicker functionality from the element.
      * @method
      * @return jquery element
-     * @example sample <!-- nojquery, timepicker -->
+     * @example sample <!-- timepicker -->
      * <button class="gj-button-md" onclick="timepicker.destroy()">Destroy</button>
-     * <input id="picker" width="312" />
+     * <input id="timepicker" width="312" />
      * <script>
-     *     var timepicker = new GijgoTimePicker(document.getElementById('picker'), );
+     *     var timepicker = $('#timepicker').timepicker();
      * </script>
      */
     self.destroy = function () {
@@ -858,13 +756,13 @@ GijgoTimePicker = function (element, jsConfig) {
     /** Open the clock.
      * @method
      * @return timepicker
-     * @example Open.Close <!-- nojquery, timepicker -->
-     * <button class="gj-button-md" onclick="picker.open()">Open</button>
-     * <button class="gj-button-md" onclick="picker.close()">Close</button>
+     * @example Open.Close <!-- timepicker -->
+     * <button class="gj-button-md" onclick="$timepicker.open()">Open</button>
+     * <button class="gj-button-md" onclick="$timepicker.close()">Close</button>
      * <hr/>
-     * <input id="picker" width="312" />
+     * <input id="timepicker" width="312" />
      * <script>
-     *     var picker = new GijgoTimePicker(document.getElementById('picker'), { modal: false, header: false, footer: false, mode: '24hr' });
+     *     var $timepicker = $('#timepicker').timepicker({ modal: false, header: false, footer: false, mode: '24hr' });
      * </script>
      */
     self.open = function () {
@@ -874,46 +772,44 @@ GijgoTimePicker = function (element, jsConfig) {
     /** Close the clock.
      * @method
      * @return timepicker
-     * @example Open.Close <!-- nojquery, timepicker -->
-     * <button class="gj-button-md" onclick="picker.open()">Open</button>
-     * <button class="gj-button-md" onclick="picker.close()">Close</button>
+     * @example Open.Close <!-- timepicker -->
+     * <button class="gj-button-md" onclick="$timepicker.open()">Open</button>
+     * <button class="gj-button-md" onclick="$timepicker.close()">Close</button>
      * <hr/>
-     * <input id="picker" width="312" />
+     * <input id="timepicker" width="312" />
      * <script>
-     *     var picker = new GijgoTimePicker(document.getElementById('picker'), { modal: false, header: false, footer: false, mode: '24hr' });
+     *     var $timepicker = $('#timepicker').timepicker({ modal: false, header: false, footer: false, mode: '24hr' });
      * </script>
      */
     self.close = function () {
         return gj.picker.widget.prototype.close.call(this, 'timepicker');
     };
 
-    //$.extend($element, self);
-    if ('true' !== element.getAttribute('data-timepicker')) {
-        methods.init.call(self, jsConfig);
+    $.extend($element, self);
+    if ('true' !== $element.attr('data-timepicker')) {
+        methods.init.call($element, jsConfig);
     }
 
-    return self;
+    return $element;
 };
 
-GijgoTimePicker.prototype = new gj.picker.widget();
-GijgoTimePicker.constructor = GijgoTimePicker;
+gj.timepicker.widget.prototype = new gj.picker.widget();
+gj.timepicker.widget.constructor = gj.timepicker.widget;
 
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.timepicker = function (method) {
-            var $widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoTimePicker(this[0], method);
+(function ($) {
+    $.fn.timepicker = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.timepicker.widget(this, method);
+            } else {
+                $widget = new gj.timepicker.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    $widget = new GijgoTimePicker(this[0], null);
-                    if ($widget[method]) {
-                        return $widget[method].apply(this[0], Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
+        }
+    };
+})(jQuery);

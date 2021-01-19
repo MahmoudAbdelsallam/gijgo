@@ -2,11 +2,9 @@
   * @widget Dialog 
   * @plugin Base
   */
-GijgoDialog = function (element, jsConfig) {
+gj.dialog.widget = function ($element, jsConfig) {
     var self = this,
-        methods = gj.datepicker.methods;
-
-    self.element = element;
+        methods = gj.dialog.methods;
 
     /**
      * Opens the dialog.
@@ -33,7 +31,7 @@ GijgoDialog = function (element, jsConfig) {
      */
     self.open = function (title) {
         return methods.open(this, title);
-    };
+    }
 
     /**
      * Close the dialog.
@@ -50,7 +48,7 @@ GijgoDialog = function (element, jsConfig) {
      */
     self.close = function () {
         return methods.close(this);
-    };
+    }
 
     /**
      * Check if the dialog is currently open.
@@ -67,7 +65,7 @@ GijgoDialog = function (element, jsConfig) {
      */
     self.isOpen = function () {
         return methods.isOpen(this);
-    };
+    }
 
     /**
      * Gets or set the content of a dialog. Supports chaining when used as a setter.
@@ -84,7 +82,7 @@ GijgoDialog = function (element, jsConfig) {
      */
     self.content = function (content) {
         return methods.content(this, content);
-    };
+    }
 
     /**
      * Destroy the dialog.
@@ -118,37 +116,35 @@ GijgoDialog = function (element, jsConfig) {
      */
     self.destroy = function (keepHtml) {
         return methods.destroy(this, keepHtml);
-    };
-
-    if ('dialog' !== element.getAttribute('data-type')) {
-        methods.init.call(self, jsConfig);
     }
 
-    return self;
+    $.extend($element, self);
+    if ('dialog' !== $element.attr('data-type')) {
+        methods.init.call($element, jsConfig);
+    }
+
+    return $element;
 };
 
-GijgoDialog.prototype = new gj.widget();
-GijgoDialog.constructor = gj.dialog.widget;
+gj.dialog.widget.prototype = new gj.widget();
+gj.dialog.widget.constructor = gj.dialog.widget;
 
-GijgoDialog.prototype.getHTMLConfig = gj.dialog.methods.getHTMLConfig;
+gj.dialog.widget.prototype.getHTMLConfig = gj.dialog.methods.getHTMLConfig;
 
-
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.dialog = function (method) {
-            var widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoDialog(this, method);
+(function ($) {
+    $.fn.dialog = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.dialog.widget(this, method);
+            } else {
+                $widget = new gj.dialog.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    widget = new GijgoDialog(this, null);
-                    if (widget[method]) {
-                        return widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
+        }
+    };
+})(jQuery);

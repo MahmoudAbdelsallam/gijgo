@@ -894,7 +894,7 @@ gj.grid.methods = {
             data = $grid.data(),
             $row = gj.grid.methods.getRowById($grid, id);
 
-        gj.grid.events.rowRemoving($grid, $row, id, $grid.getById(id));
+        //gj.grid.events.rowRemoving($grid, $row, id, $grid.getById(id));
         if ($.isArray(data.dataSource)) {
             position = gj.grid.methods.getRecVPosById($grid, id);
             data.dataSource.splice(position, 1);

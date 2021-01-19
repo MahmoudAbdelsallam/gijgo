@@ -138,11 +138,9 @@ gj.switch.events = {
     }
 };
 
-GijgoSwitch = function (element, jsConfig) {
+gj.switch.widget = function ($element, jsConfig) {
     var self = this,
-        methods = gj.datepicker.methods;
-
-    self.element = element;
+        methods = gj.switch.methods;
 
     /** Gets or sets the value of the switch.
      * @method
@@ -181,26 +179,27 @@ GijgoSwitch = function (element, jsConfig) {
         return methods.destroy(this);
     };
 
-    if ('true' !== element.attr('data-switch')) {
-        methods.init.call(self, jsConfig);
+    $.extend($element, self);
+    if ('true' !== $element.attr('data-switch')) {
+        methods.init.call($element, jsConfig);
     }
 
-    return self;
+    return $element;
 };
 
-GijgoSwitch.prototype = new gj.widget();
-GijgoSwitch.constructor = gj.switch.widget;
+gj.switch.widget.prototype = new gj.widget();
+gj.switch.widget.constructor = gj.switch.widget;
 
 (function ($) {
     $.fn.switch = function (method) {
-        var widget;
+        var $widget;
         if (this && this.length) {
             if (typeof method === 'object' || !method) {
-                return new GijgoSwitch(this, method);
+                return new gj.switch.widget(this, method);
             } else {
-                widget = new GijgoSwitch(this, null);
-                if (widget[method]) {
-                    return widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
+                $widget = new gj.switch.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
                     throw 'Method ' + method + ' does not exist.';
                 }

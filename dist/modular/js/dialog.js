@@ -1,12 +1,12 @@
 /*
- * Gijgo Dialog v2.0.0-alpha-1
+ * Gijgo Dialog v1.9.13
  * http://gijgo.com/dialog
  *
- * Copyright 2014, 2018 gijgo.com
+ * Copyright 2014, 2019 gijgo.com
  * Released under the MIT license
  */
 /* global window alert jQuery */
-/**  */gj.dialog = {
+/**  */gj.dialog = {
     plugins: {},
     messages: {}
 };
@@ -14,38 +14,38 @@
 gj.dialog.config = {
     base: {
         /** If set to true, the dialog will automatically open upon initialization.
-         * If false, the dialog will stay hidden until the open() method is called.         */        autoOpen: true,
+         * If false, the dialog will stay hidden until the open() method is called.         */        autoOpen: true,
 
-        /** Specifies whether the dialog should have a close button in right part of dialog header.         */        closeButtonInHeader: true,
+        /** Specifies whether the dialog should have a close button in right part of dialog header.         */        closeButtonInHeader: true,
 
-        /** Specifies whether the dialog should close when it has focus and the user presses the escape (ESC) key.         */        closeOnEscape: true,
+        /** Specifies whether the dialog should close when it has focus and the user presses the escape (ESC) key.         */        closeOnEscape: true,
 
-        /** If set to true, the dialog will be draggable by the title bar.         */        draggable: true,
+        /** If set to true, the dialog will be draggable by the title bar.         */        draggable: true,
 
-        /** The height of the dialog.         */        height: 'auto',
+        /** The height of the dialog.         */        height: 'auto',
 
-        /** The language that needs to be in use.         */        locale: 'en-us',
+        /** The language that needs to be in use.         */        locale: 'en-us',
 
-        /** The maximum height in pixels to which the dialog can be resized.         */        maxHeight: undefined,
+        /** The maximum height in pixels to which the dialog can be resized.         */        maxHeight: undefined,
 
-        /** The maximum width in pixels to which the dialog can be resized.         */        maxWidth: undefined,
+        /** The maximum width in pixels to which the dialog can be resized.         */        maxWidth: undefined,
 
-        /** The minimum height in pixels to which the dialog can be resized.         */        minHeight: undefined,
+        /** The minimum height in pixels to which the dialog can be resized.         */        minHeight: undefined,
 
-        /** The minimum width in pixels to which the dialog can be resized.         */        minWidth: undefined,
+        /** The minimum width in pixels to which the dialog can be resized.         */        minWidth: undefined,
 
         /** If set to true, the dialog will have modal behavior.
-         * Modal dialogs create an overlay below the dialog, but above other page elements and you can't interact with them.         */        modal: false,
+         * Modal dialogs create an overlay below the dialog, but above other page elements and you can't interact with them.         */        modal: false,
 
-        /** If set to true, the dialog will be resizable.         */        resizable: false,
+        /** If set to true, the dialog will be resizable.         */        resizable: false,
 
-        /** If set to true, add vertical scroller to the dialog body.         */        scrollable: false,
+        /** If set to true, add vertical scroller to the dialog body.         */        scrollable: false,
 
-        /** The title of the dialog. Can be also set through the title attribute of the html element.         */        title: undefined,
+        /** The title of the dialog. Can be also set through the title attribute of the html element.         */        title: undefined,
 
-        /** The name of the UI library that is going to be in use. Currently we support Material Design and Bootstrap.         */        uiLibrary: undefined,
+        /** The name of the UI library that is going to be in use. Currently we support Material Design and Bootstrap.         */        uiLibrary: undefined,
 
-        /** The width of the dialog.         */        width: 300,
+        /** The width of the dialog.         */        width: 300,
 
         style: {
             modal: 'gj-modal',
@@ -82,60 +82,60 @@ gj.dialog.config = {
         }
     }
 };
-/**   */gj.dialog.events = {
+/**   */gj.dialog.events = {
     /**
      * Triggered when the dialog is initialized.
-     *     */    initialized: function ($dialog) {
+     *     */    initialized: function ($dialog) {
         $dialog.trigger("initialized");
     },
 
     /**
-     * Triggered before the dialog is opened.     */    opening: function ($dialog) {
+     * Triggered before the dialog is opened.     */    opening: function ($dialog) {
         $dialog.trigger("opening");
     },
 
     /**
-     * Triggered when the dialog is opened.     */    opened: function ($dialog) {
+     * Triggered when the dialog is opened.     */    opened: function ($dialog) {
         $dialog.trigger("opened");
     },
 
     /**
-     * Triggered before the dialog is closed.     */    closing: function ($dialog) {
+     * Triggered before the dialog is closed.     */    closing: function ($dialog) {
         $dialog.trigger("closing");
     },
 
     /**
-     * Triggered when the dialog is closed.     */    closed: function ($dialog) {
+     * Triggered when the dialog is closed.     */    closed: function ($dialog) {
         $dialog.trigger("closed");
     },
 
     /**
-     * Triggered while the dialog is being dragged.     */    drag: function ($dialog) {
+     * Triggered while the dialog is being dragged.     */    drag: function ($dialog) {
         $dialog.trigger("drag");
     },
 
     /**
-     * Triggered when the user starts dragging the dialog.     */    dragStart: function ($dialog) {
+     * Triggered when the user starts dragging the dialog.     */    dragStart: function ($dialog) {
         $dialog.trigger("dragStart");
     },
 
     /**
-     * Triggered after the dialog has been dragged.     */    dragStop: function ($dialog) {
+     * Triggered after the dialog has been dragged.     */    dragStop: function ($dialog) {
         $dialog.trigger("dragStop");
     },
 
     /**
-     * Triggered while the dialog is being resized.     */    resize: function ($dialog) {
+     * Triggered while the dialog is being resized.     */    resize: function ($dialog) {
         $dialog.trigger("resize");
     },
 
     /**
-     * Triggered when the user starts resizing the dialog.     */    resizeStart: function ($dialog) {
+     * Triggered when the user starts resizing the dialog.     */    resizeStart: function ($dialog) {
         $dialog.trigger("resizeStart");
     },
 
     /**
-     * Triggered after the dialog has been resized.     */    resizeStop: function ($dialog) {
+     * Triggered after the dialog has been resized.     */    resizeStop: function ($dialog) {
         $dialog.trigger("resizeStop");
     }
 };
@@ -143,7 +143,7 @@ gj.dialog.config = {
 gj.dialog.methods = {
 
     init: function (jsConfig) {
-        gj.widget.prototype.initJS.call(this, jsConfig, 'dialog');
+        gj.widget.prototype.init.call(this, jsConfig, 'dialog');
 
         gj.dialog.methods.localization(this);
         gj.dialog.methods.initialize(this);
@@ -151,75 +151,72 @@ gj.dialog.methods = {
         return this;
     },
 
-    localization: function(dialog) {
-        var data = gijgoStorage.get(dialog.element, 'gijgo');
-        if (typeof data.title === 'undefined') {
+    localization: function($dialog) {
+        var data = $dialog.data();
+        if (typeof (data.title) === 'undefined') {
             data.title = gj.dialog.messages[data.locale].DefaultTitle;
         }
     },
 
     getHTMLConfig: function () {
         var result = gj.widget.prototype.getHTMLConfig.call(this),
-            attrs = this.attributes;
+            attrs = this[0].attributes;
         if (attrs['title']) {
             result.title = attrs['title'].value;
         }
         return result;
     },
 
-    initialize: function (dialog) {
-        var data, header, body, footer;
-        data = gijgoStorage.get(dialog.element, 'gijgo');
+    initialize: function ($dialog) {
+        var data = $dialog.data(),
+            $header, $body, $footer;
 
-        gj.core.addClass(dialog.element, data.style.content);
+        $dialog.addClass(data.style.content);
 
-        gj.dialog.methods.setSize(dialog.element, data);
+        gj.dialog.methods.setSize($dialog);
 
         if (data.closeOnEscape) {
-            document.addEventListener('keyup', function (e) {
+            $(document).keyup(function (e) {
                 if (e.keyCode === 27) {
-                    dialog.close();
+                    $dialog.close();
                 }
             });
         }
 
-        body = dialog.element.querySelector('div[data-role="body"]');
-        if (!body) {
-            body = document.createElement('div');
-            body.setAttribute('role', 'body');
-            dialog.element.addChild(body);
-        }
-        gj.core.addClasses(body, data.style.body);
-
-        header = gj.dialog.methods.renderHeader(dialog, data);
-
-        footer = dialog.element.querySelector('div[data-role="footer"]');
-        if (footer) {
-            gj.core.addClasses(footer, data.style.footer);
+        $body = $dialog.children('div[data-role="body"]');
+        if ($body.length === 0) {
+            $body = $('<div data-role="body"/>').addClass(data.style.body);
+            $dialog.wrapInner($body);
+        } else {
+            $body.addClass(data.style.body);
         }
 
-        dialog.querySelector('[data-role="close"]').addEventListener('click', function () {
-            dialog.close();
+        $header = gj.dialog.methods.renderHeader($dialog);
+
+        $footer = $dialog.children('div[data-role="footer"]').addClass(data.style.footer);
+
+        $dialog.find('[data-role="close"]').on('click', function () {
+            $dialog.close();
         });
 
         if (gj.draggable) {
             if (data.draggable) {
-                gj.dialog.methods.draggable(dialog, header);
+                gj.dialog.methods.draggable($dialog, $header);
             }
             if (data.resizable) {
-                gj.dialog.methods.resizable(dialog);
+                gj.dialog.methods.resizable($dialog);
             }
         }
 
         if (data.scrollable && data.height) {
-            dialog.element.classList.add('gj-dialog-scrollable');
-            dialog.element.addEventListener('opened', function () {
-                var body = dialog.element.querySelector('div[data-role="body"]');
-                body.style.height = (data.height - $header.outerHeight() - ($footer.length ? $footer.outerHeight() : 0)) + 'px';
+            $dialog.addClass('gj-dialog-scrollable');
+            $dialog.on('opened', function () {
+                var $body = $dialog.children('div[data-role="body"]');
+                $body.css('height', data.height - $header.outerHeight() - ($footer.length ? $footer.outerHeight() : 0));
             });            
         }
 
-        gj.core.center(dialog.element);
+        gj.core.center($dialog);
 
         if (data.modal) {
             $dialog.wrapAll('<div data-role="modal" class="' + data.style.modal + '"/>');
@@ -230,44 +227,41 @@ gj.dialog.methods = {
         }
     },
 
-    setSize: function (dialog, data) {
+    setSize: function ($dialog) {
+        var data = $dialog.data();
         if (data.width) {
-            dialog.element.width = data.width + 'px';
+            $dialog.css("width", data.width);
         }
         if (data.height) {
-            dialog.element.height = data.height + 'px';
+            $dialog.css("height", data.height);
         }
     },
 
-    renderHeader: function (dialog, data) {
-        var header, title, closeButton;
-        header = dialog.element.querySelector('div[data-role="header"]');
-        if (!header) {
-            header = document.createElement('div');
-            header.setAttribute('role', 'header');
-            dialog.element.parentElement.insertBefore(header, dialog.element);
+    renderHeader: function ($dialog) {
+        var $header, $title, $closeButton, data = $dialog.data();
+        $header = $dialog.children('div[data-role="header"]');
+        if ($header.length === 0) {
+            $header = $('<div data-role="header" />');
+            $dialog.prepend($header);
         }
-        gj.core.addClasses(header, data.style.header);
+        $header.addClass(data.style.header);
 
-        title = header.querySelector('[data-role="title"]');
-        if (!title) {
-            title = document.createElement('h4');
-            title.setAttribute('role', 'title');
-            title.innerHTML = data.title;
-            header.appendChild(title);
+        $title = $header.find('[data-role="title"]');
+        if ($title.length === 0) {
+            $title = $('<h4 data-role="title">' + data.title + '</h4>');
+            $header.append($title);
         }
-        gj.core.addClasses(title, data.style.headerTitle);
+        $title.addClass(data.style.headerTitle);
 
-        closeButton = header.querySelector('[data-role="close"]');
-        if (!closeButton && data.closeButtonInHeader) {
-            closeButton = document.createElement('button');
+        $closeButton = $header.find('[data-role="close"]');
+        if ($closeButton.length === 0 && data.closeButtonInHeader) {
             $closeButton = $('<button type="button" data-role="close" title="' + gj.dialog.messages[data.locale].Close + '"><span>×</span></button>');
             $closeButton.addClass(data.style.headerCloseButton);
             $header.append($closeButton);
-        } else if (closeButton && data.closeButtonInHeader === false) {
-            closeButton.style.display = 'node';
+        } else if ($closeButton.length > 0 && data.closeButtonInHeader === false) {
+            $closeButton.hide();
         } else {
-            closeButton.classList.add(data.style.headerCloseButton);
+            $closeButton.addClass(data.style.headerCloseButton);
         }
 
         return $header;
@@ -434,69 +428,65 @@ gj.dialog.methods = {
         return $dialog;
     }
 };
-/**   */GijgoDialog = function (element, jsConfig) {
+/**   */gj.dialog.widget = function ($element, jsConfig) {
     var self = this,
-        methods = gj.datepicker.methods;
-
-    self.element = element;
+        methods = gj.dialog.methods;
 
     /**
-     * Opens the dialog.     */    self.open = function (title) {
+     * Opens the dialog.     */    self.open = function (title) {
         return methods.open(this, title);
-    };
-
-    /**
-     * Close the dialog.     */    self.close = function () {
-        return methods.close(this);
-    };
-
-    /**
-     * Check if the dialog is currently open.     */    self.isOpen = function () {
-        return methods.isOpen(this);
-    };
-
-    /**
-     * Gets or set the content of a dialog. Supports chaining when used as a setter.     */    self.content = function (content) {
-        return methods.content(this, content);
-    };
-
-    /**
-     * Destroy the dialog.     */    self.destroy = function (keepHtml) {
-        return methods.destroy(this, keepHtml);
-    };
-
-    if ('dialog' !== element.getAttribute('data-type')) {
-        methods.init.call(self, jsConfig);
     }
 
-    return self;
+    /**
+     * Close the dialog.     */    self.close = function () {
+        return methods.close(this);
+    }
+
+    /**
+     * Check if the dialog is currently open.     */    self.isOpen = function () {
+        return methods.isOpen(this);
+    }
+
+    /**
+     * Gets or set the content of a dialog. Supports chaining when used as a setter.     */    self.content = function (content) {
+        return methods.content(this, content);
+    }
+
+    /**
+     * Destroy the dialog.     */    self.destroy = function (keepHtml) {
+        return methods.destroy(this, keepHtml);
+    }
+
+    $.extend($element, self);
+    if ('dialog' !== $element.attr('data-type')) {
+        methods.init.call($element, jsConfig);
+    }
+
+    return $element;
 };
 
-GijgoDialog.prototype = new gj.widget();
-GijgoDialog.constructor = gj.dialog.widget;
+gj.dialog.widget.prototype = new gj.widget();
+gj.dialog.widget.constructor = gj.dialog.widget;
 
-GijgoDialog.prototype.getHTMLConfig = gj.dialog.methods.getHTMLConfig;
+gj.dialog.widget.prototype.getHTMLConfig = gj.dialog.methods.getHTMLConfig;
 
-
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.dialog = function (method) {
-            var widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoDialog(this, method);
+(function ($) {
+    $.fn.dialog = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.dialog.widget(this, method);
+            } else {
+                $widget = new gj.dialog.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    widget = new GijgoDialog(this, null);
-                    if (widget[method]) {
-                        return widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
+        }
+    };
+})(jQuery);
 gj.dialog.messages['en-us'] = {
     Close: 'Close',
     DefaultTitle: 'Dialog'

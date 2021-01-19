@@ -1,40 +1,41 @@
 /*
- * Gijgo DropDown v2.0.0-alpha-1
+ * Gijgo DropDown v1.9.13
  * http://gijgo.com/dropdown
  *
- * Copyright 2014, 2018 gijgo.com
+ * Copyright 2014, 2019 gijgo.com
  * Released under the MIT license
  */
 /* global window alert jQuery gj */
-/**  */gj.dropdown = {
+/**  */gj.dropdown = {
     plugins: {}
 };
 
 gj.dropdown.config = {
     base: {
 
-        /** The data source of dropdown.         */        dataSource: undefined,
+        /** The data source of dropdown.         */        dataSource: undefined,
 
-        /** Text field name.         */        textField: 'text',
+        /** Text field name.         */        textField: 'text',
 
-        /** Value field name.         */        valueField: 'value',
+        /** Value field name.         */        valueField: 'value',
 
-        /** Selected field name.         */        selectedField: 'selected',
+        /** Selected field name.         */        selectedField: 'selected',
+		emptyField:undefined,
 
-        /** The width of the dropdown.         */        width: undefined,
+        /** The width of the dropdown.         */        width: undefined,
 
-        /** The maximum height of the dropdown list. When set to auto adjust to the screen height.         */        maxHeight: 'auto',
+        /** The maximum height of the dropdown list. When set to auto adjust to the screen height.         */        maxHeight: 'auto',
 
-        /** Placeholder. This label appear only if the value is not set yet.         */        placeholder: undefined,
+        /** Placeholder. This label appear only if the value is not set yet.         */        placeholder: undefined,
 
         fontSize: undefined,
 
-        /** The name of the UI library that is going to be in use.         */        uiLibrary: 'materialdesign',
+        /** The name of the UI library that is going to be in use.         */        uiLibrary: 'materialdesign',
 
-        /** The name of the icons library that is going to be in use. Currently we support Material Icons, Font Awesome and Glyphicons.         */        iconsLibrary: 'materialicons',
+        /** The name of the icons library that is going to be in use. Currently we support Material Icons, Font Awesome and Glyphicons.         */        iconsLibrary: 'materialicons',
 
         icons: {
-            /** DropDown icon definition.             */            dropdown: '<i class="gj-icon arrow-dropdown" />',
+            /** DropDown icon definition.             */            dropdown: '<i class="gj-icon arrow-dropdown" />',
 
             dropup: '<i class="gj-icon arrow-dropup" />'
         },
@@ -234,8 +235,16 @@ gj.dropdown.methods = {
         $dropdown.data('records', response);
         $dropdown.empty();
         $list.empty();
-
-        if (response && response.length) {
+if	(response){
+	if($dropdown.data().emptyField)
+	{
+		var emptyField={};
+		emptyField[data.textField]=$dropdown.data().emptyField;
+		emptyField[data.valueField]=null;
+		response.unshift(emptyField);
+	}
+	
+        if (   response.length) {
             $.each(response, function () {
                 var value = this[data.valueField],
                     text = this[data.textField],
@@ -267,6 +276,7 @@ gj.dropdown.methods = {
                 }
             }
         }
+	}
 
         if (data.width) {
             $parent.css('width', data.width);
@@ -317,6 +327,7 @@ gj.dropdown.methods = {
             gj.dropdown.methods.addParentsScrollListener(scrollParentEl, handler);
         }
     },
+
     removeParentsScrollListener: function (el, handler) {
         var scrollParentEl = gj.core.getScrollParent(el.parentNode);
         el.removeEventListener('scroll', handler);
@@ -394,23 +405,21 @@ gj.dropdown.methods = {
 gj.dropdown.events = {
     /**
      * Triggered when the dropdown value is changed.
-     *     */    change: function ($dropdown) {
+     *     */    change: function ($dropdown) {
         return $dropdown.triggerHandler('change');
     },
 
     /**
-     * Event fires after the loading of the data in the dropdown.     */    dataBound: function ($dropdown) {
+     * Event fires after the loading of the data in the dropdown.     */    dataBound: function ($dropdown) {
         return $dropdown.triggerHandler('dataBound');
     }
 };
 
-GijgoDropDown = function (element, jsConfig) {
+gj.dropdown.widget = function ($element, jsConfig) {
     var self = this,
-        methods = gj.datepicker.methods;
+        methods = gj.dropdown.methods;
 
-    self.element = element;
-
-    /** Gets or sets the value of the DropDown.     */    self.value = function (value) {
+    /** Gets or sets the value of the DropDown.     */    self.value = function (value) {
         return methods.value(this, value);
     };
 
@@ -422,39 +431,37 @@ GijgoDropDown = function (element, jsConfig) {
         return methods.disable(this);
     };
 
-    /** Remove dropdown functionality from the element.     */    self.destroy = function () {
+    /** Remove dropdown functionality from the element.     */    self.destroy = function () {
         return methods.destroy(this);
     };
 
-    if ('true' !== element.attr('data-dropdown')) {
-        methods.init.call(self, jsConfig);
+    $.extend($element, self);
+    if ('true' !== $element.attr('data-dropdown')) {
+        methods.init.call($element, jsConfig);
     }
 
-    return self;
+    return $element;
 };
 
-GijgoDropDown.prototype = new gj.widget();
-GijgoDropDown.constructor = gj.dropdown.widget;
+gj.dropdown.widget.prototype = new gj.widget();
+gj.dropdown.widget.constructor = gj.dropdown.widget;
 
-GijgoDropDown.prototype.getHTMLConfig = gj.dropdown.methods.getHTMLConfig;
+gj.dropdown.widget.prototype.getHTMLConfig = gj.dropdown.methods.getHTMLConfig;
 
-
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.dropdown = function (method) {
-            var widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoDropDown(this, method);
+(function ($) {
+    $.fn.dropdown = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.dropdown.widget(this, method);
+            } else {
+                $widget = new gj.dropdown.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    widget = new GijgoDropDown(this, null);
-                    if (widget[method]) {
-                        return widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
+        }
+    };
+})(jQuery);

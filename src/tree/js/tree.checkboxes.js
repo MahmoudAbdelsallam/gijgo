@@ -111,9 +111,8 @@ gj.tree.plugins.checkboxes = {
 
         nodeDataBound: function ($tree, $node, id, record) {
             var data, $expander, $checkbox, $wrapper, disabled;
-            
-            if ($node.find('> [data-role="wrapper"] > [data-role="checkbox"]').length === 0)
-            {
+
+            if ($node.find('> [data-role="wrapper"] > [data-role="checkbox"]').length === 0) {
                 data = $tree.data();
                 $expander = $node.find('> [data-role="wrapper"] > [data-role="expander"]');
                 $checkbox = $('<input type="checkbox"/>');

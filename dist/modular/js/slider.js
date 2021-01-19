@@ -1,12 +1,12 @@
 /*
- * Gijgo Slider v2.0.0-alpha-1
+ * Gijgo Slider v1.9.13
  * http://gijgo.com/slider
  *
- * Copyright 2014, 2018 gijgo.com
+ * Copyright 2014, 2019 gijgo.com
  * Released under the MIT license
  */
 /* global window alert jQuery gj */
-/**  */gj.slider = {
+/**  */gj.slider = {
     plugins: {},
     messages: {
         'en-us': {
@@ -17,17 +17,17 @@
 gj.slider.config = {
     base: {
 
-        /** The minimum value of the Slider.         */        min: 0,
+        /** The minimum value of the Slider.         */        min: 0,
 
-        /** The maximum value of the Slider.         */        max: 100,
+        /** The maximum value of the Slider.         */        max: 100,
 
-        /** The width of the slider.         */        width: undefined,
+        /** The width of the slider.         */        width: undefined,
 
-        /** The orientation of a Slider: "horizontal" or "vertical".         */        // TODO orientation
+        /** The orientation of a Slider: "horizontal" or "vertical".         */        // TODO orientation
 
-        /** The name of the UI library that is going to be in use.         */        uiLibrary: 'materialdesign',
+        /** The name of the UI library that is going to be in use.         */        uiLibrary: 'materialdesign',
 
-        /** The initial slider value.         */        value: undefined,
+        /** The initial slider value.         */        value: undefined,
 
         icons: {},
 
@@ -57,24 +57,24 @@ gj.slider.config = {
 
 gj.slider.methods = {
     init: function (jsConfig) {
-        gj.widget.prototype.initJS.call(this, jsConfig, 'slider');
-        this.element.setAttribute('data-slider', 'true');
-        gj.slider.methods.initialize(this.element, gijgoStorage.get(this.element, 'gijgo'));
+        gj.widget.prototype.init.call(this, jsConfig, 'slider');
+        this.attr('data-slider', 'true');
+        gj.slider.methods.initialize(this, this.data());
         return this;
     },
 
-    initialize: function (el, data) {
+    initialize: function ($slider, data) {
         var wrapper, track, handle, progress;
 
-        el.style.display = 'none';
+        $slider[0].style.display = 'none';
 
-        if (el.parentElement.attributes.role !== 'wrapper') {
+        if ($slider[0].parentElement.attributes.role !== 'wrapper') {
             wrapper = document.createElement('div');
             wrapper.setAttribute('role', 'wrapper');
-            el.parentNode.insertBefore(wrapper, el);
-            wrapper.appendChild(el);
+            $slider[0].parentNode.insertBefore(wrapper, $slider[0]);
+            wrapper.appendChild($slider[0]);
         } else {
-            wrapper = el.parentElement;
+            wrapper = $slider[0].parentElement;
         }
 
         if (data.width) {
@@ -83,7 +83,7 @@ gj.slider.methods = {
         
         gj.core.addClasses(wrapper, data.style.wrapper);
 
-        track = el.querySelector('[role="track"]');
+        track = $slider[0].querySelector('[role="track"]');
         if (track == null) {
             track = document.createElement('div');
             track.setAttribute('role', 'track');
@@ -91,14 +91,14 @@ gj.slider.methods = {
         }
         gj.core.addClasses(track, data.style.track);
 
-        handle = el.querySelector('[role="handle"]');
+        handle = $slider[0].querySelector('[role="handle"]');
         if (handle == null) {
             handle = document.createElement('div');
             handle.setAttribute('role', 'handle');
             wrapper.appendChild(handle);
         }
 
-        progress = el.querySelector('[role="progress"]');
+        progress = $slider[0].querySelector('[role="progress"]');
         if (progress == null) {
             progress = document.createElement('div');
             progress.setAttribute('role', 'progress');
@@ -109,35 +109,35 @@ gj.slider.methods = {
         if (!data.value) {
             data.value = data.min;
         }
-        gj.slider.methods.value(el, data, data.value);
+        gj.slider.methods.value($slider, data, data.value);
         
-        gj.documentManager.subscribeForEvent('mouseup', data.guid, gj.slider.methods.createMouseUpHandler(el, handle, data));
+        gj.documentManager.subscribeForEvent('mouseup', $slider.data('guid'), gj.slider.methods.createMouseUpHandler($slider, handle, data));
         handle.addEventListener('mousedown', gj.slider.methods.createMouseDownHandler(handle, data));
-        gj.documentManager.subscribeForEvent('mousemove', data.guid, gj.slider.methods.createMouseMoveHandler(el, track, handle, progress, data));
+        gj.documentManager.subscribeForEvent('mousemove', $slider.data('guid'), gj.slider.methods.createMouseMoveHandler($slider, track, handle, progress, data));
 
         handle.addEventListener('click', function (e) { e.stopPropagation(); });
-        wrapper.addEventListener('click', gj.slider.methods.createClickHandler(el, track, handle, data));
+        wrapper.addEventListener('click', gj.slider.methods.createClickHandler($slider, track, handle, data));
     },
 
-    createClickHandler: function (el, track, handle, data) {
+    createClickHandler: function ($slider, track, handle, data) {
         return function (e) {
             var sliderPos, x, offset, stepSize, newValue;
             if (handle.getAttribute('drag') !== 'true') {
-                sliderPos = gj.core.position(el.parentElement);
+                sliderPos = gj.core.position($slider[0].parentElement);
                 x = new gj.widget().mouseX(e) - sliderPos.left;
                 offset = gj.core.width(handle) / 2;
                 stepSize = gj.core.width(track) / (data.max - data.min);
                 newValue = Math.round((x - offset) / stepSize) + data.min;
-                gj.slider.methods.value(el, data, newValue);
+                gj.slider.methods.value($slider, data, newValue);
             }
         };
     },
 
-    createMouseUpHandler: function (el, handle, data) {
+    createMouseUpHandler: function ($slider, handle, data) {
         return function (e) {
             if (handle.getAttribute('drag') === 'true') {
                 handle.setAttribute('drag', 'false');
-                gj.slider.events.change(el);
+                gj.slider.events.change($slider);
             }
         }
     },
@@ -148,11 +148,11 @@ gj.slider.methods = {
         }
     },
 
-    createMouseMoveHandler: function (el, track, handle, progress, data) {
+    createMouseMoveHandler: function ($slider, track, handle, progress, data) {
         return function (e) {
             var sliderPos, x, trackWidth, offset, stepSize, valuePos, newValue;
             if (handle.getAttribute('drag') === 'true') {
-                sliderPos = gj.core.position(el.parentElement);
+                sliderPos = gj.core.position($slider[0].parentElement);
                 x = new gj.widget().mouseX(e) - sliderPos.left;
 
                 trackWidth = gj.core.width(track);
@@ -163,46 +163,44 @@ gj.slider.methods = {
                 if (x >= offset && x <= (trackWidth + offset)) {
                     if (x > valuePos + (stepSize / 2) || x < valuePos - (stepSize / 2)) {
                         newValue = Math.round((x - offset) / stepSize) + data.min;
-                        gj.slider.methods.value(el, data, newValue);
+                        gj.slider.methods.value($slider, data, newValue);
                     }
                 }
             }
         }
     },
 
-    value: function (el, data, value) {
+    value: function ($slider, data, value) {
         var stepSize, track, handle, progress;
         if (typeof (value) === "undefined") {
-            return el.value;
+            return $slider[0].value;
         } else {
-            el.setAttribute('value', value);
+            $slider[0].setAttribute('value', value);
             data.value = value;
-            track = el.parentElement.querySelector('[role="track"]')
+            track = $slider.parent().children('[role="track"]')[0]
             stepSize = gj.core.width(track) / (data.max - data.min);
-            handle = el.parentElement.querySelector('[role="handle"]');
+            handle = $slider.parent().children('[role="handle"]')[0];
             handle.style.left = ((value - data.min) * stepSize) + 'px';
-            progress = el.parentElement.querySelector('[role="progress"]');
+            progress = $slider.parent().children('[role="progress"]')[0];
             progress.style.width = ((value - data.min) * stepSize) + 'px';
-            gj.slider.events.slide(el, value);
-            return el;
+            gj.slider.events.slide($slider, value);
+            return $slider;
         }
     },
 
-    destroy: function (el) {
-        var data = gijgoStorage.get(el, 'gijgo'),
-            wrapper = el.parentElement;
+    destroy: function ($slider) {
+        var data = $slider.data(),
+            $wrapper = $slider.parent();
         if (data) {
-            wrapper.removeChild(wrapper.querySelector('[role="track"]'));
-            wrapper.removeChild(wrapper.querySelector('[role="handle"]'));
-            wrapper.removeChild(wrapper.querySelector('[role="progress"]'));
-            $(el).unwrap();
-            $(el).off();
-            gijgoStorage.remove(el, 'gijgo');
-            el.removeAttribute('data-type');
-            el.removeAttribute('data-guid')
-            el.removeAttribute('data-slider');
-            el.removeAttribute('class');
-            el.style.display = 'block';
+            $wrapper.children('[role="track"]').remove();
+            $wrapper.children('[role="handle"]').remove();
+            $wrapper.children('[role="progress"]').remove();
+            $slider.unwrap();
+            $slider.off();
+            $slider.removeData();
+            $slider.removeAttr('data-type').removeAttr('data-guid').removeAttr('data-slider');
+            $slider.removeClass();
+            $slider.show();
         }
         return $slider;
     }
@@ -211,57 +209,53 @@ gj.slider.methods = {
 gj.slider.events = {
     /**
      * Fires when the slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard.
-     *     */    change: function (el) {
-        return el.dispatchEvent(new Event('change'));
+     *     */    change: function ($slider) {
+        return $slider.triggerHandler('change');
     },
 
     /**
-     * Fires when the user drags the drag handle to a new position.     */    slide: function (el, value) {
-        return el.dispatchEvent(new CustomEvent('slide', { 'value': value }));
+     * Fires when the user drags the drag handle to a new position.     */    slide: function ($slider, value) {
+        return $slider.triggerHandler('slide', [value]);
     }
 };
 
-GijgoSlider = function (element, jsConfig) {
+gj.slider.widget = function ($element, jsConfig) {
     var self = this,
         methods = gj.slider.methods;
 
-    self.element = element;
-
-    /** Gets or sets the value of the slider.     */    self.value = function (value) {
-        return methods.value(this.element, gijgoStorage.get(this.element, 'gijgo'), value);
+    /** Gets or sets the value of the slider.     */    self.value = function (value) {
+        return methods.value(this, this.data(), value);
     };
 
-    /** Remove slider functionality from the element.     */    self.destroy = function () {
-        return methods.destroy(this.element);
+    /** Remove slider functionality from the element.     */    self.destroy = function () {
+        return methods.destroy(this);
     };
 
-    //$.extend(element, self);
-    if ('true' !== element.getAttribute('data-slider')) {
-        methods.init.call(self, jsConfig);
+    $.extend($element, self);
+    if ('true' !== $element.attr('data-slider')) {
+        methods.init.call($element, jsConfig);
     }
 
-    return self;
+    return $element;
 };
 
-GijgoSlider.prototype = new gj.widget();
-GijgoSlider.constructor = GijgoSlider;
+gj.slider.widget.prototype = new gj.widget();
+gj.slider.widget.constructor = gj.slider.widget;
 
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.slider = function (method) {
-            var $widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoSlider(this[0], method);
+(function ($) {
+    $.fn.slider = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.slider.widget(this, method);
+            } else {
+                $widget = new gj.slider.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    $widget = new GijgoSlider(this[0], null);
-                    if ($widget[method]) {
-                        return $widget[method].apply(this[0], Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
+        }
+    };
+})(jQuery);

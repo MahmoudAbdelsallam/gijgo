@@ -1,73 +1,73 @@
 /*
- * Gijgo Grid v2.0.0-alpha-1
+ * Gijgo Grid v1.9.13
  * http://gijgo.com/grid
  *
- * Copyright 2014, 2018 gijgo.com
+ * Copyright 2014, 2019 gijgo.com
  * Released under the MIT license
  */
 /* global window alert jQuery gj */
-/**  */gj.grid = {
+/**  */gj.grid = {
     plugins: {},
     messages: {}
 };
 
 gj.grid.config = {
     base: {
-        /** The data source for the grid.         */        dataSource: undefined,
+        /** The data source for the grid.         */        dataSource: undefined,
 
-        /** An array that holds the configurations of each column from the grid.         */        columns: [],
+        /** An array that holds the configurations of each column from the grid.         */        columns: [],
 
-        /** Auto generate column for each field in the datasource when set to true.         */        autoGenerateColumns: false,
+        /** Auto generate column for each field in the datasource when set to true.         */        autoGenerateColumns: false,
 
-        /** An object that holds the default configuration settings of each column from the grid.         */        defaultColumnSettings: {
+        /** An object that holds the default configuration settings of each column from the grid.         */        defaultColumnSettings: {
 
-            /** If set to true the column will not be displayed in the grid. By default all columns are displayed.             */            hidden: false,
+            /** If set to true the column will not be displayed in the grid. By default all columns are displayed.             */            hidden: false,
 
             /** The width of the column. Numeric values are treated as pixels.
-             * If the width is undefined the width of the column is not set and depends on the with of the table(grid).             */            width: undefined,
+             * If the width is undefined the width of the column is not set and depends on the with of the table(grid).             */            width: undefined,
 
             /** Indicates if the column is sortable.
-             * If set to true the user can click the column header and sort the grid by the column source field.             */            sortable: false,
+             * If set to true the user can click the column header and sort the grid by the column source field.             */            sortable: false,
 
-            /** Indicates the type of the column.             */            type: 'text',
+            /** Indicates the type of the column.             */            type: 'text',
 
-            /** The caption that is going to be displayed in the header of the grid.             */            title: undefined,
+            /** The caption that is going to be displayed in the header of the grid.             */            title: undefined,
 
             /** The field name to which the column is bound.
-             * If the column.title is not defined this value is used as column.title.             */            field: undefined,
+             * If the column.title is not defined this value is used as column.title.             */            field: undefined,
 
-            /** This setting control the alignment of the text in the cell.             */            align: undefined,
+            /** This setting control the alignment of the text in the cell.             */            align: undefined,
 
-            /** The name(s) of css class(es) that are going to be applied to all cells inside that column, except the header cell.             */            cssClass: undefined,
+            /** The name(s) of css class(es) that are going to be applied to all cells inside that column, except the header cell.             */            cssClass: undefined,
 
-            /** The name(s) of css class(es) that are going to be applied to the header cell of that column.             */            headerCssClass: undefined,
+            /** The name(s) of css class(es) that are going to be applied to the header cell of that column.             */            headerCssClass: undefined,
 
-            /** The text for the cell tooltip.             */            tooltip: undefined,
+            /** The text for the cell tooltip.             */            tooltip: undefined,
 
             /** Css class for icon that is going to be in use for the cell.
-             * This setting can be in use only with combination of type icon.             */            icon: undefined,
+             * This setting can be in use only with combination of type icon.             */            icon: undefined,
 
             /** Configuration object with event names as keys and functions as values that are going to be bind to each cell from the column.
-             * Each function is going to receive event information as a parameter with info in the 'data' field for id, field name and record data.             */            events: undefined,
+             * Each function is going to receive event information as a parameter with info in the 'data' field for id, field name and record data.             */            events: undefined,
 
-            /** Format the date when the type of the column is date.             */            format: 'mm/dd/yyyy',
+            /** Format the date when the type of the column is date.             */            format: 'mm/dd/yyyy',
 
-            /** Number of decimal digits after the decimal point.             */            decimalDigits: undefined,
+            /** Number of decimal digits after the decimal point.             */            decimalDigits: undefined,
 
             /** Template for the content in the column.
-             * Use curly brackets '{}' to wrap the names of data source columns from server response.             */            tmpl: undefined,
+             * Use curly brackets '{}' to wrap the names of data source columns from server response.             */            tmpl: undefined,
 
-            /** If set to true stop event propagation when event occur.             */            stopPropagation: false,
+            /** If set to true stop event propagation when event occur.             */            stopPropagation: false,
 
-            /** A renderer is an 'interceptor' function which can be used to transform data (value, appearance, etc.) before it is rendered.             */            renderer: undefined,
+            /** A renderer is an 'interceptor' function which can be used to transform data (value, appearance, etc.) before it is rendered.             */            renderer: undefined,
 
-            /** Function which can be used to customize filtering with local data (javascript sourced data).             */            filter: undefined
+            /** Function which can be used to customize filtering with local data (javascript sourced data).             */            filter: undefined
         },
 
         mapping: {
-            /** The name of the object in the server response, that contains array with records, that needs to be display in the grid.             */            dataField: 'records',
+            /** The name of the object in the server response, that contains array with records, that needs to be display in the grid.             */            dataField: 'records',
 
-            /** The name of the object in the server response, that contains the number of all records on the server.             */            totalRecordsField: 'total'
+            /** The name of the object in the server response, that contains the number of all records on the server.             */            totalRecordsField: 'total'
         },
 
         params: {},
@@ -75,40 +75,42 @@ gj.grid.config = {
         paramNames: {
 
             /** The name of the parameter that is going to send the name of the column for sorting.
-             * The "sortable" setting for at least one column should be enabled in order this parameter to be in use.             */            sortBy: 'sortBy',
+             * The "sortable" setting for at least one column should be enabled in order this parameter to be in use.             */            sortBy: 'sortBy',
 
             /** The name of the parameter that is going to send the direction for sorting.
-             * The "sortable" setting for at least one column should be enabled in order this parameter to be in use.             */            direction: 'direction'
+             * The "sortable" setting for at least one column should be enabled in order this parameter to be in use.             */            direction: 'direction'
         },
 
-        /** The name of the UI library that is going to be in use. Currently we support Bootstrap 3, Bootstrap 4 and Material Design.         */        uiLibrary: 'materialdesign',
+        /** The name of the UI library that is going to be in use. Currently we support Bootstrap 3, Bootstrap 4 and Material Design.         */        uiLibrary: 'materialdesign',
 
-        /** The name of the icons library that is going to be in use. Currently we support Material Icons, Font Awesome and Glyphicons.         */        iconsLibrary: 'materialicons',
+        /** The name of the icons library that is going to be in use. Currently we support Material Icons, Font Awesome and Glyphicons.         */        iconsLibrary: 'materialicons',
 
         /** The type of the row selection.<br/>
-         * If the type is set to multiple the user will be able to select more then one row from the grid.         */        selectionType: 'single',
+         * If the type is set to multiple the user will be able to select more then one row from the grid.         */        selectionType: 'single',
 
-        /** The type of the row selection mechanism.         */        selectionMethod: 'basic',
+        /** The type of the row selection mechanism.         */        selectionMethod: 'basic',
 
-        /** When this setting is enabled the content of the grid will be loaded automatically after the creation of the grid.         */        autoLoad: true,
+        /** When this setting is enabled the content of the grid will be loaded automatically after the creation of the grid.         */        autoLoad: true,
 
-        /** The text that is going to be displayed if the grid is empty.         */        notFoundText: undefined,
+        /** The text that is going to be displayed if the grid is empty.         */        notFoundText: undefined,
+		
+		deleteConfirmationText:'Are you sure you want to delete?',
 
-        /** Width of the grid.         */        width: undefined,
+        /** Width of the grid.         */        width: undefined,
 
-        /** Minimum width of the grid.         */        minWidth: undefined,
+        /** Minimum width of the grid.         */        minWidth: undefined,
 
         /** This configuration option manage the behaviour of the header row height.
-         * Auto scale if set to to 'autogrow'. All body rows are with the same height if set to 'fixed'.         */        headerRowHeight: 'fixed',
+         * Auto scale if set to to 'autogrow'. All body rows are with the same height if set to 'fixed'.         */        headerRowHeight: 'fixed',
 
         /** This configuration option manage the behaviour of the body row height.
-         * Auto scale if set to to 'autogrow'. All body rows are with the same height if set to 'fixed'.         */        bodyRowHeight: 'autogrow',
+         * Auto scale if set to to 'autogrow'. All body rows are with the same height if set to 'fixed'.         */        bodyRowHeight: 'autogrow',
 
-        /** The size of the font in the grid.         */        fontSize: undefined,
+        /** The size of the font in the grid.         */        fontSize: undefined,
 
-        /** Name of column that contains the record id.          */        primaryKey: undefined,
+        /** Name of column that contains the record id.          */        primaryKey: undefined,
 
-        /** The language that needs to be in use.         */        locale: 'en-us',
+        /** The language that needs to be in use.         */        locale: 'en-us',
 
         defaultIconColumnWidth: 70,
         defaultCheckBoxColumnWidth: 70,
@@ -183,79 +185,79 @@ gj.grid.config = {
     }
 };
 
-/**  */gj.grid.events = {
+/**  */gj.grid.events = {
     /**
-     * Event fires before addition of an empty row to the grid.     */    beforeEmptyRowInsert: function ($grid, $row) {
+     * Event fires before addition of an empty row to the grid.     */    beforeEmptyRowInsert: function ($grid, $row) {
         return $grid.triggerHandler('beforeEmptyRowInsert', [$row]);
     },
 
     /**
      * Event fired before data binding takes place.
-     *     */    dataBinding: function ($grid, records) {
+     *     */    dataBinding: function ($grid, records) {
         return $grid.triggerHandler('dataBinding', [records]);
     },
 
     /**
      * Event fires after the loading of the data in the grid.
-     *     */    dataBound: function ($grid, records, totalRecords) {
+     *     */    dataBound: function ($grid, records, totalRecords) {
         return $grid.triggerHandler('dataBound', [records, totalRecords]);
     },
 
     /**
-     * Event fires after insert of a row in the grid during the loading of the data.     */    rowDataBound: function ($grid, $row, id, record) {
+     * Event fires after insert of a row in the grid during the loading of the data.     */    rowDataBound: function ($grid, $row, id, record) {
         return $grid.triggerHandler('rowDataBound', [$row, id, record]);
     },
 
     /**
      * Event fires after insert of a cell in the grid during the loading of the data
-     *     */    cellDataBound: function ($grid, $displayEl, id, column, record) {
+     *     */    cellDataBound: function ($grid, $displayEl, id, column, record) {
         return $grid.triggerHandler('cellDataBound', [$displayEl, id, column, record]);
     },
 
     /**
      * Event fires on selection of row
-     *     */    rowSelect: function ($grid, $row, id, record) {
+     *     */    rowSelect: function ($grid, $row, id, record) {
         return $grid.triggerHandler('rowSelect', [$row, id, record]);
     },
 
     /**
      * Event fires on un selection of row
-     *     */    rowUnselect: function ($grid, $row, id, record) {
+     *     */    rowUnselect: function ($grid, $row, id, record) {
         return $grid.triggerHandler('rowUnselect', [$row, id, record]);
     },
 
     /**
-     * Event fires before deletion of row in the grid.     */    rowRemoving: function ($grid, $row, id, record) {
+     * Event fires before deletion of row in the grid.     */    rowRemoving: function ($grid, $row, id, record) {
         return $grid.triggerHandler('rowRemoving', [$row, id, record]);
     },
 
     /**
      * Event fires when the grid.destroy method is called.
-     *     */    destroying: function ($grid) {
+     *     */    destroying: function ($grid) {
         return $grid.triggerHandler('destroying');
     },
 
     /**
      * Event fires when column is hidding
-     *     */    columnHide: function ($grid, column) {
+     *     */    columnHide: function ($grid, column) {
         return $grid.triggerHandler('columnHide', [column]);
     },
 
     /**
      * Event fires when column is showing
-     *     */    columnShow: function ($grid, column) {
+     *     */    columnShow: function ($grid, column) {
         return $grid.triggerHandler('columnShow', [column]);
     },
 
     /**
      * Event fires when grid is initialized.
-     *     */    initialized: function ($grid) {
+     *     */    initialized: function ($grid) {
         return $grid.triggerHandler('initialized');
     },
 
     /**
      * Event fires when the grid data is filtered.
-     *     */    dataFiltered: function ($grid, records) {
+     *     */    dataFiltered: function ($grid, records) {
         return $grid.triggerHandler('dataFiltered', [records]);
     }
 };
@@ -1156,7 +1158,7 @@ gj.grid.methods = {
             data = $grid.data(),
             $row = gj.grid.methods.getRowById($grid, id);
 
-        gj.grid.events.rowRemoving($grid, $row, id, $grid.getById(id));
+        //gj.grid.events.rowRemoving($grid, $row, id, $grid.getById(id));
         if ($.isArray(data.dataSource)) {
             position = gj.grid.methods.getRecVPosById($grid, id);
             data.dataSource.splice(position, 1);
@@ -1192,96 +1194,94 @@ gj.grid.methods = {
     }
 };
 
-/**  */GijgoGrid = function (element, jsConfig) {
+/**  */gj.grid.widget = function ($grid, jsConfig) {
     var self = this,
-        methods = gj.datepicker.methods;
-
-    self.element = element;
+        methods = gj.grid.methods;
 
     /**
-     * Reload the data in the grid from a data source.     */    self.reload = function (params) {
+     * Reload the data in the grid from a data source.     */    self.reload = function (params) {
         methods.startLoading(this);
         return gj.widget.prototype.reload.call(this, params);
     };
 
     /**
-     * Clear the content in the grid.     */    self.clear = function (showNotFoundText) {
+     * Clear the content in the grid.     */    self.clear = function (showNotFoundText) {
         return methods.clear(this, showNotFoundText);
     };
 
     /**
-     * Return the number of records in the grid. By default return only the records that are visible in the grid.     */    self.count = function (includeAllRecords) {
+     * Return the number of records in the grid. By default return only the records that are visible in the grid.     */    self.count = function (includeAllRecords) {
         return methods.count(this, includeAllRecords);
     };
 
     /**
-     * Render data in the grid     */    self.render = function (response) {
+     * Render data in the grid     */    self.render = function (response) {
         return methods.render($grid, response);
     };
 
     /**
-     * Destroy the grid. This method remove all data from the grid and all events attached to the grid.     */    self.destroy = function (keepTableTag, keepWrapperTag) {
+     * Destroy the grid. This method remove all data from the grid and all events attached to the grid.     */    self.destroy = function (keepTableTag, keepWrapperTag) {
         return methods.destroy(this, keepTableTag, keepWrapperTag);
     };
 
     /**
-     * Select a row from the grid based on id parameter.     */    self.setSelected = function (id) {
+     * Select a row from the grid based on id parameter.     */    self.setSelected = function (id) {
         return methods.setSelected(this, id);
     };
 
     /**
      * Return the id of the selected record.
-     * If the multiple selection method is one this method is going to return only the id of the first selected record.     */    self.getSelected = function () {
+     * If the multiple selection method is one this method is going to return only the id of the first selected record.     */    self.getSelected = function () {
         return methods.getSelected(this);
     };
 
     /**
-     * Return an array with the ids of the selected record.     */    self.getSelections = function () {
+     * Return an array with the ids of the selected record.     */    self.getSelections = function () {
         return methods.getSelections(this);
     };
 
     /**
-     * Select all records from the grid.     */    self.selectAll = function () {
+     * Select all records from the grid.     */    self.selectAll = function () {
         return methods.selectAll(this);
     };
 
     /**
-     * Unselect all records from the grid.     */    self.unSelectAll = function () {
+     * Unselect all records from the grid.     */    self.unSelectAll = function () {
         return methods.unSelectAll(this);
     };
 
     /**
-     * Return record by id of the record.     */    self.getById = function (id) {
+     * Return record by id of the record.     */    self.getById = function (id) {
         return methods.getById(this, id);
     };
 
     /**
-     * Return record from the grid based on position.     */    self.get = function (position) {
+     * Return record from the grid based on position.     */    self.get = function (position) {
         return methods.getByPosition(this, position);
     };
 
     /**
-     * Return an array with all records presented in the grid.     */    self.getAll = function (includeAllRecords) {
+     * Return an array with all records presented in the grid.     */    self.getAll = function (includeAllRecords) {
         return methods.getAll(this, includeAllRecords);
     };
 
     /**
-     * Show hidden column.     */    self.showColumn = function (field) {
+     * Show hidden column.     */    self.showColumn = function (field) {
         return methods.showColumn(this, field);
     };
 
     /**
-     * Hide column from the grid.     */    self.hideColumn = function (field) {
+     * Hide column from the grid.     */    self.hideColumn = function (field) {
         return methods.hideColumn(this, field);
     };
 
     /**
-     * Add new row to the grid.     */    self.addRow = function (record) {
+     * Add new row to the grid.     */    self.addRow = function (record) {
         return methods.addRow(this, record);
     };
 
     /**
-     * Update row data.     */    self.updateRow = function (id, record) {
+     * Update row data.     */    self.updateRow = function (id, record) {
         return methods.updateRow(this, id, record);
     };
 
@@ -1291,49 +1291,47 @@ gj.grid.methods = {
     };
 
     /**
-     * Remove row from the grid     */    self.removeRow = function (id) {
+     * Remove row from the grid     */    self.removeRow = function (id) {
         return methods.removeRow(this, id);
     };
 
-    if ('grid' !== element.attr('data-type')) {
-        methods.init.call(self, jsConfig);
+    $.extend($grid, self);
+    if ('grid' !== $grid.attr('data-type')) {
+        methods.init.call($grid, jsConfig);
     }
 
-    return self;
-};
-
-GijgoGrid.prototype = new gj.widget();
-GijgoGrid.constructor = gj.grid.widget;
-
-GijgoGrid.prototype.getConfig = gj.grid.methods.getConfig;
-GijgoGrid.prototype.getHTMLConfig = gj.grid.methods.getHTMLConfig;
-
-
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.grid = function (method) {
-            var widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoGrid(this, method);
-                } else {
-                    widget = new GijgoGrid(this, null);
-                    if (widget[method]) {
-                        return widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
-                }
-            }
-        };
-    })(jQuery);
+    return $grid;
 }
 
-/** */gj.grid.plugins.fixedHeader = {
+gj.grid.widget.prototype = new gj.widget();
+gj.grid.widget.constructor = gj.grid.widget;
+
+gj.grid.widget.prototype.getConfig = gj.grid.methods.getConfig;
+gj.grid.widget.prototype.getHTMLConfig = gj.grid.methods.getHTMLConfig;
+
+(function ($) {
+    $.fn.grid = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.grid.widget(this, method);
+            } else {
+                $widget = new gj.grid.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
+                } else {
+                    throw 'Method ' + method + ' does not exist.';
+                }
+            }
+        }
+    };
+})(jQuery);
+
+/** */gj.grid.plugins.fixedHeader = {
     config: {
         base: {
 
-            /** If set to true, add scroll to the table body             */            fixedHeader: false,
+            /** If set to true, add scroll to the table body             */            fixedHeader: false,
 
             height: 300
         }
@@ -1431,21 +1429,21 @@ if (typeof (jQuery) !== "undefined") {
     }
 };
 
-/**  */gj.grid.plugins.expandCollapseRows = {
+/**  */gj.grid.plugins.expandCollapseRows = {
     config: {
         base: {
             /** Template for the content in the detail section of the row.
-             * Automatically add expand collapse column as a first column in the grid during initialization.             */            detailTemplate: undefined,
+             * Automatically add expand collapse column as a first column in the grid during initialization.             */            detailTemplate: undefined,
 
             /** If set try to persist the state of expanded rows.
-             * You need to specify primaryKey on the initialization of the grid in order to enable this feature.             */            keepExpandedRows: true,
+             * You need to specify primaryKey on the initialization of the grid in order to enable this feature.             */            keepExpandedRows: true,
 
             expandedRows: [],
 
             icons: {
-                /** Expand row icon definition.                 */                expandRow: '<i class="gj-icon chevron-right" />',
+                /** Expand row icon definition.                 */                expandRow: '<i class="gj-icon chevron-right" />',
 
-                /** Collapse row icon definition.                 */                collapseRow: '<i class="gj-icon chevron-down" />'
+                /** Collapse row icon definition.                 */                collapseRow: '<i class="gj-icon chevron-down" />'
             }
         },
 
@@ -1532,7 +1530,7 @@ if (typeof (jQuery) !== "undefined") {
     'public': {
 
         /**
-         * Collapse all grid rows.         */        collapseAll: function () {
+         * Collapse all grid rows.         */        collapseAll: function () {
             var $grid = this, data = $grid.data(), position;
                 
 
@@ -1552,7 +1550,7 @@ if (typeof (jQuery) !== "undefined") {
         },
 
         /**
-         * Expand all grid rows.         */        expandAll: function () {
+         * Expand all grid rows.         */        expandAll: function () {
             var $grid = this, data = $grid.data(), position;
 
             if (typeof (data.detailTemplate) !== 'undefined') {
@@ -1591,13 +1589,13 @@ if (typeof (jQuery) !== "undefined") {
     'events': {
         /**
          * Event fires when detail row is showing
-         *         */        detailExpand: function ($grid, $detailWrapper, id) {
+         *         */        detailExpand: function ($grid, $detailWrapper, id) {
             $grid.triggerHandler('detailExpand', [$detailWrapper, id]);
         },
 
         /**
          * Event fires when detail row is hiding
-         *         */        detailCollapse: function ($grid, $detailWrapper, id) {
+         *         */        detailCollapse: function ($grid, $detailWrapper, id) {
             $grid.triggerHandler('detailCollapse', [$detailWrapper, id]);
         }
     },
@@ -1665,7 +1663,7 @@ if (typeof (jQuery) !== "undefined") {
         }
     }
 };
-/**  */gj.grid.plugins.inlineEditing = {
+/**  */gj.grid.plugins.inlineEditing = {
     renderers: {
         editManager: function (value, record, $cell, $displayEl, id, $grid) {
             var data = $grid.data(),
@@ -1677,13 +1675,15 @@ if (typeof (jQuery) !== "undefined") {
                 $grid.edit($(this).attr('key'));
             });
             $delete.on('click', function (e) {
-                $grid.removeRow($(this).attr('key'));
+					//$grid.removeRow($(this).attr('key'));
+					gj.grid.events.rowRemoving($grid, $cell, id, $grid.getById(id));
             });
             $update.on('click', function (e) {
                 $grid.update($(this).attr('key'));
             });
             $cancel.on('click', function (e) {
                 $grid.cancel($(this).attr('key'));
+				gj.grid.plugins.inlineEditing.events.rowDataCancelled($grid,$(this).attr('key'));
             });
             $displayEl.empty().append($edit).append($delete).append($update).append($cancel);
         }
@@ -1693,17 +1693,17 @@ if (typeof (jQuery) !== "undefined") {
 gj.grid.plugins.inlineEditing.config = {
     base: {
         defaultColumnSettings: {
-            /** Provides a way to set an editing UI for the column.             */            editor: undefined,
+            /** Provides a way to set an editing UI for the column.             */            editor: undefined,
 
-            /** The name of the field in the grid data where the grid is going to set the new value.             */            editField: undefined,
+            /** The name of the field in the grid data where the grid is going to set the new value.             */            editField: undefined,
 
-            /** Provides a way to specify a display mode for the column.             */            mode: 'readEdit'
+            /** Provides a way to specify a display mode for the column.             */            mode: 'readEdit'
         },
         inlineEditing: {
 
-            /** Inline editing mode.             */            mode: 'click',
+            /** Inline editing mode.             */            mode: 'click',
                 
-            /** If set to true, add column with buttons for edit, delete, update and cancel at the end of the grid.            */            managementColumn: true,
+            /** If set to true, add column with buttons for edit, delete, update and cancel at the end of the grid.            */            managementColumn: true,
 
             managementColumnConfig: { width: 300, role: 'managementColumn', align: 'center', renderer: gj.grid.plugins.inlineEditing.renderers.editManager, cssClass: 'gj-grid-management-column' }
         }
@@ -1806,6 +1806,7 @@ gj.grid.plugins.inlineEditing.private = {
                                     $dropdown.value(record[column.field]);
                                 }
                             };
+							config.emptyField=column.editor.emptyField;
                             $editorField = $editorField.dropdown(config);
                         } else {
                             $editorField = $('<input type="text" value="' + value + '" class="gj-width-full"/>');
@@ -1824,11 +1825,14 @@ gj.grid.plugins.inlineEditing.private = {
                         });
                     }
                 }
-                if ($editorField.prop('tagName').toUpperCase() === "INPUT" && $editorField.prop('type').toUpperCase() === 'TEXT') {
-                    gj.core.setCaretAtEnd($editorField[0]);
-                } else {
-                    $editorField.focus();
-                }
+				if($editorField!="")
+				{
+					if ($editorField.prop('tagName').toUpperCase() === "INPUT" && $editorField.prop('type').toUpperCase() === 'TEXT') {
+						gj.core.setCaretAtEnd($editorField[0]);
+					} else {
+						$editorField.focus();
+					}
+				}
                 $cell.attr('data-mode', 'edit');
             } else if (column.role === 'managementColumn') {
                 $cell.find('[role="edit"]').hide();
@@ -1934,12 +1938,12 @@ gj.grid.plugins.inlineEditing.private = {
 
 gj.grid.plugins.inlineEditing.public = {
     /**
-     * Return array with all changes     */    getChanges: function () {
+     * Return array with all changes     */    getChanges: function () {
         return JSON.parse(sessionStorage.getItem('gj.grid.' + this.data().guid));
     },
 
     /**
-     * Enable edit mode for all editable cells within a row.     */    edit: function (id) {
+     * Enable edit mode for all editable cells within a row.     */    edit: function (id) {
         var i, record = this.getById(id),
             $cells = gj.grid.methods.getRowById(this, id).children('td'),
             columns = this.data('columns');
@@ -1952,7 +1956,7 @@ gj.grid.plugins.inlineEditing.public = {
     },
 
     /**
-     * Update all editable cells within a row, when the row is in edit mode.     */    update: function (id) {
+     * Update all editable cells within a row, when the row is in edit mode.     */    update: function (id) {
         var i, record = this.getById(id),
             $cells = gj.grid.methods.getRowById(this, id).children('td'),
             columns = this.data('columns');
@@ -1967,7 +1971,7 @@ gj.grid.plugins.inlineEditing.public = {
     },
 
     /**
-     * Cancel the edition of all editable cells, when the row is in edit mode.     */    cancel: function (id) {
+     * Cancel the edition of all editable cells, when the row is in edit mode.     */    cancel: function (id) {
         var i, record = this.getById(id),
             $cells = gj.grid.methods.getRowById(this, id).children('td'),
             columns = this.data('columns');
@@ -1975,7 +1979,7 @@ gj.grid.plugins.inlineEditing.public = {
         for (i = 0; i < $cells.length; i++) {
             gj.grid.plugins.inlineEditing.private.displayMode(this, $($cells[i]), columns[i], true);
         }
-
+	 
         return this;
     }
 };
@@ -1983,15 +1987,21 @@ gj.grid.plugins.inlineEditing.public = {
 gj.grid.plugins.inlineEditing.events = {
     /**
      * Event fires after inline edit of a cell in the grid.
-     *     */    cellDataChanged: function ($grid, $cell, column, record, oldValue, newValue) {
+     *     */    cellDataChanged: function ($grid, $cell, column, record, oldValue, newValue) {
         $grid.triggerHandler('cellDataChanged', [$cell, column, record, oldValue, newValue]);
     },
 
     /**
      * Event fires after inline edit of a row in the grid.
-     *     */    rowDataChanged: function ($grid, id, record) {
+     *     */    rowDataChanged: function ($grid, id, record) {
         $grid.triggerHandler('rowDataChanged', [id, record]);
+    },
+	
+	rowDataCancelled: function ($grid,id) {
+        $grid.triggerHandler('rowDataCancelled', [id]);
     }
+	
+
 };
 
 gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientConfig) {
@@ -2025,14 +2035,14 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     }
 };
 
-/**  */gj.grid.plugins.optimisticPersistence = {
+/**  */gj.grid.plugins.optimisticPersistence = {
 
     config: {
         base: {
             optimisticPersistence: {
-                /** Array that contains a list with param names that needs to be saved in the localStorage. You need to specify guid on the initialization of the grid in order to enable this feature.                 */                localStorage: undefined,
+                /** Array that contains a list with param names that needs to be saved in the localStorage. You need to specify guid on the initialization of the grid in order to enable this feature.                 */                localStorage: undefined,
 
-                /** Array that contains a list with param names that needs to be saved in the sessionStorage. You need to specify guid on the initialization of the grid in order to enable this feature.                 */                sessionStorage: undefined
+                /** Array that contains a list with param names that needs to be saved in the sessionStorage. You need to specify guid on the initialization of the grid in order to enable this feature.                 */                sessionStorage: undefined
             }
         }
     },
@@ -2089,7 +2099,7 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
         }
     }
 };
-/** */gj.grid.plugins.pagination = {
+/** */gj.grid.plugins.pagination = {
     config: {
         base: {
             style: {
@@ -2102,21 +2112,21 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
 
             paramNames: {
                 /** The name of the parameter that is going to send the number of the page.
-                 * The pager should be enabled in order this parameter to be in use.                 */                page: 'page',
+                 * The pager should be enabled in order this parameter to be in use.                 */                page: 'page',
 
                 /** The name of the parameter that is going to send the maximum number of records per page.
-                 * The pager should be enabled in order this parameter to be in use.                 */                limit: 'limit'
+                 * The pager should be enabled in order this parameter to be in use.                 */                limit: 'limit'
             },
 
             pager: {
-                /** The maximum number of records that can be show by page.                 */                limit: 10,
+                /** The maximum number of records that can be show by page.                 */                limit: 10,
 
                 /** Array that contains the possible page sizes of the grid.
-                 * When this setting is set, then a drop down with the options for each page size is visualized in the pager.                 */                sizes: [5, 10, 20, 100],
+                 * When this setting is set, then a drop down with the options for each page size is visualized in the pager.                 */                sizes: [5, 10, 20, 100],
 
-                /** Array that contains a list with jquery objects that are going to be used on the left side of the pager.                 */                leftControls: undefined,
+                /** Array that contains a list with jquery objects that are going to be used on the left side of the pager.                 */                leftControls: undefined,
 
-                /** Array that contains a list with jquery objects that are going to be used on the right side of the pager.                 */                rightControls: undefined
+                /** Array that contains a list with jquery objects that are going to be used on the right side of the pager.                 */                rightControls: undefined
             }
         },
 
@@ -2494,13 +2504,13 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     events: {
         /**
          * Triggered when the page size is changed.
-         *         */        pageSizeChange: function ($grid, newSize) {
+         *         */        pageSizeChange: function ($grid, newSize) {
             $grid.triggerHandler('pageSizeChange', [newSize]);
         },
 
         /**
          * Triggered before the change of the page.
-         *         */        pageChanging: function ($grid, newSize) {
+         *         */        pageChanging: function ($grid, newSize) {
             $grid.triggerHandler('pageChanging', [newSize]);
         }
     },
@@ -2527,28 +2537,28 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     }
 };
 
-/**  */gj.grid.plugins.responsiveDesign = {
+/**  */gj.grid.plugins.responsiveDesign = {
     config: {
         base: {
             /** The interval in milliseconds for checking if the grid is resizing.
-             * This setting is in use only if the resizeMonitoring setting is set to true.             */            resizeCheckInterval: 500,
+             * This setting is in use only if the resizeMonitoring setting is set to true.             */            resizeCheckInterval: 500,
 
             /** This setting enables responsive behaviour of the grid where some column are invisible when there is not enough space on the screen for them.
              * The visibility of the columns in this mode is driven by the column minWidth and priority settings.
-             * The columns without priority setting are always visible and can't hide in small screen resolutions.             */            responsive: false,
+             * The columns without priority setting are always visible and can't hide in small screen resolutions.             */            responsive: false,
 
             /** Automatically adds hidden columns to the details section of the row.
              * This setting works only if the responsive setting is set to true and the detailTemplate is set.
-             * You need to set priority and minWidth on the colums, that needs to be hidden in smaller screens.             */            showHiddenColumnsAsDetails: false,
+             * You need to set priority and minWidth on the colums, that needs to be hidden in smaller screens.             */            showHiddenColumnsAsDetails: false,
 
             defaultColumn: {
                 /** The priority of the column compared to other columns in the grid.
                  * The columns are hiding based on the priorities.
-                 * This setting is working only when the responsive setting is set to true.                 */                priority: undefined,
+                 * This setting is working only when the responsive setting is set to true.                 */                priority: undefined,
 
                 /** The minimum width of the column.
                  * The column is getting invisible when there is not enough space in the grid for this minimum width.
-                 * This setting is working only when the responsive setting is set to true and the column priority setting is set.                 */                minWidth: 250
+                 * This setting is working only when the responsive setting is set to true and the column priority setting is set.                 */                minWidth: 250
             },
             style: {
                 rowDetailItem: ''
@@ -2627,7 +2637,7 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
 
         /**
          * Make the grid responsive based on the available space.
-         * Show column if the space for the grid is expanding and hide columns when the space for the grid is decreasing.         */        makeResponsive: function () {
+         * Show column if the space for the grid is expanding and hide columns when the space for the grid is decreasing.         */        makeResponsive: function () {
             var i, $column,
                 extraWidth = 0,
                 config = this.data(),
@@ -2664,7 +2674,7 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     'events': {
         /**
          * Event fires when the grid width is changed. The "responsive" configuration setting should be set to true in order this event to fire.
-         *         */        resize: function ($grid, newWidth, oldWidth) {
+         *         */        resize: function ($grid, newWidth, oldWidth) {
             $grid.triggerHandler('resize', [newWidth, oldWidth]);
         }
     },
@@ -2709,12 +2719,12 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     }
 };
 
-/**  */gj.grid.plugins.toolbar = {
+/**  */gj.grid.plugins.toolbar = {
     config: {
         base: {
-            /** Template for the content in the toolbar. Appears in a separate row on top of the grid.              */            toolbarTemplate: undefined,
+            /** Template for the content in the toolbar. Appears in a separate row on top of the grid.              */            toolbarTemplate: undefined,
 
-            /** The title of the grid. Appears in a separate row on top of the grid.              */            title: undefined,
+            /** The title of the grid. Appears in a separate row on top of the grid.              */            title: undefined,
 
             style: {
                 toolbar: 'gj-grid-md-toolbar'
@@ -2768,7 +2778,7 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
 
     public: {        
         /**
-         * Get or set grid title.         */        title: function (text) {
+         * Get or set grid title.         */        title: function (text) {
             var $titleEl = this.parent().find('div[data-role="toolbar"] [data-role="title"]');
             if (typeof (text) !== 'undefined') {
                 $titleEl.text(text);
@@ -2790,10 +2800,10 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     }
 };
 
-/**  */gj.grid.plugins.resizableColumns = {
+/**  */gj.grid.plugins.resizableColumns = {
     config: {
         base: {
-            /** If set to true, users can resize columns by dragging the edges (resize handles) of their header cells.             */            resizableColumns: false
+            /** If set to true, users can resize columns by dragging the edges (resize handles) of their header cells.             */            resizableColumns: false
         }
     },
 
@@ -2876,15 +2886,15 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     }
 };
 
-/**  */gj.grid.plugins.rowReorder = {
+/**  */gj.grid.plugins.rowReorder = {
     config: {
         base: {
-            /** If set to true, enable row reordering with drag and drop.             */            rowReorder: false,
+            /** If set to true, enable row reordering with drag and drop.             */            rowReorder: false,
 
             /** If set, enable row reordering only when you try to drag cell from the configured column.
-             * Accept only field names of columns.             */            rowReorderColumn: undefined,
+             * Accept only field names of columns.             */            rowReorderColumn: undefined,
 
-            /** If set, update the value in the field for all records. Accept only field names of columns.             */            orderNumberField: undefined,
+            /** If set, update the value in the field for all records. Accept only field names of columns.             */            orderNumberField: undefined,
 
             style: {
                 targetRowIndicatorTop: 'gj-grid-row-reorder-indicator-top',
@@ -3022,12 +3032,12 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     }
 };
 
-/**  */gj.grid.plugins.export = {
+/**  */gj.grid.plugins.export = {
     config: { base: {} },
 
     public: {
         /**
-         * Get grid data in Comma Separated Values (CSV) format.         */        getCSV: function (includeAllRecords) {
+         * Get grid data in Comma Separated Values (CSV) format.         */        getCSV: function (includeAllRecords) {
             var i, j, line = '', str = '',
                 columns = this.data().columns,
                 records = this.getAll(includeAllRecords);
@@ -3057,7 +3067,7 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
         },
 
         /**
-         * Download grid data in Comma Separated Values (CSV) format.         */        downloadCSV: function (filename, includeAllRecords) {
+         * Download grid data in Comma Separated Values (CSV) format.         */        downloadCSV: function (filename, includeAllRecords) {
             var link = document.createElement('a');
             document.body.appendChild(link);
             link.download = filename || 'griddata.csv'; 
@@ -3081,10 +3091,10 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     }
 };
 
-/**  */gj.grid.plugins.columnReorder = {
+/**  */gj.grid.plugins.columnReorder = {
     config: {
         base: {
-            /** If set to true, enable column reordering with drag and drop.             */            columnReorder: false,
+            /** If set to true, enable column reordering with drag and drop.             */            columnReorder: false,
 
             dragReady: false,
 
@@ -3234,15 +3244,15 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     }
 };
 
-/** */gj.grid.plugins.headerFilter = {
+/** */gj.grid.plugins.headerFilter = {
     config: {
         base: {
             defaultColumnSettings: {
-                /** Indicates if the column is sortable. If set to false the header filter is hidden.                 */                filterable: true
+                /** Indicates if the column is sortable. If set to false the header filter is hidden.                 */                filterable: true
             },
 
-            /** If set to true, add filters for each column             */            headerFilter: {
-                /** Type of the header filter                 */                type: 'onenterkeypress'
+            /** If set to true, add filters for each column             */            headerFilter: {
+                /** Type of the header filter                 */                type: 'onenterkeypress'
             }
         }
     },
@@ -3305,27 +3315,27 @@ gj.grid.plugins.inlineEditing.configure = function ($grid, fullConfig, clientCon
     }
 };
 
-/**  */gj.grid.plugins.grouping = {
+/**  */gj.grid.plugins.grouping = {
     config: {
         base: {
             paramNames: {
                 /** The name of the parameter that is going to send the name of the column for grouping.
-                 * The grouping should be enabled in order this parameter to be in use.                 */                groupBy: 'groupBy',
+                 * The grouping should be enabled in order this parameter to be in use.                 */                groupBy: 'groupBy',
 
                 /** The name of the parameter that is going to send the direction for grouping.
-                 * The grouping should be enabled in order this parameter to be in use.                 */                groupByDirection: 'groupByDirection'
+                 * The grouping should be enabled in order this parameter to be in use.                 */                groupByDirection: 'groupByDirection'
             },
 
             grouping: {
-                /** The name of the field that needs to be in use for grouping.                  */                groupBy: undefined,
+                /** The name of the field that needs to be in use for grouping.                  */                groupBy: undefined,
 
                 direction: 'asc'
             },
 
             icons: {
-                /** Expand row icon definition.                 */                expandGroup: '<i class="gj-icon plus" />',
+                /** Expand row icon definition.                 */                expandGroup: '<i class="gj-icon plus" />',
 
-                /** Collapse row icon definition.                 */                collapseGroup: '<i class="gj-icon minus" />'
+                /** Collapse row icon definition.                 */                collapseGroup: '<i class="gj-icon minus" />'
             }
         },
 

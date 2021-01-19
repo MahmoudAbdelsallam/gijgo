@@ -2,11 +2,9 @@
   * @widget Tree
   * @plugin Base
   */
-GijgoTree = function (element, jsConfig) {
+gj.tree.widget = function ($element, jsConfig) {
     var self = this,
-        methods = gj.datepicker.methods;
-
-    self.element = element;
+        methods = gj.tree.methods;
 
     /**
      * Reload the tree.
@@ -750,32 +748,31 @@ GijgoTree = function (element, jsConfig) {
         return methods.disableAll(this);
     };
 
-    if ('tree' !== element.attr('data-type')) {
-        methods.init.call(self, jsConfig);
+    $.extend($element, self);
+    if ('tree' !== $element.attr('data-type')) {
+        methods.init.call($element, jsConfig);
     }
 
-    return self;
+    return $element;
 };
 
-GijgoTree.prototype = new gj.widget();
-GijgoTree.constructor = gj.tree.widget;
+gj.tree.widget.prototype = new gj.widget();
+gj.tree.widget.constructor = gj.tree.widget;
 
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.tree = function (method) {
-            var widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoTree(this, method);
+(function ($) {
+    $.fn.tree = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.tree.widget(this, method);
+            } else {
+                $widget = new gj.tree.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    widget = new GijgoTree(this, null);
-                    if (widget[method]) {
-                        return widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
+        }
+    };
+})(jQuery);

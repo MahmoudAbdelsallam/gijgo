@@ -1,12 +1,12 @@
 /*
- * Gijgo Editor v2.0.0-alpha-1
+ * Gijgo Editor v1.9.13
  * http://gijgo.com/editor
  *
- * Copyright 2014, 2018 gijgo.com
+ * Copyright 2014, 2019 gijgo.com
  * Released under the MIT license
  */
 /* global window alert jQuery */
-/**  */gj.editor = {
+/**  */gj.editor = {
     plugins: {},
     messages: {}
 };
@@ -14,15 +14,15 @@
 gj.editor.config = {
     base: {
 
-        /** The height of the editor. Numeric values are treated as pixels.         */        height: 300,
+        /** The height of the editor. Numeric values are treated as pixels.         */        height: 300,
 
-        /** The width of the editor. Numeric values are treated as pixels.         */        width: undefined,
+        /** The width of the editor. Numeric values are treated as pixels.         */        width: undefined,
 
-        /** The name of the UI library that is going to be in use. Currently we support only Material Design and Bootstrap.          */        uiLibrary: 'materialdesign',
+        /** The name of the UI library that is going to be in use. Currently we support only Material Design and Bootstrap.          */        uiLibrary: 'materialdesign',
 
-        /** The name of the icons library that is going to be in use. Currently we support Material Icons and Font Awesome.         */        iconsLibrary: 'materialicons',
+        /** The name of the icons library that is going to be in use. Currently we support Material Icons and Font Awesome.         */        iconsLibrary: 'materialicons',
 
-        /** The language that needs to be in use.         */        locale: 'en-us',
+        /** The language that needs to be in use.         */        locale: 'en-us',
 
         buttons: undefined,
 
@@ -99,73 +99,71 @@ gj.editor.config = {
 
 gj.editor.methods = {
     init: function (jsConfig) {
-        gj.widget.prototype.initJS.call(this, jsConfig, 'editor');
-        this.element.setAttribute('data-editor', 'true');
-        gj.editor.methods.initialize(this, gijgoStorage.get(this.element, 'gijgo'));
+        gj.widget.prototype.init.call(this, jsConfig, 'editor');
+        this.attr('data-editor', 'true');
+        gj.editor.methods.initialize(this);
         return this;
     },
 
-    initialize: function (editor, data) {
-        var group, groupEl, btn, btnEl, wrapper, body, toolbar;
+    initialize: function ($editor) {
+        var self = this, data = $editor.data(),
+            $group, $btn, wrapper, $body, $toolbar;
 
-        editor.element.style.display = 'none';
+        $editor.hide();
 
-        if (editor.element.parentElement.attributes.role !== 'wrapper') {
+        if ($editor[0].parentElement.attributes.role !== 'wrapper') {
             wrapper = document.createElement('div');
             wrapper.setAttribute('role', 'wrapper');
-            editor.element.parentNode.insertBefore(wrapper, editor.element);
-            wrapper.appendChild(editor.element);
+            $editor[0].parentNode.insertBefore(wrapper, $editor[0]);
+            wrapper.appendChild($editor[0]);
         }
 
         gj.editor.methods.localization(data);
-        gj.core.addClasses(wrapper, data.style.wrapper);
+        $(wrapper).addClass(data.style.wrapper);
         if (data.width) {
-            wrapper.style.width = data.width;
+            $(wrapper).width(data.width);
         }
 
-        body = wrapper.querySelector('div[role="body"]');
-        if (!body) {
-            body = document.createElement('div');
-            body.setAttribute('role', 'body');
-            wrapper.appendChild(body);
-            if (editor.element.innerText) {
-                body.innerHTML = editor.element.innerText;
+        $body = $(wrapper).children('div[role="body"]');
+        if ($body.length === 0) {
+            $body = $('<div role="body"></div>');
+            $(wrapper).append($body);
+            if ($editor[0].innerText) {
+                $body[0].innerHTML = $editor[0].innerText;
             }
         }
-        body.setAttribute('contenteditable', true);
-        body.addEventListener('keydown', function (e) {
-            var key = e.keyCode || e.charCode;
-            if (gj.editor.events.changing(editor.element) === false && key !== 8 && key !== 46) {
+        $body.attr('contenteditable', true);
+        $body.on('keydown', function (e) {
+            var key = event.keyCode || event.charCode;
+            if (gj.editor.events.changing($editor) === false && key !== 8 && key !== 46) {
                 e.preventDefault();
             }
         });
-        body.addEventListener('mouseup keyup mouseout cut paste', function (e) {
-            self.updateToolbar(editor, toolbar, data);
-            gj.editor.events.changed(editor);
-            editor.html(body.html());
+        $body.on('mouseup keyup mouseout cut paste', function (e) {
+            self.updateToolbar($editor, $toolbar);
+            gj.editor.events.changed($editor);
+            $editor.html($body.html());
         });
 
-        toolbar = wrapper.querySelector('div[role="toolbar"]');
-        if (!toolbar) {
-            toolbar = document.createElement('div');
-            toolbar.setAttribute('role', 'toolbar');
-            body.parentNode.insertBefore(toolbar, body);
+        $toolbar = $(wrapper).children('div[role="toolbar"]');
+        if ($toolbar.length === 0) {
+            $toolbar = $('<div role="toolbar"></div>');
+            $body.before($toolbar);
 
-            for (group in data.buttons) {
-                groupEl = document.createElement('div');
-                groupEl.classList.add(data.style.buttonsGroup);
-                for (btn in data.buttons[group]) {
-                    btnEl = gj.core.createElement(data.buttons[group][btn]);
-                    btnEl.addEventListener('click', function () {
-                        gj.editor.methods.executeCmd(editor, body, toolbar, this, data);
+            for (var group in data.buttons) {
+                $group = $('<div />').addClass(data.style.buttonsGroup);
+                for (var btn in data.buttons[group]) {
+                    $btn = $(data.buttons[group][btn]);
+                    $btn.on('click', function () {
+                        gj.editor.methods.executeCmd($editor, $body, $toolbar, $(this));
                     });
-                    groupEl.appendChild(btnEl);
+                    $group.append($btn);
                 }
-                toolbar.appendChild(groupEl);
+                $toolbar.append($group);
             }
         }
 
-        body.style.height = data.height - gj.core.height(toolbar, true) + 'px';
+        $body.height(data.height - gj.core.height($toolbar[0], true));
     },
 
     localization: function (data) {
@@ -198,47 +196,49 @@ gj.editor.methods = {
         }
     },
 
-    updateToolbar: function (editor, toolbar, data) {
-        buttons = toolbar.querySelectorAll('[role]').forEach(function(btn) {
-            var cmd = btn.getAttribute('role');
+    updateToolbar: function ($editor, $toolbar) {
+        var data = $editor.data();
+        $buttons = $toolbar.find('[role]').each(function() {
+            var $btn = $(this),
+                cmd = $btn.attr('role');
 
             if (cmd && document.queryCommandEnabled(cmd) && document.queryCommandValue(cmd) === "true") {
-                btn.classList.add(data.style.buttonActive);
+                $btn.addClass(data.style.buttonActive);
             } else {
-                btn.classList.remove(data.style.buttonActive);
+                $btn.removeClass(data.style.buttonActive);
             }
         });
     },
 
-    executeCmd: function (editor, body, toolbar, btn, data) {
-        body.focus();
-        document.execCommand(btn.getAttribute('role'), false);
-        gj.editor.methods.updateToolbar(editor, toolbar, data);
+    executeCmd: function ($editor, $body, $toolbar, $btn) {
+        $body.focus();
+        document.execCommand($btn.attr('role'), false);
+        gj.editor.methods.updateToolbar($editor, $toolbar);
     },
 
-    content: function (editor, html) {
-        var body = editor.element.parentElement.querySelector('div[role="body"]');
-        if (typeof html === "undefined") {
-            return body.innerHTML;
+    content: function ($editor, html) {
+        var $body = $editor.parent().children('div[role="body"]');
+        if (typeof (html) === "undefined") {
+            return $body.html();
         } else {
-            body.innerHTML = html;
+            return $body.html(html);
         }
     },
 
-    destroy: function (editor) {
-        var wrapper;
-        if (editor.element.getAttribute('data-editor') === 'true') {
-            wrapper = editor.element.parentElement;
-            wrapper.querySelector('div[role="body"]').remove();
-            wrapper.querySelector('div[role="toolbar"]').remove();
-            editor.element.outerHTML = editor.element.innerHTML;
-            gijgoStorage.remove(editor.element, 'gijgo');
-            editor.element.removeAttribute('data-guid');
-            editor.element.removeAttribute('data-editor');
-            //$editor.off();
-            editor.element.display = 'block';
+    destroy: function ($editor) {
+        var $wrapper;
+        if ($editor.attr('data-editor') === 'true') {
+            $wrapper = $editor.parent();
+            $wrapper.children('div[role="body"]').remove();
+            $wrapper.children('div[role="toolbar"]').remove();
+            $editor.unwrap();
+            $editor.removeData();
+            $editor.removeAttr('data-guid');
+            $editor.removeAttr('data-editor');
+            $editor.off();
+            $editor.show();
         }
-        return editor;
+        return $editor;
     }
 };
 
@@ -246,61 +246,57 @@ gj.editor.events = {
 
     /**
      * Event fires before change of text in the editor.
-     *     */    changing: function (el) {
-        return el.dispatchEvent(new Event('changing'));
+     *     */    changing: function ($editor) {
+        return $editor.triggerHandler('changing');
     },
 
     /**
      * Event fires after change of text in the editor.
-     *     */    changed: function (el) {
-        return el.dispatchEvent(new Event('changed'));
+     *     */    changed: function ($editor) {
+        return $editor.triggerHandler('changed');
     }
 };
 
-GijgoEditor = function (element, jsConfig) {
+gj.editor.widget = function ($element, jsConfig) {
     var self = this,
         methods = gj.editor.methods;
 
-    self.element = element;
-
-    /** Get or set html content in the body.     */    self.content = function (html) {
+    /** Get or set html content in the body.     */    self.content = function (html) {
         return methods.content(this, html);
     };
 
-    /** Remove editor functionality from the element.     */    self.destroy = function () {
+    /** Remove editor functionality from the element.     */    self.destroy = function () {
         return methods.destroy(this);
     };
 
-    if ('true' !== element.getAttribute('data-editor')) {
-        methods.init.call(self, jsConfig);
+    $.extend($element, self);
+    if ('true' !== $element.attr('data-editor')) {
+        methods.init.call($element, jsConfig);
     }
 
-    return self;
+    return $element;
 };
 
-GijgoEditor.prototype = new gj.widget();
-GijgoEditor.constructor = gj.editor.widget;
+gj.editor.widget.prototype = new gj.widget();
+gj.editor.widget.constructor = gj.editor.widget;
 
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.editor = function (method) {
-            var widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoEditor(this, method);
+(function ($) {
+    $.fn.editor = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.editor.widget(this, method);
+            } else {
+                $widget = new gj.editor.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    widget = new GijgoEditor(this, null);
-                    if (widget[method]) {
-                        return widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
-
+        }
+    };
+})(jQuery);
 gj.editor.messages['en-us'] = {
     bold: 'Bold',
     italic: 'Italic',

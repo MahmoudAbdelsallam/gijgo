@@ -13,17 +13,10 @@ gj.datepicker.config = {
          * @additionalinfo Set to true by default for Bootstrap.
          * @type Boolean
          * @default false
-         * @example JS.True <!-- nojquery, datepicker -->
+         * @example True <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
-         *        showOtherMonths: true
-         *    });
-         * </script>
-         * @example jQuery.True <!-- datepicker -->
-         * <input id="datepicker" width="312" />
-         * <script>
-         *    $('#datepicker').datepicker({
+         *    var datepicker = $('#datepicker').datepicker({ 
          *        showOtherMonths: true
          *    });
          * </script>
@@ -41,15 +34,7 @@ gj.datepicker.config = {
          * This only applies if the showOtherMonths option is set to true.
          * @type Boolean
          * @default true
-         * @example JS.True <!-- nojquery, datepicker -->
-         * <input id="datepicker" width="312" />
-         * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
-         *        showOtherMonths: true,
-         *        selectOtherMonths: true
-         *    });
-         * </script>
-         * @example jQuery.True <!-- datepicker -->
+         * @example True <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
          *    $('#datepicker').datepicker({
@@ -57,10 +42,10 @@ gj.datepicker.config = {
          *        selectOtherMonths: true
          *    });
          * </script>
-         * @example JS.False <!-- datepicker -->
+         * @example False <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), {
+         *     $('#datepicker').datepicker({ 
          *        showOtherMonths: true,
          *        selectOtherMonths: false
          *     });
@@ -71,10 +56,10 @@ gj.datepicker.config = {
         /** The width of the datepicker.
          * @type number
          * @default undefined
-         * @example JS.Config <!-- nojquery, datepicker -->
+         * @example JS.Config <!-- datepicker -->
          * <input id="datepicker" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { width: 312 });
+         *    $('#datepicker').datepicker({ width: 312 });
          * </script>
          * @example HTML.Config <!-- datepicker -->
          * <input id="datepicker" width="312" />
@@ -88,15 +73,16 @@ gj.datepicker.config = {
          * @additionalinfo If the minDate is set by string, then the date in the string needs to follow the format specified by the 'format' configuration option.
          * @type Date|String|Function
          * @default undefined
-         * @example JS.Today <!-- nojquery, datepicker -->
+         * @example Today <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    var today, datepicker;
+         *    today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+         *    datepicker = $('#datepicker').datepicker({
          *        minDate: today
          *    });
          * </script>
-         * @example jQuery.Yesterday <!-- datepicker -->
+         * @example Yesterday <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
          *     $('#datepicker').datepicker({
@@ -107,22 +93,22 @@ gj.datepicker.config = {
          *        }
          *     });
          * </script>
-         * @example Bootstrap <!-- nojquery, bootstrap, datepicker -->
+         * @example Bootstrap <!-- bootstrap, datepicker -->
          * <input id="datepicker" width="220" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), {
+         *     $('#datepicker').datepicker({
          *        format: 'yyyy-mm-dd',
-         *        value: '2019-01-15',
-         *        minDate: '2019-01-12',
+         *        value: '2017-12-15',
+         *        minDate: '2017-12-12',
          *        uiLibrary: 'bootstrap'
          *     });
          * </script>
-         * @example Bootstrap.4 <!-- nojquery, bootstrap4, datepicker -->
+         * @example Bootstrap.4 <!-- bootstrap4, datepicker -->
          * <input id="datepicker" width="234" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), {
-         *        value: '02/15/2019',
-         *        minDate: '02/12/2019',
+         *     $('#datepicker').datepicker({
+         *        value: '12/15/2017',
+         *        minDate: '12/12/2017',
          *        uiLibrary: 'bootstrap4'
          *     });
          * </script>
@@ -132,15 +118,16 @@ gj.datepicker.config = {
         /** The maximum selectable date. When not set, there is no maximum
          * @type Date|String|Function
          * @default undefined
-         * @example JS.Today <!-- nojquery, datepicker -->
+         * @example Today <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    var today, datepicker;
+         *    today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+         *    datepicker = $('#datepicker').datepicker({
          *        maxDate: today
          *    });
          * </script>
-         * @example jQuery.Tomorrow <!-- datepicker -->
+         * @example Tomorrow <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
          *     $('#datepicker').datepicker({ 
@@ -167,20 +154,20 @@ gj.datepicker.config = {
          * <b>yyyy</b> - Year represented by four digits.<br/>
          * @type String
          * @default 'mm/dd/yyyy'
-         * @example Sample <!-- nojquery, datepicker -->
+         * @example Sample <!-- datepicker -->
          * <input id="datepicker" value="2017-25-07" width="312" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), { format: 'yyyy-dd-mm' });
+         *     $('#datepicker').datepicker({ format: 'yyyy-dd-mm' });
          * </script>
-         * @example Short.Month.Format <!-- nojquery, datepicker -->
+         * @example Short.Month.Format <!-- datepicker -->
          * <input id="datepicker" value="10 Oct 2017" width="312" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), { format: 'dd mmm yyyy' });
+         *     $('#datepicker').datepicker({ format: 'dd mmm yyyy' });
          * </script>
-         * @example Long.Month.Format <!-- nojquery, datepicker -->
+         * @example Long.Month.Format <!-- datepicker -->
          * <input id="datepicker" value="10 October 2017" width="312" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), { format: 'dd mmmm yyyy' });
+         *     $('#datepicker').datepicker({ format: 'dd mmmm yyyy' });
          * </script>
          */
         format: 'mm/dd/yyyy',
@@ -189,25 +176,25 @@ gj.datepicker.config = {
          * @additionalinfo The css file for bootstrap should be manually included if you use bootstrap.
          * @type (materialdesign|bootstrap|bootstrap4)
          * @default materialdesign
-         * @example MaterialDesign <!-- nojquery, datepicker -->
+         * @example MaterialDesign <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { uiLibrary: 'materialdesign' });
+         *    var datepicker = $('#datepicker').datepicker({ uiLibrary: 'materialdesign' });
          * </script>
-         * @example Bootstrap.3 <!-- nojquery, bootstrap, datepicker -->
+         * @example Bootstrap.3 <!-- bootstrap, datepicker -->
          * <input id="datepicker" width="220" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), { uiLibrary: 'bootstrap' });
+         *     $('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
          * </script>
-         * @example Bootstrap.4.Material.Icons <!-- nojquery, bootstrap4, datepicker -->
+         * @example Bootstrap.4.Material.Icons <!-- bootstrap4, datepicker -->
          * <input id="datepicker" width="234" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), { uiLibrary: 'bootstrap4', iconsLibrary: 'materialicons' });
+         *     $('#datepicker').datepicker({ uiLibrary: 'bootstrap4', iconsLibrary: 'materialicons' });
          * </script>
-         * @example Bootstrap.4.FontAwesome <!-- nojquery, fontawesome, bootstrap4, datepicker -->
+         * @example Bootstrap.4.FontAwesome <!-- fontawesome, bootstrap4, datepicker -->
          * <input id="datepicker" width="234" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), { uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome' });
+         *     $('#datepicker').datepicker({ uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome' });
          * </script>
          */
         uiLibrary: 'materialdesign',
@@ -218,18 +205,18 @@ gj.datepicker.config = {
          * The css files for Material Icons, Font Awesome or Glyphicons should be manually included to the page where the grid is in use.
          * @type (materialicons|fontawesome|glyphicons)
          * @default 'materialicons'
-         * @example Bootstrap.Font.Awesome <!-- nojquery, bootstrap, fontawesome, datepicker -->
+         * @example Bootstrap.Font.Awesome <!-- bootstrap, fontawesome, datepicker -->
          * <input id="datepicker" width="220" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), {
+         *     $('#datepicker').datepicker({
          *         uiLibrary: 'bootstrap',
          *         iconsLibrary: 'fontawesome'
          *     });
          * </script>
-         * @example Bootstrap.4.Font.Awesome <!-- nojquery, bootstrap4, fontawesome, datepicker -->
+         * @example Bootstrap.4.Font.Awesome <!-- bootstrap4, fontawesome, datepicker -->
          * <input id="datepicker" width="234" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'), {
+         *     $('#datepicker').datepicker({
          *         uiLibrary: 'bootstrap4',
          *         iconsLibrary: 'fontawesome'
          *     });
@@ -240,17 +227,17 @@ gj.datepicker.config = {
         /** The initial datepicker value.
          * @type String
          * @default undefined
-         * @example Javascript <!-- nojquery, datepicker -->
+         * @example Javascript <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
-         *        value: '01/01/2019'
+         *    $('#datepicker').datepicker({
+         *        value: '01/01/2018'
          *    });
          * </script>
-         * @example HTML <!-- nojquery, datepicker -->
-         * <input id="datepicker" width="312" value="01/01/2019" />
+         * @example HTML <!-- datepicker -->
+         * <input id="datepicker" width="312" value="01/01/2018" />
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker'));
+         *     $('#datepicker').datepicker();
          * </script>
          */
         value: undefined,
@@ -258,17 +245,17 @@ gj.datepicker.config = {
         /** Day of the week start. 0 (Sunday) to 6 (Saturday)
          * @type Number
          * @default 0
-         * @example Monday <!-- nojquery, datepicker -->
+         * @example Monday <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        weekStartDay: 1
          *    });
          * </script>
-         * @example Saturday <!-- nojquery, datepicker -->
+         * @example Saturday <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        weekStartDay: 6
          *    });
          * </script>
@@ -282,15 +269,15 @@ gj.datepicker.config = {
          * <input id="datepicker" width="312" />
          * <script>
          *    $('#datepicker').datepicker({
-         *        value: '11/10/2019',
-         *        disableDates: [new Date(2019,10,11), '11/12/2019']
+         *        value: '11/10/2017',
+         *        disableDates: [new Date(2017,10,11), '11/12/2017']
          *    });
          * </script>
-         * @example Function <!-- nojquery, datepicker -->
+         * @example Function <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
-         *        value: '11/11/2019',
+         *    $('#datepicker').datepicker({
+         *        value: '11/11/2017',
          *        disableDates:  function (date) {
          *            var disabled = [10,15,20,25];
          *            if (disabled.indexOf(date.getDate()) == -1 ) {
@@ -308,10 +295,10 @@ gj.datepicker.config = {
          * The array needs to contains only numbers where 0 is Sunday, 1 is Monday and etc.
          * @type Array
          * @default undefined
-         * @example Saturday.Sunday <!-- nojquery, datepicker -->
+         * @example Saturday.Sunday <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        disableDaysOfWeek: [0, 6]
          *    });
          * </script>
@@ -321,24 +308,20 @@ gj.datepicker.config = {
         /** Whether to display week number in year on the left side of the calendar.
          * @type Boolean
          * @default false
-         * @example Material.Design <!-- nojquery, datepicker -->
+         * @example Material.Design <!-- datepicker -->
          * <input id="datepicker" width="356" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
-         *        calendarWeeks: true,
-         *        modal: true,
-         *        footer: true
-         *    });
+         *    $('#datepicker').datepicker({ calendarWeeks: true, modal: true, footer: true });
          * </script>
-         * @example Bootstrap <!-- nojquery, datepicker, bootstrap -->
+         * @example Bootstrap <!-- datepicker, bootstrap -->
+         * <input id="datepicker" width="220" />
+         * <script>
+         *    $('#datepicker').datepicker({ calendarWeeks: true, uiLibrary: 'bootstrap' });
+         * </script>
+         * @example Bootstrap.4 <!-- bootstrap4, datepicker -->
          * <input id="datepicker" width="234" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { calendarWeeks: true, uiLibrary: 'bootstrap' });
-         * </script>
-         * @example Bootstrap.4 <!-- nojquery, bootstrap4, datepicker -->
-         * <input id="datepicker" width="234" />
-         * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { calendarWeeks: true, uiLibrary: 'bootstrap4' });
+         *    $('#datepicker').datepicker({ calendarWeeks: true, uiLibrary: 'bootstrap4' });
          * </script>
          */
         calendarWeeks: false,
@@ -346,22 +329,22 @@ gj.datepicker.config = {
         /** Whether to enable keyboard navigation.
          * @type Boolean
          * @default true
-         * @example Material.Design <!-- nojquery, datepicker -->
+         * @example Material.Design <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        keyboardNavigation: true
          *    });
          * </script>
-         * @example Material.Design.Modal <!-- nojquery, datepicker -->
+         * @example Material.Design.Modal <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { keyboardNavigation: true, modal: true, header: true, footer: true });
+         *    $('#datepicker').datepicker({ keyboardNavigation: true, modal: true, header: true, footer: true });
          * </script>
-         * @example Bootstrap.4 <!-- nojquery, bootstrap4, datepicker -->
+         * @example Bootstrap.4 <!-- bootstrap4, datepicker -->
          * <input id="datepicker" width="234" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        uiLibrary: 'bootstrap4',
          *        keyboardNavigation: true,
          *        showOtherMonths: true
@@ -373,83 +356,83 @@ gj.datepicker.config = {
         /** The language that needs to be in use.
          * @type string
          * @default 'en-us'
-         * @example German <!-- nojquery, datepicker -->
+         * @example German <!-- datepicker -->
          * <input id="datepicker" width="276" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        locale: 'de-de',
          *        format: 'dd mmm yyyy'
          *    });
          * </script>
-         * @example Bulgarian <!-- nojquery, datepicker -->
+         * @example Bulgarian <!-- datepicker -->
          * <input id="datepicker" width="276" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        locale: 'bg-bg',
          *        format: 'dd mmm yyyy',
          *        weekStartDay: 1
          *    });
          * </script>
-         * @example French <!-- nojquery, datepicker -->
+         * @example French <!-- datepicker -->
          * <input id="datepicker" width="276" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        locale: 'fr-fr',
          *        format: 'dd mmm yyyy'
          *    });
          * </script>
-         * @example Brazil <!-- nojquery, datepicker -->
+         * @example Brazil <!-- datepicker -->
          * <input id="datepicker" width="276" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        locale: 'pt-br',
          *        format: 'dd mmm yyyy'
          *    });
          * </script>
-         * @example Russian <!-- nojquery, datepicker -->
+         * @example Russian <!-- datepicker -->
          * <input id="datepicker" width="276" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        locale: 'ru-ru',
          *        format: 'dd mmm yyyy'
          *    });
          * </script>
-         * @example Spanish <!-- nojquery, datepicker -->
+         * @example Spanish <!-- datepicker -->
          * <input id="datepicker" width="276" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        locale: 'es-es',
          *        format: 'dd/mm/yyyy'
          *    });
          * </script>
-         * @example Italian <!-- nojquery, datepicker -->
+         * @example Italian <!-- datepicker -->
          * <input id="datepicker" width="276" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        locale: 'it-it',
          *        format: 'dd/mm/yyyy'
          *    });
          * </script>
-         * @example Japanise <!-- nojquery, datepicker -->
+         * @example Japanise <!-- datepicker -->
          * <input id="datepicker" width="276" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        locale: 'ja-jp',
          *        format: 'dd mmmm yyyy'
          *    });
          * </script>
-         * @example Chinise_Simplified <!-- nojquery, datepicker -->
+         * @example Chinise_Simplified <!-- datepicker -->
          * <input id="datepicker" width="276" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        locale: 'zh-cn',
          *        format: 'dd mmmm yyyy'
          *    });
          * </script>
-         * @example Chinise_Traditional <!-- nojquery, datepicker -->
+         * @example Chinise_Traditional <!-- datepicker -->
          * <input id="datepicker" width="276" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
+         *    $('#datepicker').datepicker({
          *        locale: 'zh-tw',
          *        format: 'dd mmmm yyyy'
          *    });
@@ -465,7 +448,7 @@ gj.datepicker.config = {
              * @example Custom.Material.Icon <!-- materialicons, datepicker -->
              * <input id="datepicker" width="312" />
              * <script>
-             *     new GijgoDatePicker(document.getElementById('datepicker'), {
+             *     $('#datepicker').datepicker({
              *         icons: { 
              *             rightIcon: '<i class="material-icons">date_range</i>'
              *         }
@@ -474,7 +457,7 @@ gj.datepicker.config = {
              * @example Custom.Glyphicon.Icon <!-- bootstrap, datepicker -->
              * <input id="datepicker" width="220" />
              * <script>
-             *     new GijgoDatePicker(document.getElementById('datepicker'), {
+             *     $('#datepicker').datepicker({
              *         uiLibrary: 'bootstrap',
              *         icons: {
              *             rightIcon: '<span class="glyphicon glyphicon-chevron-down"></span>'
@@ -484,7 +467,7 @@ gj.datepicker.config = {
              * @example Bootstrap.4 <!-- bootstrap4, materialicons, datepicker -->
              * <input id="datepicker" width="234" />
              * <script>
-             *     new GijgoDatePicker(document.getElementById('datepicker'), {
+             *     $('#datepicker').datepicker({
              *         uiLibrary: 'bootstrap4',
              *         icons: {
              *             rightIcon: '<i class="material-icons">date_range</i>'
@@ -503,41 +486,41 @@ gj.datepicker.config = {
         /** The size of the datepicker input.
          * @type 'small'|'default'|'large'
          * @default 'default'
-         * @example Bootstrap.4 <!-- nojquery, bootstrap4, datepicker -->
-         * <p><label for="datepicker-small">Small Size:</label> <input id="datepicker-small" width="234" value="03/20/2019" /></p>
-         * <p><label for="datepicker-default">Default Size:</label> <input id="datepicker-default" width="234" value="03/20/2019" /></p>
-         * <p><label for="datepicker-large">Large Size:</label> <input id="datepicker-large" width="234" value="03/20/2019" /></p>
+         * @example Bootstrap.4 <!-- bootstrap4, datepicker -->
+         * <p><label for="datepicker-small">Small Size:</label> <input id="datepicker-small" width="234" value="03/20/2018" /></p>
+         * <p><label for="datepicker-default">Default Size:</label> <input id="datepicker-default" width="234" value="03/20/2018" /></p>
+         * <p><label for="datepicker-large">Large Size:</label> <input id="datepicker-large" width="234" value="03/20/2018" /></p>
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker-small'), { uiLibrary: 'bootstrap4', size: 'small' });
-         *     new GijgoDatePicker(document.getElementById('datepicker-default'), { uiLibrary: 'bootstrap4', size: 'default' });
-         *     new GijgoDatePicker(document.getElementById('datepicker-large'), { uiLibrary: 'bootstrap4', size: 'large' });
+         *     $('#datepicker-small').datepicker({ uiLibrary: 'bootstrap4', size: 'small' });
+         *     $('#datepicker-default').datepicker({ uiLibrary: 'bootstrap4', size: 'default' });
+         *     $('#datepicker-large').datepicker({ uiLibrary: 'bootstrap4', size: 'large' });
          * </script>
-         * @example Bootstrap.4.Font.Awesome <!-- nojquery, bootstrap4, fontawesome, datepicker -->
-         * <p><label for="datepicker-small">Small Size:</label> <input id="datepicker-small" width="234" value="03/20/2019" /></p>
-         * <p><label for="datepicker-default">Default Size:</label> <input id="datepicker-default" width="234" value="03/20/2019" /></p>
-         * <p><label for="datepicker-large">Large Size:</label> <input id="datepicker-large" width="234" value="03/20/2019" /></p>
+         * @example Bootstrap.4.Font.Awesome <!-- bootstrap4, fontawesome, datepicker -->
+         * <p><label for="datepicker-small">Small Size:</label> <input id="datepicker-small" width="234" value="03/20/2018" /></p>
+         * <p><label for="datepicker-default">Default Size:</label> <input id="datepicker-default" width="234" value="03/20/2018" /></p>
+         * <p><label for="datepicker-large">Large Size:</label> <input id="datepicker-large" width="234" value="03/20/2018" /></p>
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker-small'), { uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'small' });
-         *     new GijgoDatePicker(document.getElementById('datepicker-default'), { uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'default' });
-         *     new GijgoDatePicker(document.getElementById('datepicker-large'), { uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'large' });
+         *     $('#datepicker-small').datepicker({ uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'small' });
+         *     $('#datepicker-default').datepicker({ uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'default' });
+         *     $('#datepicker-large').datepicker({ uiLibrary: 'bootstrap4', iconsLibrary: 'fontawesome', size: 'large' });
          * </script>
-         * @example Bootstrap.3 <!-- nojquery, bootstrap, datepicker -->
-         * <p><label for="datepicker-small">Small Size:</label> <input id="datepicker-small" width="220" value="03/20/2019" /></p>
-         * <p><label for="datepicker-default">Default Size:</label> <input id="datepicker-default" width="220" value="03/20/2019" /></p>
-         * <p><label for="datepicker-large">Large Size:</label> <input id="datepicker-large" width="220" value="03/20/2019" /></p>
+         * @example Bootstrap.3 <!-- bootstrap, datepicker -->
+         * <p><label for="datepicker-small">Small Size:</label> <input id="datepicker-small" width="220" value="03/20/2018" /></p>
+         * <p><label for="datepicker-default">Default Size:</label> <input id="datepicker-default" width="220" value="03/20/2018" /></p>
+         * <p><label for="datepicker-large">Large Size:</label> <input id="datepicker-large" width="220" value="03/20/2018" /></p>
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker-small'), { uiLibrary: 'bootstrap', size: 'small' });
-         *     new GijgoDatePicker(document.getElementById('datepicker-default'), { uiLibrary: 'bootstrap', size: 'default' });
-         *     new GijgoDatePicker(document.getElementById('datepicker-large'), { uiLibrary: 'bootstrap', size: 'large' });
+         *     $('#datepicker-small').datepicker({ uiLibrary: 'bootstrap', size: 'small' });
+         *     $('#datepicker-default').datepicker({ uiLibrary: 'bootstrap', size: 'default' });
+         *     $('#datepicker-large').datepicker({ uiLibrary: 'bootstrap', size: 'large' });
          * </script>
-         * @example Material.Design <!-- nojquery, datepicker -->
-         * <p><label for="datepicker-small">Small Size:</label> <input id="datepicker-small" width="276" value="03/20/2019" /></p>
-         * <p><label for="datepicker-default">Default Size:</label> <input id="datepicker-default" width="276" value="03/20/2019" /></p>
-         * <p><label for="datepicker-large">Large Size:</label> <input id="datepicker-large" width="276" value="03/20/2019" /></p>
+         * @example Material.Design <!-- datepicker -->
+         * <p><label for="datepicker-small">Small Size:</label> <input id="datepicker-small" width="276" value="03/20/2018" /></p>
+         * <p><label for="datepicker-default">Default Size:</label> <input id="datepicker-default" width="276" value="03/20/2018" /></p>
+         * <p><label for="datepicker-large">Large Size:</label> <input id="datepicker-large" width="276" value="03/20/2018" /></p>
          * <script>
-         *     new GijgoDatePicker(document.getElementById('datepicker-small'), { size: 'small' });
-         *     new GijgoDatePicker(document.getElementById('datepicker-default'), { size: 'default' });
-         *     new GijgoDatePicker(document.getElementById('datepicker-large'), { size: 'large' });
+         *     $('#datepicker-small').datepicker({ size: 'small' });
+         *     $('#datepicker-default').datepicker({ size: 'default' });
+         *     $('#datepicker-large').datepicker({ size: 'large' });
          * </script>
          */
         size: 'default',
@@ -545,30 +528,20 @@ gj.datepicker.config = {
         /** If set to true, the datepicker will have modal behavior.
          * @type Boolean
          * @default false
-         * @example Material.Design <!-- nojquery, datepicker -->
+         * @example Material.Design <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { modal: true });
+         *    $('#datepicker').datepicker({ modal: true });
          * </script>
-         * @example Bootstrap <!-- nojquery, bootstrap, datepicker -->
+         * @example Bootstrap <!-- bootstrap, datepicker -->
          * <input id="datepicker" width="220" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
-         *        uiLibrary: 'bootstrap',
-         *        modal: true,
-         *        header: true,
-         *        footer: true
-         *    });
+         *    $('#datepicker').datepicker({ uiLibrary: 'bootstrap', modal: true, header: true, footer: true });
          * </script>
-         * @example Bootstrap.4 <!-- nojquery, bootstrap4, datepicker -->
+         * @example Bootstrap.4 <!-- bootstrap4, datepicker -->
          * <input id="datepicker" width="234" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), {
-         *        uiLibrary: 'bootstrap4',
-         *        modal: true,
-         *        header: true,
-         *        footer: true
-         *    });
+         *    $('#datepicker').datepicker({ uiLibrary: 'bootstrap4', modal: true, header: true, footer: true });
          * </script>
          */
         modal: false,
@@ -576,12 +549,12 @@ gj.datepicker.config = {
         /** If set to true, add header to the datepicker.
          * @type Boolean
          * @default false
-         * @example True <!-- nojquery, datepicker -->
+         * @example True <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { header: true, modal: true, footer: true });
+         *    $('#datepicker').datepicker({ header: true, modal: true, footer: true });
          * </script>
-         * @example False <!-- nojquery, datepicker -->
+         * @example False <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
          *    $('#datepicker').datepicker({ header: false });
@@ -592,12 +565,12 @@ gj.datepicker.config = {
         /** If set to true, add footer with ok and cancel buttons to the datepicker.
          * @type Boolean
          * @default false
-         * @example True <!-- nojquery, datepicker -->
+         * @example True <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { footer: true, modal: true, header: true });
+         *    $('#datepicker').datepicker({ footer: true, modal: true, header: true });
          * </script>
-         * @example False <!-- nojquery, datepicker -->
+         * @example False <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
          *    $('#datepicker').datepicker({ footer: false });
@@ -608,15 +581,15 @@ gj.datepicker.config = {
         /** If set to true, show datepicker on input focus.
          * @type Boolean
          * @default true
-         * @example True <!-- nojquery, datepicker -->
+         * @example True <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { showOnFocus: true, showRightIcon: false });
+         *    $('#datepicker').datepicker({ showOnFocus: true, showRightIcon: false });
          * </script>
-         * @example False <!-- nojquery, datepicker -->
+         * @example False <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { showOnFocus: false });
+         *    $('#datepicker').datepicker({ showOnFocus: false });
          * </script>
          */
         showOnFocus: true,
@@ -624,15 +597,15 @@ gj.datepicker.config = {
         /** If set to true, show datepicker icon on the right side of the input.
          * @type Boolean
          * @default true
-         * @example False <!-- nojquery, datepicker -->
+         * @example False <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { showOnFocus: true, showRightIcon: false });
+         *    $('#datepicker').datepicker({ showOnFocus: true, showRightIcon: false });
          * </script>
-         * @example True <!-- nojquery, datepicker -->
+         * @example True <!-- datepicker -->
          * <input id="datepicker" width="312" />
          * <script>
-         *    new GijgoDatePicker(document.getElementById('datepicker'), { showRightIcon: true });
+         *    $('#datepicker').datepicker({ showRightIcon: true });
          * </script>
          */
         showRightIcon: true,
@@ -689,385 +662,285 @@ gj.datepicker.config = {
 
 gj.datepicker.methods = {
     init: function (jsConfig) {
-        gj.widget.prototype.initJS.call(this, jsConfig, 'datepicker');
-        this.element.setAttribute('data-datepicker', 'true');
-        gj.datepicker.methods.initialize(this, gijgoStorage.get(this.element, 'gijgo'));
+        gj.widget.prototype.init.call(this, jsConfig, 'datepicker');
+        this.attr('data-datepicker', 'true');
+        gj.datepicker.methods.initialize(this, this.data());
         return this;
     },
 
-    initialize: function (picker, data) {
-        var wrapper, rightIcon, calendar;
+    initialize: function ($datepicker, data) {
+        var $calendar, $rightIcon,
+            $wrapper = $datepicker.parent('div[role="wrapper"]');
 
-        if (picker.element.parentElement.attributes.role !== 'wrapper') {
-            wrapper = document.createElement('div');
-            wrapper.setAttribute('role', 'wrapper');
-            picker.element.parentNode.insertBefore(wrapper, picker.element);
-            wrapper.appendChild(picker.element);
+        if ($wrapper.length === 0) {
+            $wrapper = $('<div role="wrapper" />').addClass(data.style.wrapper); // The css class needs to be added before the wrapping, otherwise doesn't work.
+            $datepicker.wrap($wrapper);
         } else {
-            wrapper = picker.element.parentElement;
+            $wrapper.addClass(data.style.wrapper);
         }
+        $wrapper = $datepicker.parent('div[role="wrapper"]');
 
-        gj.core.addClasses(wrapper, data.style.wrapper);
+        data.width && $wrapper.css('width', data.width);
 
-        if (data.width) {
-            wrapper.style.width = data.width + 'px';
-        }
+        $datepicker.val(data.value).addClass(data.style.input).attr('role', 'input');
 
-        picker.element.value = data.value || '';
-        gj.core.addClasses(picker.element, data.style.input);
-        wrapper.setAttribute('role', 'input');
-
-        if (data.fontSize) {
-            picker.element.style.fontSize = data.fontSize;
-        }
+        data.fontSize && $datepicker.css('font-size', data.fontSize);
         
         if (data.uiLibrary === 'bootstrap' || data.uiLibrary === 'bootstrap4') {
             if (data.size === 'small') {
-                wrapper.classList.add('input-group-sm');
-                picker.element.classList.add('form-control-sm');
+                $wrapper.addClass('input-group-sm');
+                $datepicker.addClass('form-control-sm');
             } else if (data.size === 'large') {
-                wrapper.classList.add('input-group-lg');
-                picker.element.classList.add('form-control-lg');
+                $wrapper.addClass('input-group-lg');
+                $datepicker.addClass('form-control-lg');
             }
         } else {
             if (data.size === 'small') {
-                wrapper.classList.add('small');
+                $wrapper.addClass('small');
             } else if (data.size === 'large') {
-                wrapper.classList.add('large');
+                $wrapper.addClass('large');
             }
         }
 
         if (data.showRightIcon) {
             if (data.uiLibrary === 'bootstrap') {
-                rightIcon = document.createElement('span');
-                rightIcon.classList.add('input-group-addon');
-                rightIcon.innerHTML = data.icons.rightIcon;
+                $rightIcon = $('<span class="input-group-addon">' + data.icons.rightIcon + '</span>');
             } else if (data.uiLibrary === 'bootstrap4') {
-                rightIcon = document.createElement('span');
-                rightIcon.classList.add('input-group-append');
-                rightIcon.innerHTML = '<button class="btn btn-outline-secondary border-left-0" type="button">' + data.icons.rightIcon + '</button>';                
+                $rightIcon = $('<span class="input-group-append"><button class="btn btn-outline-secondary border-left-0" type="button">' + data.icons.rightIcon + '</button></span>');
             } else {
-                rightIcon = gj.core.createElement(data.icons.rightIcon);
+                $rightIcon = $(data.icons.rightIcon);
             }
-            rightIcon.setAttribute('role', 'right-icon');
-            rightIcon.addEventListener('click', function (e) {
-                var calendar = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');
-                if (window.getComputedStyle(calendar).display === 'none') {
-                    gj.datepicker.methods.open(picker, data);
+            $rightIcon.attr('role', 'right-icon');
+            $rightIcon.on('click', function (e) {
+                var $calendar = $('body').find('[role="calendar"][guid="' + $datepicker.attr('data-guid') + '"]');
+                if ($calendar.is(':visible')) {
+                    gj.datepicker.methods.close($datepicker);
                 } else {
-                    gj.datepicker.methods.close(picker);
+                    gj.datepicker.methods.open($datepicker, data);
                 }
             });
-            wrapper.appendChild(rightIcon);
+            $wrapper.append($rightIcon);
         }
 
         if (data.showOnFocus) {
-            picker.element.addEventListener('focus', function () {
-                gj.datepicker.methods.open(picker, data);
+            $datepicker.on('focus', function () {
+                gj.datepicker.methods.open($datepicker, data);
             });
         }
 
-        calendar = gj.datepicker.methods.createCalendar(picker, data);
+        $calendar = gj.datepicker.methods.createCalendar($datepicker, data);
 
         if (data.footer !== true) {
-            picker.element.addEventListener('blur', function () {
-                picker.timeout = setTimeout(function () {
-                    gj.datepicker.methods.close(picker);
+            $datepicker.on('blur', function () {
+                $datepicker.timeout = setTimeout(function () {
+                    gj.datepicker.methods.close($datepicker);
                 }, 500);
             });
-            calendar.addEventListener('mousedown', function () {
-                clearTimeout(picker.timeout);
-                document.activeElement !== picker.element && picker.element.focus();
+            $calendar.mousedown(function () {
+                clearTimeout($datepicker.timeout);
+                document.activeElement !== $datepicker[0] && $datepicker.focus();
                 return false;
             });
-            calendar.addEventListener('click', function () {
-                clearTimeout(picker.timeout);
-                //document.activeElement !== picker.element && picker.element.focus(); //breaks datetimepicker
+            $calendar.on('click', function () {
+                clearTimeout($datepicker.timeout);
+                document.activeElement !== $datepicker[0] && $datepicker.focus();
             });
         }
 
         if (data.keyboardNavigation) {
-            document.addEventListener('keydown', gj.datepicker.methods.createKeyDownHandler(picker, calendar, data));
+            $(document).on('keydown', gj.datepicker.methods.createKeyDownHandler($datepicker, $calendar, data));
         }
     },
 
-    createCalendar: function (picker, data) {
-        var date, body, footer, btnCancel, btnOk, calendar, wrapper;
-
-        calendar = document.createElement('div');
-        calendar.setAttribute('role', 'picker');
-        calendar.setAttribute('type', 'month');
-        gj.core.addClasses(calendar, data.style.calendar);
-        calendar.setAttribute('guid', picker.element.getAttribute('data-guid'));
+    createCalendar: function ($datepicker, data) {
+        var date, $body, $footer, $btnCancel, $btnOk,
+            $calendar = $('<div role="calendar" type="month"/>').addClass(data.style.calendar).attr('guid', $datepicker.attr('data-guid'));
         
-        if (data.fontSize) {
-            calendar.style.fontSize = data.fontSize;
-        }
+        data.fontSize && $calendar.css('font-size', data.fontSize);
 
         date = gj.core.parseDate(data.value, data.format, data.locale);
         if (!date || isNaN(date.getTime())) {
             date = new Date();
         } else {
-            picker.element.setAttribute('day', date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate());
+            $datepicker.attr('day', date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate());
         }
 
-        calendar.setAttribute('month', date.getMonth());
-        calendar.setAttribute('year', date.getFullYear());
+        $calendar.attr('month', date.getMonth());
+        $calendar.attr('year', date.getFullYear());
 
-        gj.datepicker.methods.renderHeader(picker, calendar, data, date);
+        gj.datepicker.methods.renderHeader($datepicker, $calendar, data, date);
 
-        body = document.createElement('div');
-        body.setAttribute('role', 'body');
-        calendar.appendChild(body);
+        $body = $('<div role="body" />');
+        $calendar.append($body);
 
         if (data.footer) {
-            footer = document.createElement('div');
-            footer.setAttribute('role', 'footer');
-            gj.core.addClasses(footer, data.style.footer);
+            $footer = $('<div role="footer" class="' + data.style.footer + '" />');
 
-            btnCancel = gj.core.createElement('<button class="' + data.style.button + '">' + gj.core.messages[data.locale].cancel + '</button>');
-            btnCancel.addEventListener('click', function () { picker.close(); });
-            footer.appendChild(btnCancel);
+            $btnCancel = $('<button class="' + data.style.button + '">' + gj.core.messages[data.locale].cancel + '</button>');
+            $btnCancel.on('click', function () { $datepicker.close(); });
+            $footer.append($btnCancel);
 
-            btnOk = gj.core.createElement('<button class="' + data.style.button + '">' + gj.core.messages[data.locale].ok + '</button>');
-            btnOk.addEventListener('click', function () {
-                var date, dayArr, dayStr = calendar.getAttribute('selectedDay');
+            $btnOk = $('<button class="' + data.style.button + '">' + gj.core.messages[data.locale].ok + '</button>');
+            $btnOk.on('click', function () {
+                var date, dayArr, dayStr = $calendar.attr('selectedDay');
                 if (dayStr) {
                     dayArr = dayStr.split('-');
-                    date = new Date(dayArr[0], dayArr[1], dayArr[2], calendar.getAttribute('hour') || 0, calendar.getAttribute('minute') || 0);
-                    gj.datepicker.methods.change(picker, calendar, data, date);
+                    date = new Date(dayArr[0], dayArr[1], dayArr[2], $calendar.attr('hour') || 0, $calendar.attr('minute') || 0);
+                    gj.datepicker.methods.change($datepicker, $calendar, data, date);
                 } else {
-                    picker.close();
+                    $datepicker.close();
                 }
             });
-            footer.appendChild(btnOk);
+            $footer.append($btnOk);
 
-            calendar.appendChild(footer);
+            $calendar.append($footer);
         }
 
-        calendar.style.display = 'none';
-        document.body.appendChild(calendar);
+        $calendar.hide();
+        $('body').append($calendar);
 
         if (data.modal) {
-            wrapper = document.createElement('div');
-            wrapper.setAttribute('role', 'modal');
-            gj.core.addClasses(wrapper, data.style.modal);
-            calendar.parentNode.insertBefore(wrapper, calendar);
-            wrapper.appendChild(calendar);
-            gj.core.center(calendar);
+            $calendar.wrapAll('<div role="modal" class="' + data.style.modal + '"/>');
+            gj.core.center($calendar);
         }
 
-        return calendar;
+        return $calendar;
     },
 
-    renderHeader: function (picker, calendar, data, date) {
-        var header, dateEl, yearEl;
+    renderHeader: function ($datepicker, $calendar, data, date) {
+        var $header, $date, $year;
 
         if (data.header) {
-            header = document.createElement('div');
-            header.setAttribute('role', 'header');
-
-            yearEl = document.createElement('div');
-            yearEl.setAttribute('role', 'year');
-
-            yearEl.addEventListener('click', function () {
-                gj.datepicker.methods.renderDecade(picker, calendar, data);
-                yearEl.classList.add('selected');
-                dateEl.classList.remove('selected');
+            $header = $('<div role="header" />');
+            $year = $('<div role="year" />').on('click', function () {
+                gj.datepicker.methods.renderDecade($datepicker, $calendar, data);
+                $year.addClass('selected');
+                $date.removeClass('selected');
             });
-            yearEl.innerHTML = gj.core.formatDate(date, 'yyyy', data.locale);
-            header.appendChild(yearEl);
-
-            dateEl = document.createElement('div');
-            dateEl.setAttribute('role', 'date');
-            dateEl.classList.add('selected');
-            dateEl.addEventListener('click', function () {
-                gj.datepicker.methods.renderMonth(picker, calendar, data);
-                dateEl.classList.add('selected');
-                yearEl.classList.remove('selected');
+            $year.html(gj.core.formatDate(date, 'yyyy', data.locale));
+            $header.append($year);
+            $date = $('<div role="date" class="selected" />').on('click', function () {
+                gj.datepicker.methods.renderMonth($datepicker, $calendar, data);
+                $date.addClass('selected');
+                $year.removeClass('selected');
             });
-            dateEl.innerHTML = gj.core.formatDate(date, 'ddd, mmm dd', data.locale);
-            header.appendChild(dateEl);
-            calendar.appendChild(header);
+            $date.html(gj.core.formatDate(date, 'ddd, mmm dd', data.locale));
+            $header.append($date);
+            $calendar.append($header);
         }
     },
 
-    updateHeader: function (calendar, data, date) {
-        var yearEl, dateEl, hour, minute,
-            header = calendar.querySelector('[role="header"]');
-
-        if (header) {
-            yearEl = header.querySelector('[role="year"]');
-            if (yearEl) {
-                yearEl.classList.remove('selected');
-                yearEl.innerHTML = gj.core.formatDate(date, 'yyyy', data.locale);
-            }
-
-            dateEl = header.querySelector('[role="date"]');
-            dateEl.classList.add('selected');
-            dateEl.innerHTML = gj.core.formatDate(date, 'ddd, mmm dd', data.locale);
-
-            // update hours and minutes for datetimepickers
-            hour = header.querySelector('[role="hour"]');
-            if (hour) {
-                hour.classList.remove('selected');
-                hour.innerHTML = gj.core.formatDate(date, 'HH', data.locale);
-            }
-
-            minute = header.querySelector('[role="minute"]');
-            if (minute) {
-                minute.classList.remove('selected');
-                minute.innerHTML = gj.core.formatDate(date, 'MM', data.locale);
-            }
-        }
+    updateHeader: function ($calendar, data, date) {
+        $calendar.find('[role="header"] [role="year"]').removeClass('selected').html(gj.core.formatDate(date, 'yyyy', data.locale));
+        $calendar.find('[role="header"] [role="date"]').addClass('selected').html(gj.core.formatDate(date, 'ddd, mmm dd', data.locale));
+        $calendar.find('[role="header"] [role="hour"]').removeClass('selected').html(gj.core.formatDate(date, 'HH', data.locale));
+        $calendar.find('[role="header"] [role="minute"]').removeClass('selected').html(gj.core.formatDate(date, 'MM', data.locale));
     },
 
-    createNavigation: function (picker, body, table, data) {
-        var navigator, row, prevIcon, period, nextIcon, th, thead = document.createElement('thead');
+    createNavigation: function ($datepicker, $body, $table, data) {
+        var $row, $navigator, $thead = $('<thead/>');
 
-        navigator = document.createElement('div');
-        navigator.setAttribute('role', 'navigator');
-
-        prevIcon = document.createElement('div');
-        prevIcon.innerHTML = data.icons.previousMonth;
-        prevIcon.addEventListener('click', gj.datepicker.methods.prev(picker, data));
-        navigator.appendChild(prevIcon);
-
-        period = document.createElement('div');
-        period.setAttribute('role', 'period');
-        period.addEventListener('click', gj.datepicker.methods.changePeriod(picker, data));
-        navigator.appendChild(period);
-
-        nextIcon = document.createElement('div');
-        nextIcon.innerHTML = data.icons.nextMonth;
-        nextIcon.addEventListener('click', gj.datepicker.methods.next(picker, data));
-        navigator.appendChild(nextIcon);
-
-        body.append(navigator);
-
-        row = document.createElement('tr');
-        row.setAttribute('role', 'week-days');
+        $navigator = $('<div role="navigator" />');
+        $navigator.append($('<div>' + data.icons.previousMonth + '</div>').on('click', gj.datepicker.methods.prev($datepicker, data)));
+        $navigator.append($('<div role="period"></div>').on('click', gj.datepicker.methods.changePeriod($datepicker, data)));
+        $navigator.append($('<div>' + data.icons.nextMonth + '</div>').on('click', gj.datepicker.methods.next($datepicker, data)));
+        $body.append($navigator);
         
+        $row = $('<tr role="week-days" />');
         if (data.calendarWeeks) {
-            th = document.createElement('th');
-            th.innerHTML = '<div>&nbsp;</div>';
-            row.appendChild(th);
+            $row.append('<th><div>&nbsp;</div></th>');
         }
         for (i = data.weekStartDay; i < gj.core.messages[data.locale].weekDaysMin.length; i++) {
-            th = document.createElement('th');
-            th.innerHTML = '<div>' + gj.core.messages[data.locale].weekDaysMin[i] + '</div>';
-            row.appendChild(th);
+            $row.append('<th><div>' + gj.core.messages[data.locale].weekDaysMin[i] + '</div></th>');
         }
         for (i = 0; i < data.weekStartDay; i++) {
-            th = document.createElement('th');
-            th.innerHTML = '<div>' + gj.core.messages[data.locale].weekDaysMin[i] + '</div>';
-            row.appendChild(th);
+            $row.append('<th><div>' + gj.core.messages[data.locale].weekDaysMin[i] + '</div></th>');
         }
-        thead.appendChild(row);
+        $thead.append($row);
 
-        table.appendChild(thead);
+        $table.append($thead);
     },
 
-    getDaysInMonth: function (year) {
-        var result = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-        if (year % 4 == 0 && year != 1900) {
-            result[1] = 29;
-        }
-        return result;
-    },
-
-    renderMonth: function (picker, calendar, data) {
-        var weekDay, selectedDay, day, month, year, total, daysInMonth, firstDayPosition, i, now, prevMonth, nextMonth, cell, dayEl, date,
-            body = calendar.querySelector('[role="body"]'),
-            table = document.createElement('table'),
-            tbody = document.createElement('tbody'),
+    renderMonth: function ($datepicker, $calendar, data) {
+        var weekDay, selectedDay, day, month, year, daysInMonth, total, firstDayPosition, i, now, prevMonth, nextMonth, $cell, $day, date,
+            $body = $calendar.children('[role="body"]'),
+            $table = $('<table/>'),
+            $tbody = $('<tbody/>'),
             period = gj.core.messages[data.locale].titleFormat;
         
-        body.innerHTML = '';
-        gj.datepicker.methods.createNavigation(picker, body, table, data);
+        $body.off().empty();
+        gj.datepicker.methods.createNavigation($datepicker, $body, $table, data);
         
-        month = parseInt(calendar.getAttribute('month'), 10);
-        year = parseInt(calendar.getAttribute('year'), 10);
+        month = parseInt($calendar.attr('month'), 10);
+        year = parseInt($calendar.attr('year'), 10);
 
-        calendar.setAttribute('type', 'month');
+        $calendar.attr('type', 'month');
         period = period.replace('mmmm', gj.core.messages[data.locale].monthNames[month]).replace('yyyy', year);
-        calendar.querySelector('div[role="period"]').innerText = period;
-        daysInMonth = gj.datepicker.methods.getDaysInMonth(year);
+        $calendar.find('div[role="period"]').text(period);
+        daysInMonth = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+        if (year % 4 == 0 && year != 1900) {
+            daysInMonth[1] = 29;
+        }
         total = daysInMonth[month];
 
         firstDayPosition = (new Date(year, month, 1).getDay() + 7 - data.weekStartDay) % 7;
 
         weekDay = 0;
-        row = document.createElement('tr');
+        $row = $('<tr />');
         prevMonth = gj.datepicker.methods.getPrevMonth(month, year);
         for (i = 1; i <= firstDayPosition; i++) {
             day = (daysInMonth[prevMonth.month] - firstDayPosition + i);
             date = new Date(prevMonth.year, prevMonth.month, day);
             if (data.calendarWeeks && i === 1) {
-                cell = document.createElement('td');
-                cell.classList.add('calendar-week');
-                cell.innerHTML = '<div>' + gj.datepicker.methods.getWeekNumber(date) + '</div>';
-                row.appendChild(cell);
+                $row.append('<td class="calendar-week"><div>' + gj.datepicker.methods.getWeekNumber(date) + '</div></td>');
             }
-            cell = document.createElement('td');
-            cell.classList.add('other-month');
+            $cell = $('<td class="other-month" />');
             if (data.showOtherMonths) {
-                dayEl = document.createElement('div');
-                dayEl.innerHTML = day;
-                cell.appendChild(dayEl);
+                $day = $('<div>' + day + '</div>');
+                $cell.append($day);
                 if (data.selectOtherMonths && gj.datepicker.methods.isSelectable(data, date)) {
-                    cell.classList.add('gj-cursor-pointer');
-                    cell.setAttribute('day', day);
-                    cell.setAttribute('month', prevMonth.month);
-                    cell.setAttribute('year', prevMonth.year);
-                    dayEl.addEventListener('click', gj.datepicker.methods.dayClickHandler(picker, calendar, data, date));
-                    dayEl.addEventListener('mousedown', function (e) { e.stopPropagation(); });
+                    $cell.addClass('gj-cursor-pointer').attr('day', day).attr('month', prevMonth.month).attr('year', prevMonth.year);
+                    $day.on('click', gj.datepicker.methods.dayClickHandler($datepicker, $calendar, data, date));
+                    $day.on('mousedown', function (e) { e.stopPropagation() });
                 } else {
-                    cell.classList.add('disabled');
+                    $cell.addClass('disabled');
                 }
             }
-            row.appendChild(cell);
+            $row.append($cell);
             weekDay++;
         }
         if (i > 1) {
-            tbody.appendChild(row);
+            $tbody.append($row);
         }
 
         now = new Date();
         for (i = 1; i <= total; i++) {
             date = new Date(year, month, i);
             if (weekDay == 0) {
-                row = document.createElement('tr');
+                $row = $('<tr>');
                 if (data.calendarWeeks) {
-                    cell = document.createElement('td');
-                    cell.classList.add('calendar-week');
-                    cell.innerHTML = '<div>' + gj.datepicker.methods.getWeekNumber(date) + '</div>';
-                    row.appendChild(cell);
+                    $row.append('<td class="calendar-week"><div>' + gj.datepicker.methods.getWeekNumber(date) + '</div></td>');
                 }
             }
-            cell = document.createElement('td');
-            cell.setAttribute('day', i);
-            cell.setAttribute('month', month);
-            cell.setAttribute('year', year);
+            $cell = $('<td day="' + i + '" month="' + month + '" year="' + year + '" />');
             if (year === now.getFullYear() && month === now.getMonth() && i === now.getDate()) {
-                cell.classList.add('today');
+                $cell.addClass('today');
             } else {
-                cell.classList.add('current-month');
+                $cell.addClass('current-month');
             }
-            dayEl = document.createElement('div');
-            dayEl.innerText = i;
+            $day = $('<div>' + i + '</div>');
             if (gj.datepicker.methods.isSelectable(data, date)) {
-                cell.classList.add('gj-cursor-pointer');
-                dayEl.addEventListener('click', gj.datepicker.methods.dayClickHandler(picker, calendar, data, date));
-                dayEl.addEventListener('mousedown', function (e) { e.stopPropagation() });
+                $cell.addClass('gj-cursor-pointer');
+                $day.on('click', gj.datepicker.methods.dayClickHandler($datepicker, $calendar, data, date));
+                $day.on('mousedown', function (e) { e.stopPropagation() });
             } else {
-                cell.classList.add('disabled');
+                $cell.addClass('disabled');
             }
-            cell.appendChild(dayEl);
-            row.appendChild(cell);
+            $cell.append($day);
+            $row.append($cell);
             weekDay++;
             if (weekDay == 7) {
-                tbody.appendChild(row);
+                $tbody.append($row);
                 weekDay = 0;
             }
         }
@@ -1075,128 +948,114 @@ gj.datepicker.methods = {
         nextMonth = gj.datepicker.methods.getNextMonth(month, year);
         for (i = 1; weekDay != 0; i++) {
             date = new Date(nextMonth.year, nextMonth.month, i);
-            cell = document.createElement('td');
-            cell.classList.add('other-month');
+            $cell = $('<td class="other-month" />');
             if (data.showOtherMonths) {
-                dayEl = document.createElement('div');
-                dayEl.innerText = i;
+                $day = $('<div>' + i + '</div>');
                 if (data.selectOtherMonths && gj.datepicker.methods.isSelectable(data, date)) {
-                    cell.classList.add('gj-cursor-pointer');
-                    cell.setAttribute('day', i);
-                    cell.setAttribute('month', nextMonth.month);
-                    cell.setAttribute('year', nextMonth.year);                    
-                    dayEl.addEventListener('click', gj.datepicker.methods.dayClickHandler(picker, calendar, data, date));
-                    dayEl.addEventListener('mousedown', function (e) { e.stopPropagation() });
+                    $cell.addClass('gj-cursor-pointer').attr('day', i).attr('month', nextMonth.month).attr('year', nextMonth.year);
+                    $day.on('click', gj.datepicker.methods.dayClickHandler($datepicker, $calendar, data, date));
+                    $day.on('mousedown', function (e) { e.stopPropagation() });
                 } else {
-                    cell.classList.add('disabled');
+                    $cell.addClass('disabled');
                 }
-                cell.appendChild(dayEl);
+                $cell.append($day);
             }
-            row.appendChild(cell);
+            $row.append($cell);
             weekDay++;
             if (weekDay == 7) {
-                tbody.appendChild(row);
+                $tbody.append($row);
                 weekDay = 0;
             }
         }
 
-        table.appendChild(tbody);
-        body.appendChild(table);
+        $table.append($tbody);
+        $body.append($table);
 
-        if (calendar.getAttribute('selectedDay')) {
-            selectedDay = calendar.getAttribute('selectedDay').split('-');
-            date = new Date(selectedDay[0], selectedDay[1], selectedDay[2], calendar.getAttribute('hour') || 0, calendar.getAttribute('minute') || 0);
-            cell = calendar.querySelector('tbody td[day="' + selectedDay[2] + '"][month="' + selectedDay[1] + '"]');
-            if (cell) {
-                cell.classList.add('selected');
-            }
-            gj.datepicker.methods.updateHeader(calendar, data, date);
+        if ($calendar.attr('selectedDay')) {
+            selectedDay = $calendar.attr('selectedDay').split('-');
+            date = new Date(selectedDay[0], selectedDay[1], selectedDay[2], $calendar.attr('hour') || 0, $calendar.attr('minute') || 0);
+            $calendar.find('tbody td[day="' + selectedDay[2] + '"][month="' + selectedDay[1] + '"]').addClass('selected');
+            gj.datepicker.methods.updateHeader($calendar, data, date);
         }
     },
 
-    renderYear: function (picker, calendar, data) {
-        var year, i, m, row, month,
-            table = calendar.querySelector('[role="body"] table'),
-            tbody = table.querySelector('tbody');
+    renderYear: function ($datepicker, $calendar, data) {
+        var year, i, m, $month,
+            $table = $calendar.find('>[role="body"]>table'),
+            $tbody = $table.children('tbody');
         
-        table.querySelector('thead').style.display = 'none';
+        $table.children('thead').hide();
 
-        year = parseInt(calendar.getAttribute('year'), 10);
+        year = parseInt($calendar.attr('year'), 10);
 
-        calendar.setAttribute('type', 'year');
-        calendar.querySelector('div[role="period"]').innerText = year;
+        $calendar.attr('type', 'year');
+        $calendar.find('div[role="period"]').text(year);
 
-        tbody.innerHTML = '';
+        $tbody.empty();
 
         for (i = 0; i < 3; i++) {
-            row = document.createElement('tr');
+            $row = $('<tr />');
             for (m = (i * 4); m <= (i * 4) + 3; m++) {
-                month = document.createElement('div');
-                month.innerHTML = gj.core.messages[data.locale].monthShortNames[m];
-                month.addEventListener('click', gj.datepicker.methods.selectMonth(picker, calendar, data, m));
-                cell = document.createElement('td');
-                cell.appendChild(month);
-                row.appendChild(cell);
+                $month = $('<div>' + gj.core.messages[data.locale].monthShortNames[m] + '</div>');
+                $month.on('click', gj.datepicker.methods.selectMonth($datepicker, $calendar, data, m));
+                $cell = $('<td></td>').append($month);
+                $row.append($cell);
             }
-            tbody.appendChild(row);
+            $tbody.append($row);
         }
     },
 
-    renderDecade: function (picker, calendar, data) {
-        var year, decade, i, y, year,
-            table = calendar.querySelector('[role="body"] table'),
-            tbody = table.querySelector('tbody');
+    renderDecade: function ($datepicker, $calendar, data) {
+        var year, decade, i, y, $year,
+            $table = $calendar.find('>[role="body"]>table'),
+            $tbody = $table.children('tbody');
         
-        table.querySelector('thead').display.style = 'none';
+        $table.children('thead').hide();
 
-        year = parseInt(calendar.getAttribute('year'), 10);
+        year = parseInt($calendar.attr('year'), 10);
         decade = year - (year % 10);
 
-        calendar.setAttribute('type', 'decade');
-        calendar.querySelector('div[role="period"]').innerText = decade + ' - ' + (decade + 9);
+        $calendar.attr('type', 'decade');
+        $calendar.find('div[role="period"]').text(decade + ' - ' + (decade + 9));
 
-        tbody.innerHTML = '';
+        $tbody.empty();
 
         for (i = decade - 1; i <= decade + 10 ; i += 4) {
-            row = document.createElement('tr');
+            $row = $('<tr />');
             for (y = i; y <= i + 3; y++) {
-                year = document.createElement('div');
-                year.innerText = y;
-                year.addEventListener('click', gj.datepicker.methods.selectYear(picker, calendar, data, y));
-                cell = document.createElement('td')
-                cell.appendChild(year);
-                row.appendChild(cell);
+                $year = $('<div>' + y + '</div>');
+                $year.on('click', gj.datepicker.methods.selectYear($datepicker, $calendar, data, y));
+                $cell = $('<td></td>').append($year);
+                $row.append($cell);
             }
-            tbody.appendChild(row);
+            $tbody.append($row);
         }
     },
 
-    renderCentury: function (picker, calendar, data) {
-        var year, century, i, d, decade,
-            table = calendar.querySelector('[role="body"] table'),
-            tbody = $table.querySelector('tbody');
+    renderCentury: function ($datepicker, $calendar, data) {
+        var year, century, i, d, $decade,
+            $table = $calendar.find('>[role="body"]>table'),
+            $tbody = $table.children('tbody');
         
-        table.querySelector('thead').style.display = 'none';
+        $table.children('thead').hide();
 
-        year = parseInt(calendar.getAttribute('year'), 10);
+        year = parseInt($calendar.attr('year'), 10);
         century = year - (year % 100);
 
-        calendar.setAttribute('type', 'century');
-        calendar.querySelector('div[role="period"]').innerText = century + ' - ' + (century + 99);
+        $calendar.attr('type', 'century');
+        $calendar.find('div[role="period"]').text(century + ' - ' + (century + 99));
 
-        tbody.innerHTML = '';
+        $tbody.empty();
 
         for (i = (century - 10); i < century + 100; i += 40) {
-            row = document.createElement('tr');
+            $row = $('<tr />');
             for (d = i; d <= i + 30; d += 10) {
-                decade = document.createElement('div');
-                decade.innerText = d;
-                decade.addEventListener('click', gj.datepicker.methods.selectDecade(picker, calendar, data, d));
-                cell = document.createElement('td')
-                cell.appendChild(decade);
-                row.appendChild(cell);
+                $decade = $('<div>' + d + '</div>');
+                $decade.on('click', gj.datepicker.methods.selectDecade($datepicker, $calendar, data, d));
+                $cell = $('<td></td>').append($decade);
+                $row.append($cell);
             }
-            tbody.appendChild(row);
+            $tbody.append($row);
         }
     },
 
@@ -1258,7 +1117,7 @@ gj.datepicker.methods = {
 
         if (result) {
             if (data.disableDates) {
-                if (Array.isArray(data.disableDates)) {
+                if ($.isArray(data.disableDates)) {
                     for (i = 0; i < data.disableDates.length; i++) {
                         if (data.disableDates[i] instanceof Date && data.disableDates[i].getTime() === date.getTime()) {
                             result = false;
@@ -1270,7 +1129,7 @@ gj.datepicker.methods = {
                     result = data.disableDates(date);
                 }
             }
-            if (Array.isArray(data.disableDaysOfWeek) && data.disableDaysOfWeek.indexOf(date.getDay()) > -1) {
+            if ($.isArray(data.disableDaysOfWeek) && data.disableDaysOfWeek.indexOf(date.getDay()) > -1) {
                 result = false;
             }
         }
@@ -1289,338 +1148,313 @@ gj.datepicker.methods = {
         return { month: date.getMonth(), year: date.getFullYear() };
     },
 
-    prev: function (picker, data) {
+    prev: function ($datepicker, data) {
         return function () {
             var date, month, year, decade, century,
-                calendar = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');
+                $calendar = $('body').find('[role="calendar"][guid="' + $datepicker.attr('data-guid') + '"]');
 
-            year = parseInt(calendar.getAttribute('year'), 10);
-            switch (calendar.getAttribute('type')) {
+            year = parseInt($calendar.attr('year'), 10);
+            switch ($calendar.attr('type')) {
                 case 'month':
-                    month = parseInt(calendar.getAttribute('month'), 10);
+                    month = parseInt($calendar.attr('month'), 10);
                     date = gj.datepicker.methods.getPrevMonth(month, year);
-                    calendar.setAttribute('month', date.month);
-                    calendar.setAttribute('year', date.year);
-                    gj.datepicker.methods.renderMonth(picker, calendar, data);
+                    $calendar.attr('month', date.month);
+                    $calendar.attr('year', date.year);
+                    gj.datepicker.methods.renderMonth($datepicker, $calendar, data);
                     break;
                 case 'year':
-                    calendar.setAttribute('year', year - 1);
-                    gj.datepicker.methods.renderYear(picker, calendar, data);
+                    $calendar.attr('year', year - 1);
+                    gj.datepicker.methods.renderYear($datepicker, $calendar, data);
                     break;
                 case 'decade':
                     decade = year - (year % 10);
-                    calendar.setAttribute('year', decade - 10);
-                    gj.datepicker.methods.renderDecade(picker, calendar, data);
+                    $calendar.attr('year', decade - 10);
+                    gj.datepicker.methods.renderDecade($datepicker, $calendar, data);
                     break;
                 case 'century':
                     century = year - (year % 100);
-                    calendar.setAttribute('year', century - 100);
-                    gj.datepicker.methods.renderCentury(picker, calendar, data);
+                    $calendar.attr('year', century - 100);
+                    gj.datepicker.methods.renderCentury($datepicker, $calendar, data);
                     break;
             }
-            
-            return false;
         }
     },
 
-    next: function (picker, data) {
-        return function (e) {
+    next: function ($datepicker, data) {
+        return function () {
             var date, month, year, decade, century,
-                calendar = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');
+                $calendar = $('body').find('[role="calendar"][guid="' + $datepicker.attr('data-guid') + '"]');
 
-            year = parseInt(calendar.getAttribute('year'), 10);
-            switch (calendar.getAttribute('type')) {
+            year = parseInt($calendar.attr('year'), 10);
+            switch ($calendar.attr('type')) {
                 case 'month':
-                    month = parseInt(calendar.getAttribute('month'), 10);
+                    month = parseInt($calendar.attr('month'), 10);
                     date = gj.datepicker.methods.getNextMonth(month, year);
-                    calendar.setAttribute('month', date.month);
-                    calendar.setAttribute('year', date.year);
-                    gj.datepicker.methods.renderMonth(picker, calendar, data);
+                    $calendar.attr('month', date.month);
+                    $calendar.attr('year', date.year);
+                    gj.datepicker.methods.renderMonth($datepicker, $calendar, data);
                     break;
                 case 'year':
-                    calendar.setAttribute('year', year + 1);
-                    gj.datepicker.methods.renderYear(picker, calendar, data);
+                    $calendar.attr('year', year + 1);
+                    gj.datepicker.methods.renderYear($datepicker, $calendar, data);
                     break;
                 case 'decade':
                     decade = year - (year % 10);
-                    calendar.setAttribute('year', decade + 10);
-                    gj.datepicker.methods.renderDecade(picker, calendar, data);
+                    $calendar.attr('year', decade + 10);
+                    gj.datepicker.methods.renderDecade($datepicker, $calendar, data);
                     break;
                 case 'century':
                     century = year - (year % 100);
-                    calendar.setAttribute('year', century + 100);
-                    gj.datepicker.methods.renderCentury(picker, calendar, data);
+                    $calendar.attr('year', century + 100);
+                    gj.datepicker.methods.renderCentury($datepicker, $calendar, data);
                     break;
             }
-
-            return false;
-        };
+        }
     },
 
-    changePeriod: function (picker, data) {
+    changePeriod: function ($datepicker, data) {
         return function (e) {
-            var calendar = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');
+            var $calendar = $('body').find('[role="calendar"][guid="' + $datepicker.attr('data-guid') + '"]');
 
-            switch (calendar.getAttribute('type')) {
+            switch ($calendar.attr('type')) {
                 case 'month':
-                    gj.datepicker.methods.renderYear(picker, calendar, data);
+                    gj.datepicker.methods.renderYear($datepicker, $calendar, data);
                     break;
                 case 'year':
-                    gj.datepicker.methods.renderDecade(picker, calendar, data);
+                    gj.datepicker.methods.renderDecade($datepicker, $calendar, data);
                     break;
                 case 'decade':
-                    gj.datepicker.methods.renderCentury(picker, calendar, data);
+                    gj.datepicker.methods.renderCentury($datepicker, $calendar, data);
                     break;
             }
-        };
+        }
     },
 
-    dayClickHandler: function (picker, calendar, data, date) {
+    dayClickHandler: function ($datepicker, $calendar, data, date) {
         return function (e) {
             e && e.stopPropagation();
-            gj.datepicker.methods.selectDay(picker, calendar, data, date);
-            gj.datepicker.events.select(picker.element, 'day');
+            gj.datepicker.methods.selectDay($datepicker, $calendar, data, date);
             if (data.footer !== true && data.autoClose !== false) {
-                gj.datepicker.methods.change(picker, calendar, data, date);
+                gj.datepicker.methods.change($datepicker, $calendar, data, date);
             }
-            return picker;
+            return $datepicker;
         };
     },
 
-    change: function (picker, calendar, data, date) {
+    change: function ($datepicker, $calendar, data, date) {
         var day = date.getDate(),
             month = date.getMonth(),
             year = date.getFullYear(),
             value = gj.core.formatDate(date, data.format, data.locale);
-        calendar.setAttribute('month', month);
-        calendar.setAttribute('year', year);
-        picker.element.value = value;
-        gj.datepicker.events.change(picker.element);
-        if (window.getComputedStyle(calendar).display !== 'none') {
-            gj.datepicker.methods.close(picker);
+        $calendar.attr('month', month);
+        $calendar.attr('year', year);
+        $datepicker.val(value);
+        gj.datepicker.events.change($datepicker);
+        if (window.getComputedStyle($calendar[0]).display !== 'none') {
+            gj.datepicker.methods.close($datepicker);
         }
     },
 
-    selectDay: function (picker, calendar, data, date) {
-        var cell, day = date.getDate(),
+    selectDay: function ($datepicker, $calendar, data, date) {
+        var day = date.getDate(),
             month = date.getMonth(),
             year = date.getFullYear();
-        calendar.setAttribute('selectedDay', year + '-' + month + '-' + day);
-        [].forEach.call(calendar.querySelectorAll('tbody td'), function (el) {
-            el.classList.remove('selected');
-        });
-        cell = calendar.querySelector('tbody td[day="' + day + '"][month="' + month + '"]');
-        if (cell) {
-            cell.classList.add('selected');
-        }
-        gj.datepicker.methods.updateHeader(calendar, data, date);
+        $calendar.attr('selectedDay', year + '-' + month + '-' + day);
+        $calendar.find('tbody td').removeClass('selected');
+        $calendar.find('tbody td[day="' + day + '"][month="' + month + '"]').addClass('selected');
+        gj.datepicker.methods.updateHeader($calendar, data, date);
+        gj.datepicker.events.select($datepicker, 'day');
     },
 
-    selectMonth: function (picker, calendar, data, month) {
+    selectMonth: function ($datepicker, $calendar, data, month) {
         return function (e) {
-            calendar.setAttribute('month', month);
-            gj.datepicker.methods.renderMonth(picker, calendar, data);
-            gj.datepicker.events.select(picker.element, 'month');
+            $calendar.attr('month', month);
+            gj.datepicker.methods.renderMonth($datepicker, $calendar, data);
+            gj.datepicker.events.select($datepicker, 'month');
         };
     },
 
-    selectYear: function (picker, calendar, data, year) {
+    selectYear: function ($datepicker, $calendar, data, year) {
         return function (e) {
-            calendar.setAttribute('year', year);
-            gj.datepicker.methods.renderYear(picker, calendar, data);
-            gj.datepicker.events.select(picker.element, 'year');
+            $calendar.attr('year', year);
+            gj.datepicker.methods.renderYear($datepicker, $calendar, data);
+            gj.datepicker.events.select($datepicker, 'year');
         };
     },
 
-    selectDecade: function (picker, calendar, data, year) {
+    selectDecade: function ($datepicker, $calendar, data, year) {
         return function (e) {
-            calendar.setAttribute('year', year);
-            gj.datepicker.methods.renderDecade(picker, calendar, data);
-            gj.datepicker.events.select(picker.element, 'decade');
+            $calendar.attr('year', year);
+            gj.datepicker.methods.renderDecade($datepicker, $calendar, data);
+            gj.datepicker.events.select($datepicker, 'decade');
         };
     },
 
-    open: function (picker, data) {
-        var date,
-            calendar = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');
+    open: function ($datepicker, data) {
+        var date, $calendar = $('body').find('[role="calendar"][guid="' + $datepicker.attr('data-guid') + '"]');
 
-        if (window.getComputedStyle(calendar).display === 'none') {
-            if (picker.element.value) {
-                picker.value(picker.element.value);
-            } else {
-                date = new Date();
-                calendar.setAttribute('month', date.getMonth());
-                calendar.setAttribute('year', date.getFullYear());
-            }
-
-            switch (calendar.getAttribute('type')) {
-                case 'year':
-                    gj.datepicker.methods.renderYear(picker, calendar, data);
-                    break;
-                case 'decade':
-                    gj.datepicker.methods.renderDecade(picker, calendar, data);
-                    break;
-                case 'century':
-                    gj.datepicker.methods.renderCentury(picker, calendar, data);
-                    break;
-                default:
-                    gj.datepicker.methods.renderMonth(picker, calendar, data);
-                    break;
-            }
-
-            calendar.style.display = 'block';
-            if (data.modal) {
-                calendar.parentElement.style.display = 'block';
-                gj.core.center(calendar);
-            } else {
-                gj.core.setChildPosition(picker.element, calendar);
-                document.activeElement !== picker.element && picker.element.focus();
-            }
-            clearTimeout(picker.timeout);
-            gj.datepicker.events.open(picker.element);
+        if ($datepicker.val()) {
+            $datepicker.value($datepicker.val());
+        } else {
+            date = new Date();
+            $calendar.attr("month", date.getMonth());
+            $calendar.attr("year", date.getFullYear());
         }
+
+        switch ($calendar.attr('type')) {
+            case 'month':
+                gj.datepicker.methods.renderMonth($datepicker, $calendar, data);
+                break;
+            case 'year':
+                gj.datepicker.methods.renderYear($datepicker, $calendar, data);
+                break;
+            case 'decade':
+                gj.datepicker.methods.renderDecade($datepicker, $calendar, data);
+                break;
+            case 'century':
+                gj.datepicker.methods.renderCentury($datepicker, $calendar, data);
+                break;
+        }
+
+        $calendar.show();
+        $calendar.closest('div[role="modal"]').show();
+        if (data.modal) {
+            gj.core.center($calendar);
+        } else {
+            gj.core.setChildPosition($datepicker[0], $calendar[0]);
+            document.activeElement !== $datepicker[0] && $datepicker.focus();
+        }
+        clearTimeout($datepicker.timeout);
+        gj.datepicker.events.open($datepicker);
     },
 
-    close: function (picker) {
-        var calendar = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');
-        if (window.getComputedStyle(calendar).display !== 'none') {
-            calendar.style.display = 'none';
-            if (calendar.parentElement.getAttribute('role') === 'modal') {
-                calendar.parentElement.style.display = 'none';
-            }
-            gj.datepicker.events.close(picker.element);
-        }
+    close: function ($datepicker) {
+        var $calendar = $('body').find('[role="calendar"][guid="' + $datepicker.attr('data-guid') + '"]');
+        $calendar.hide();
+        $calendar.closest('div[role="modal"]').hide();
+        gj.datepicker.events.close($datepicker);
     },
 
-    createKeyDownHandler: function (picker, calendar, data) {
+    createKeyDownHandler: function ($datepicker, $calendar, data) {
         return function (e) {
-            var activeCell;
-            e = e || window.event;
-            if (window.getComputedStyle(calendar).display !== 'none') {
-                activeCell = gj.datepicker.methods.getActiveCell(calendar);
-                gj.datepicker.methods.activateNextElement(picker, calendar, data, e.keyCode, activeCell);
-            }
-        };
-    },
+            var month, year, day, index, $new, $active, e = e || window.event;
 
-    activateNextElement: function (picker, calendar, data, keyCode, cell) {
-        var day, month, year, index, newEl;
-
-        if (keyCode == '38') { // up
-            index = Array.prototype.slice.call(cell.parentElement.children).indexOf(cell);
-            if (cell.parentElement.previousSibling) {
-                newEl = cell.parentElement.previousSibling.children[index];
-            }
-            if (!newEl || !newEl.hasAttribute('day')) {
-                gj.datepicker.methods.prev(picker, data)();
-                nodes = calendar.querySelectorAll('tbody tr');
-                newEl = nodes[nodes.length - 1].querySelectorAll('td')[index];
-            }
-            gj.datepicker.methods.selectElement(picker, calendar, data, keyCode, cell, newEl);
-        } else if (keyCode == '40') { // down
-            index = Array.prototype.slice.call(cell.parentElement.children).indexOf(cell);
-            if (cell.parentElement.nextSibling) {
-                newEl = cell.parentElement.nextSibling.children[index];
-            }
-            if (!newEl || !newEl.hasAttribute('day')) {
-                gj.datepicker.methods.next(picker, data)();
-                newEl = calendar.querySelector('tbody tr').querySelectorAll('td')[index];
-            }
-            gj.datepicker.methods.selectElement(picker, calendar, data, keyCode, cell, newEl);
-        } else if (keyCode == '37') { // left
-            newEl = cell.previousSibling;
-            if (!newEl && cell.parentElement.previousSibling && cell.parentElement.previousSibling.children[6].hasAttribute('day')) { // Go To the previous row/week
-                newEl = cell.parentElement.previousSibling.children[6];
-            }
-            if (!newEl) {
-                gj.datepicker.methods.prev(picker, data)();
-                month = parseInt(calendar.getAttribute('month'), 10);
-                year = parseInt(calendar.getAttribute('year'), 10);
-                day = data.showOtherMonths ? parseInt(cell.getAttribute('day'), 10) - 1 : gj.datepicker.methods.getDaysInMonth(year)[month];
-                newEl = calendar.querySelector('tbody tr td[day="' + day + '"]');
-            }
-            gj.datepicker.methods.selectElement(picker, calendar, data, keyCode, cell, newEl);
-        } else if (keyCode == '39') { // right
-            newEl = cell.nextSibling;
-            if (!newEl && cell.parentElement.nextSibling && cell.parentElement.nextSibling.children[0].hasAttribute('day')) { // Go To the next row/week
-                newEl = cell.parentElement.nextSibling.children[0];
-            }
-            if (!newEl) { // Go To the next month
-                gj.datepicker.methods.next(picker, data)();
-                day = data.showOtherMonths ? parseInt(cell.getAttribute('day'), 10) + 1 : 1;
-                newEl = calendar.querySelector('tbody tr td[day="' + day + '"]');
-            }
-            gj.datepicker.methods.selectElement(picker, calendar, data, keyCode, cell, newEl);
-        } else if (keyCode == '13') { // enter
-            day = parseInt(cell.getAttribute('day'), 10);
-            month = parseInt(cell.getAttribute('month'), 10);
-            year = parseInt(cell.getAttribute('year'), 10);
-            gj.datepicker.methods.dayClickHandler(picker, calendar, data, new Date(year, month, day))();
-        } else if (keyCode == '27') { // esc
-            picker.close();
-        }
-    },
-
-    selectElement: function (picker, calendar, data, keyCode, cell, newEl) {
-        if (newEl) {
-            if (newEl.classList.contains('disabled') || !newEl.hasAttribute('day')) {
-                cell.classList.remove('focused');
-                gj.datepicker.methods.activateNextElement(picker, calendar, data, keyCode, newEl);
-            } else {
-                newEl.classList.add('focused');
-                cell.classList.remove('focused');
-            }
-        }
-    },
-
-    getActiveCell: function (calendar) {
-        var cell = calendar.querySelector('td[day].focused');
-        if (!cell) {
-            cell = calendar.querySelector('td[day].selected');
-            if (!cell) {
-                cell = calendar.querySelector('td[day].today');
-                if (!cell) {
-                    cell = calendar.querySelector('td[day]:not(.disabled)');
+            if (window.getComputedStyle($calendar[0]).display !== 'none')
+            {
+                $active = gj.datepicker.methods.getActiveCell($calendar);
+                if (e.keyCode == '38') { // up
+                    index = $active.index();
+                    $new = $active.closest('tr').prev('tr').find('td:eq(' + index + ')');
+                    if (!$new.is('[day]')) {
+                        gj.datepicker.methods.prev($datepicker, data)();
+                        $new = $calendar.find('tbody tr').last().find('td:eq(' + index + ')');
+                        if ($new.is(':empty')) {
+                            $new = $calendar.find('tbody tr').last().prev().find('td:eq(' + index + ')');
+                        }
+                    }
+                    if ($new.is('[day]')) {
+                        $new.addClass('focused');
+                        $active.removeClass('focused');
+                    }
+                } else if (e.keyCode == '40') { // down
+                    index = $active.index();
+                    $new = $active.closest('tr').next('tr').find('td:eq(' + index + ')');
+                    if (!$new.is('[day]')) {
+                        gj.datepicker.methods.next($datepicker, data)();
+                        $new = $calendar.find('tbody tr').first().find('td:eq(' + index + ')');
+                        if (!$new.is('[day]')) {
+                            $new = $calendar.find('tbody tr:eq(1)').find('td:eq(' + index + ')');
+                        }
+                    }
+                    if ($new.is('[day]')) {
+                        $new.addClass('focused');
+                        $active.removeClass('focused');
+                    }
+                } else if (e.keyCode == '37') { // left
+                    $new = $active.prev('td[day]:not(.disabled)');
+                    if ($new.length === 0) {
+                        $new = $active.closest('tr').prev('tr').find('td[day]').last();
+                    }
+                    if ($new.length === 0) {
+                        gj.datepicker.methods.prev($datepicker, data)();
+                        $new = $calendar.find('tbody tr').last().find('td[day]').last();
+                    }
+                    if ($new.length > 0) {
+                        $new.addClass('focused');
+                        $active.removeClass('focused');
+                    }
+                } else if (e.keyCode == '39') { // right
+                    $new = $active.next('[day]:not(.disabled)');
+                    if ($new.length === 0) {
+                        $new = $active.closest('tr').next('tr').find('td[day]').first();
+                    }
+                    if ($new.length === 0) {
+                        gj.datepicker.methods.next($datepicker, data)();
+                        $new = $calendar.find('tbody tr').first().find('td[day]').first();
+                    }
+                    if ($new.length > 0) {
+                        $new.addClass('focused');
+                        $active.removeClass('focused');
+                    }
+                } else if (e.keyCode == '13') { // enter
+                    day = parseInt($active.attr('day'), 10);
+                    month = parseInt($active.attr('month'), 10);
+                    year = parseInt($active.attr('year'), 10);
+                    gj.datepicker.methods.dayClickHandler($datepicker, $calendar, data, new Date(year, month, day))();
+                } else if (e.keyCode == '27') { // esc
+                    $datepicker.close();
                 }
             }
         }
-        return cell;
     },
 
-    value: function (picker, value) {
-        var calendar, date, data = gijgoStorage.get(picker.element, 'gijgo');
+    getActiveCell: function ($calendar) {
+        var $cell = $calendar.find('td[day].focused');
+        if ($cell.length === 0) {
+            $cell = $calendar.find('td[day].selected');
+            if ($cell.length === 0) {
+                $cell = $calendar.find('td[day].today');
+                if ($cell.length === 0) {
+                    $cell = $calendar.find('td[day]:not(.disabled)').first();
+                }
+            }
+        }
+        return $cell;
+    },
+
+    value: function ($datepicker, value) {
+        var $calendar, date, data = $datepicker.data();
         if (typeof (value) === "undefined") {
-            return picker.element.value;
+            return $datepicker.val();
         } else {
             date = gj.core.parseDate(value, data.format, data.locale);
             if (date && date.getTime()) {
-                calendar = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');
-                gj.datepicker.methods.dayClickHandler(picker, calendar, data, date)();
+                $calendar = $('body').find('[role="calendar"][guid="' + $datepicker.attr('data-guid') + '"]');
+                gj.datepicker.methods.dayClickHandler($datepicker, $calendar, data, date)();
             } else {
-                picker.element.value = '';
+                $datepicker.val('');
             }
-            return picker;
+            return $datepicker;
         }
     },
 
-    destroy: function (picker) {
-        var data = gijgoStorage.get(picker.element, 'gijgo'),
-            parent = picker.element.parentElement,
-            calendar = document.body.querySelector('[role="picker"][guid="' + picker.element.getAttribute('data-guid') + '"]');
+    destroy: function ($datepicker) {
+        var data = $datepicker.data(),
+            $parent = $datepicker.parent(),
+            $picker = $('body').find('[role="calendar"][guid="' + $datepicker.attr('data-guid') + '"]');
         if (data) {
-            //$datepicker.off();
-            if (picker.element.parentElement.getAttribute('role') === 'modal') {
-                picker.element.outerHTML = picker.element.innerHTML;
+            $datepicker.off();
+            if ($picker.parent('[role="modal"]').length > 0) {
+                $picker.unwrap();
             }
-            //$picker.remove();
-            gijgoStorage.remove(picker.element, 'gijgo');
-            picker.element.removeAttribute('data-type');
-            picker.element.removeAttribute('data-guid');
-            picker.element.removeAttribute('data-datepicker');
-            picker.element.removeAttribute('class');
-            picker.element.removeChild(picker.element.querySelector('[role="right-icon"]'));
+            $picker.remove();
+            $datepicker.removeData();
+            $datepicker.removeAttr('data-type').removeAttr('data-guid').removeAttr('data-datepicker');
+            $datepicker.removeClass();
+            $parent.children('[role="right-icon"]').remove();
+            $datepicker.unwrap();
         }
-        return picker;
+        return $datepicker;
     }
 };
 
@@ -1630,18 +1464,18 @@ gj.datepicker.events = {
      *
      * @event change
      * @param {object} e - event data
-     * @example sample <!-- nojquery, datepicker -->
+     * @example sample <!-- datepicker -->
      * <input id="datepicker" width="312" />
      * <script>
-     *     new GijgoDatePicker(document.getElementById('datepicker'), {
+     *     $('#datepicker').datepicker({
      *         change: function (e) {
      *             alert('Change is fired');
      *         }
      *     });
      * </script>
      */
-    change: function (el) {
-        return el.dispatchEvent(new Event('change'));
+    change: function ($datepicker) {
+        return $datepicker.triggerHandler('change');
     },
 
     /**
@@ -1650,35 +1484,35 @@ gj.datepicker.events = {
      * @event select
      * @param {object} e - event data
      * @param {string} type - The type of the selection. The options are day, month, year or decade.
-     * @example sample <!-- nojquery, datepicker -->
+     * @example sample <!-- datepicker -->
      * <input id="datepicker" width="312" />
      * <p>Click on the month name in order to select another month.</p>
      * <script>
-     *     new GijgoDatePicker(document.getElementById('datepicker'), {
+     *     $('#datepicker').datepicker({
      *         modal: true,
      *         header: true,
      *         footer: true,
      *         change: function (e) {
      *             alert('Change is fired');
      *         },
-     *         select: function (e) {
-     *             alert('Select from type of "' + e.detail.type + '" is fired');
+     *         select: function (e, type) {
+     *             alert('Select from type of "' + type + '" is fired');
      *         }
      *     });
      * </script>
      */
-    select: function (el, type) {
-        return el.dispatchEvent(new CustomEvent('select', { detail: { 'type': type } }));
+    select: function ($datepicker, type) {
+        return $datepicker.triggerHandler('select', [type]);
     },
 
     /**
      * Event fires when the calendar is opened.
      * @event open
      * @param {object} e - event data
-     * @example sample <!-- nojquery, datepicker -->
+     * @example sample <!-- datepicker -->
      * <input id="datepicker" width="312" />
      * <script>
-     *     new GijgoDatePicker(document.getElementById('datepicker'), ({
+     *     $('#datepicker').datepicker({
      *         modal: true,
      *         open: function (e) {
      *             alert('open is fired.');
@@ -1686,8 +1520,8 @@ gj.datepicker.events = {
      *     });
      * </script>
      */
-    open: function (el) {
-        return el.dispatchEvent(new Event('open'));
+    open: function ($datepicker) {
+        return $datepicker.triggerHandler('open');
     },
 
     /**
@@ -1697,7 +1531,7 @@ gj.datepicker.events = {
      * @example sample <!-- datepicker -->
      * <input id="datepicker" width="312" />
      * <script>
-     *     new GijgoDatePicker(document.getElementById('datepicker'), ({
+     *     $('#datepicker').datepicker({
      *         modal: true,
      *         close: function (e) {
      *             alert('Close is fired.');
@@ -1705,34 +1539,32 @@ gj.datepicker.events = {
      *     });
      * </script>
      */
-    close: function (el) {
-        return el.dispatchEvent(new Event('close'));
+    close: function ($datepicker) {
+        return $datepicker.triggerHandler('close');
     }
 };
 
-GijgoDatePicker = function (element, jsConfig) {
+gj.datepicker.widget = function ($element, jsConfig) {
     var self = this,
         methods = gj.datepicker.methods;
-
-    self.element = element;
 
     /** Gets or sets the value of the datepicker.
      * @method
      * @param {string} value - The value that needs to be selected.
      * @return string | datepicker object
      * @example Get <!-- datepicker -->
-     * <button class="gj-button-md" onclick="alert(datepicker.value())">Get Value</button>
+     * <button class="gj-button-md" onclick="alert($datepicker.value())">Get Value</button>
      * <hr/>
      * <input id="datepicker" width="312" />
      * <script>
-     *     var datepicker = new GijgoDatePicker(document.getElementById('datepicker'));
+     *     var $datepicker = $('#datepicker').datepicker();
      * </script>
      * @example Set <!-- datepicker -->
-     * <button class="gj-button-md" onclick="datepicker.value('03/01/2019')">Set Value</button>
+     * <button class="gj-button-md" onclick="$datepicker.value('08/01/2017')">Set Value</button>
      * <hr/>
      * <input id="datepicker" width="312" />
      * <script>
-     *     var datepicker = new GijgoDatePicker(document.getElementById('datepicker'));
+     *     var $datepicker = $('#datepicker').datepicker();
      * </script>
      */
     self.value = function (value) {
@@ -1746,7 +1578,7 @@ GijgoDatePicker = function (element, jsConfig) {
      * <button class="gj-button-md" onclick="datepicker.destroy()">Destroy</button>
      * <input id="datepicker" width="312" />
      * <script>
-     *     var datepicker = new GijgoDatePicker(document.getElementById('datepicker'));
+     *     var datepicker = $('#datepicker').datepicker();
      * </script>
      */
     self.destroy = function () {
@@ -1757,12 +1589,12 @@ GijgoDatePicker = function (element, jsConfig) {
      * @method
      * @return datepicker
      * @example Open.Close <!-- datepicker -->
-     * <button class="gj-button-md" onclick="datepicker.open()">Open</button>
-     * <button class="gj-button-md" onclick="datepicker.close()">Close</button>
+     * <button class="gj-button-md" onclick="$datepicker.open()">Open</button>
+     * <button class="gj-button-md" onclick="$datepicker.close()">Close</button>
      * <hr/>
      * <input id="datepicker" width="312" />
      * <script>
-     *     var datepicker = new GijgoDatePicker(document.getElementById('datepicker'));
+     *     var $datepicker = $('#datepicker').datepicker();
      * </script>
      */
     self.open = function () {
@@ -1773,44 +1605,43 @@ GijgoDatePicker = function (element, jsConfig) {
      * @method
      * @return datepicker
      * @example Open.Close <!-- datepicker -->
-     * <button class="gj-button-md" onclick="datepicker.open()">Open</button>
-     * <button class="gj-button-md" onclick="datepicker.close()">Close</button>
+     * <button class="gj-button-md" onclick="$datepicker.open()">Open</button>
+     * <button class="gj-button-md" onclick="$datepicker.close()">Close</button>
      * <hr/>
      * <input id="datepicker" width="312" />
      * <script>
-     *     var datepicker = new GijgoDatePicker(document.getElementById('datepicker'));
+     *     var $datepicker = $('#datepicker').datepicker();
      * </script>
      */
     self.close = function () {
         return methods.close(this);
     };
-    
-    if ('true' !== element.getAttribute('data-datepicker')) {
-        methods.init.call(self, jsConfig);
+
+    $.extend($element, self);
+    if ('true' !== $element.attr('data-datepicker')) {
+        methods.init.call($element, jsConfig);
     }
 
-    return self;
+    return $element;
 };
 
-GijgoDatePicker.prototype = new gj.widget();
-GijgoDatePicker.constructor = GijgoDatePicker;
+gj.datepicker.widget.prototype = new gj.widget();
+gj.datepicker.widget.constructor = gj.datepicker.widget;
 
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.datepicker = function (method) {
-            var $widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoDatePicker(this[0], method);
+(function ($) {
+    $.fn.datepicker = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.datepicker.widget(this, method);
+            } else {
+                $widget = new gj.datepicker.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    $widget = new GijgoDatePicker(this[0], null);
-                    if ($widget[method]) {
-                        return $widget[method].apply(this[0], Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
+        }
+    };
+})(jQuery);

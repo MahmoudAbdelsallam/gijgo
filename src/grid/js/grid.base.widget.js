@@ -2,11 +2,9 @@
   * @widget Grid
   * @plugin Base
   */
-GijgoGrid = function (element, jsConfig) {
+gj.grid.widget = function ($grid, jsConfig) {
     var self = this,
-        methods = gj.datepicker.methods;
-
-    self.element = element;
+        methods = gj.grid.methods;
 
     /**
      * Reload the data in the grid from a data source.
@@ -616,36 +614,34 @@ GijgoGrid = function (element, jsConfig) {
         return methods.removeRow(this, id);
     };
 
-    if ('grid' !== element.attr('data-type')) {
-        methods.init.call(self, jsConfig);
+    $.extend($grid, self);
+    if ('grid' !== $grid.attr('data-type')) {
+        methods.init.call($grid, jsConfig);
     }
 
-    return self;
-};
+    return $grid;
+}
 
-GijgoGrid.prototype = new gj.widget();
-GijgoGrid.constructor = gj.grid.widget;
+gj.grid.widget.prototype = new gj.widget();
+gj.grid.widget.constructor = gj.grid.widget;
 
-GijgoGrid.prototype.getConfig = gj.grid.methods.getConfig;
-GijgoGrid.prototype.getHTMLConfig = gj.grid.methods.getHTMLConfig;
+gj.grid.widget.prototype.getConfig = gj.grid.methods.getConfig;
+gj.grid.widget.prototype.getHTMLConfig = gj.grid.methods.getHTMLConfig;
 
-
-if (typeof (jQuery) !== "undefined") {
-    (function ($) {
-        $.fn.grid = function (method) {
-            var widget;
-            if (this && this.length) {
-                if (typeof method === 'object' || !method) {
-                    return new GijgoGrid(this, method);
+(function ($) {
+    $.fn.grid = function (method) {
+        var $widget;
+        if (this && this.length) {
+            if (typeof method === 'object' || !method) {
+                return new gj.grid.widget(this, method);
+            } else {
+                $widget = new gj.grid.widget(this, null);
+                if ($widget[method]) {
+                    return $widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
                 } else {
-                    widget = new GijgoGrid(this, null);
-                    if (widget[method]) {
-                        return widget[method].apply(this, Array.prototype.slice.call(arguments, 1));
-                    } else {
-                        throw 'Method ' + method + ' does not exist.';
-                    }
+                    throw 'Method ' + method + ' does not exist.';
                 }
             }
-        };
-    })(jQuery);
-}
+        }
+    };
+})(jQuery);
